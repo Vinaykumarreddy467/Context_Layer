@@ -1,0 +1,4 @@
+surrealdb>=3.0.0b8
+mcp[cli]>=1.0,<2
+anthropic>=0.40
+fastembed>=0.7

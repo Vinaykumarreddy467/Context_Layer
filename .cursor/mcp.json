@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "context-layer": {
+      "type": "stdio",
+      "command": "C:\\Users\\Vinaykumar.R\\Downloads\\context_layer\\context_layer\\venv\\Scripts\\python.exe",
+      "args": [
+        "mcp_server.py"
+      ],
+      "cwd": "C:\\Users\\Vinaykumar.R\\Downloads\\context_layer\\context_layer",
+      "env": {}
+    }
+  }
+}

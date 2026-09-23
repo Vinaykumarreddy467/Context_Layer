@@ -1,0 +1,11 @@
+{
+  "hooks": {
+    "PreCompact": [
+      {
+        "hooks": [
+          { "type": "command", "command": "python <full_path_to>/context_layer/adapters/copilot/pre_compact.py" }
+        ]
+      }
+    ]
+  }
+}

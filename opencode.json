@@ -1,0 +1,13 @@
+{
+  "mcp": {
+    "context-layer": {
+      "type": "local",
+      "command": [
+        "C:\\Users\\Vinaykumar.R\\Downloads\\context_layer\\context_layer\\venv\\Scripts\\python.exe",
+        "-m",
+        "context_layer.server"
+      ],
+      "enabled": true
+    }
+  }
+}

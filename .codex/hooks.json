@@ -1,0 +1,39 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:\\Users\\Vinaykumar.R\\Downloads\\context_layer\\context_layer\\venv\\Scripts\\python.exe\" \"C:\\Users\\Vinaykumar.R\\Downloads\\context_layer\\context_layer\\adapters\\codex\\hook.py\"",
+            "statusMessage": "Loading Context Layer context"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:\\Users\\Vinaykumar.R\\Downloads\\context_layer\\context_layer\\venv\\Scripts\\python.exe\" \"C:\\Users\\Vinaykumar.R\\Downloads\\context_layer\\context_layer\\adapters\\codex\\hook.py\"",
+            "statusMessage": "Saving Context Layer handoff"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:\\Users\\Vinaykumar.R\\Downloads\\context_layer\\context_layer\\venv\\Scripts\\python.exe\" \"C:\\Users\\Vinaykumar.R\\Downloads\\context_layer\\context_layer\\adapters\\codex\\hook.py\"",
+            "statusMessage": "Saving Context Layer handoff"
+          }
+        ]
+      }
+    ]
+  }
+}
