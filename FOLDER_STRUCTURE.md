@@ -45,6 +45,8 @@ context_layer/
 └── FOLDER_STRUCTURE.md               # This file
 ```
 
+The generated `graphify-out/` directory contains `graph.json` (graph data), `graph.html` (interactive viewer), `GRAPH_REPORT.md` (text analysis), `manifest.json`, `cost.json`, and reviewed community labels. These portable outputs are tracked for contributor reference. Graphify's cache, dated backups, signatures, and machine-specific metadata are local-only and ignored. See the README's [Code graph](README.md#code-graph) section for refreshing the files.
+
 ## Entry points
 
 Run commands from the project root unless noted otherwise.
@@ -69,7 +71,8 @@ The following paths are local runtime or generated data, not source modules:
 - `data/handoffs.db/` — default SurrealDB RocksDB store.
 - `.mcp/`, `.vscode/`, `.cursor/`, `.claude/`, `.codex/`, and `opencode.json` — client configuration; some files contain local absolute paths.
 - `.context-layer.json` — project identity. Commit this file when clones should share one `task_slug`.
-- `.opencode/`, `copilot-hooks.json`, and `graphify-out/` — generated plugin, hook, or analysis output where present.
+- `.opencode/` and `copilot-hooks.json` — generated plugin or hook output where present.
+- `graphify-out/cache/`, dated backup directories, and `.graphify_*` runtime metadata — local Graphify state. Portable graph reports and viewer files are checked in.
 
 Review generated configuration before sharing it. Keep credentials and machine-specific paths out of public source control.
 

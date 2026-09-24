@@ -241,3 +241,9 @@ Use `--timeout 180` to allow more time for a cold model load or slow MCP startup
 ## Repository layout
 
 See [FOLDER_STRUCTURE.md](FOLDER_STRUCTURE.md) for the source tree and entry points.
+
+## Code graph
+
+`graphify-out/` contains the generated project graph, interactive HTML viewer, report, manifest, token-cost summary, and reviewed community labels. These portable outputs are checked in so contributors can inspect the architecture without installing Graphify. To refresh them, run `/graphify --update` in a Graphify-enabled assistant; the command updates the graph and project documentation. Review the resulting diff before committing. Local Graphify caches, backups, signatures, and machine-specific interpreter/root metadata are ignored.
+
+Open `graphify-out/graph.html` in a browser to explore the graph, or read `graphify-out/GRAPH_REPORT.md` for a text summary. The graph is generated analysis and can lag behind source changes until refreshed.
