@@ -53,11 +53,13 @@ Run commands from the project root unless noted otherwise.
 
 | Command | Purpose |
 |---|---|
-| `python bootstrap.py` | Check prerequisites, install the package, generate client configs and identity, and start the local database. |
+| `python bootstrap.py` | Check prerequisites, install the package, register the Windows user-level CLI, generate client configs and identity, and start the local database. |
 | `python start_mcp.py` | Start the MCP server, attempt local SurrealDB startup, and print actionable readiness errors. |
 | `python mcp_server.py` | Compatibility entry point for existing MCP client configurations. |
 | `python -m context_layer.server` | Start the package server directly. |
 | `python setup_mcp.py --no-db` | Generate configured client files without starting SurrealDB. |
+| `context-layer init` | Configure all project-scoped clients in the current project and ensure SurrealDB is running. |
+| `context-layer init --no-db` | Configure all project-scoped clients without starting SurrealDB. |
 | `python scripts/run_migrations.py --status` | Show migration status; SurrealDB must already be running. |
 | `python scripts/diagnostics.py` | Check database, migrations, local embedding model, and MCP stdio readiness. |
 | `python scripts/handoff_cli.py summarize ...` | Summarize a transcript and store a handoff. |

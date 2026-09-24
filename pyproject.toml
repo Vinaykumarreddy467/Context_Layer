@@ -20,9 +20,10 @@ dev = ["pytest>=8", "ruff>=0.8", "tiktoken>=0.7"]
 
 [project.scripts]
 context-layer-mcp = "context_layer.server:main"
+context-layer = "setup_mcp:main"
 
 [tool.setuptools]
-py-modules = ["mcp_server"]
+py-modules = ["mcp_server", "setup_mcp"]
 
 [tool.setuptools.packages.find]
 where = ["."]

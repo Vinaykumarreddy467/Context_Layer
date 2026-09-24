@@ -21,6 +21,7 @@ Writes (merging with existing files, never clobbering):
 
 Restart editors afterwards: MCP servers are spawned at client start.
 """
+import argparse
 import json
 import os
 import platform
@@ -66,6 +67,7 @@ PLATFORM_DEFAULTS = {
     "claude_code": True, "claude_desktop": False, "copilot": True,
     "codex": True,
 }
+PROJECT_PLATFORMS = tuple(name for name in PLATFORM_DEFAULTS if name != "claude_desktop")
 
 
 def _read_json_object(path: Path, default: dict) -> dict:
@@ -250,7 +252,9 @@ def write_codex_hooks(project_root: Path):
     print("  [OK] .codex/hooks.json")
 
 
-def deploy_hooks_and_plugin(project_root: Path):
+def deploy_hooks_and_plugin(project_root: Path, platforms: dict):
+    if not (platforms.get("copilot") or platforms.get("opencode")):
+        return
     hooks_dir = project_root / "hooks"
     hooks_dir.mkdir(parents=True, exist_ok=True)
     for name in ("context-layer-checkpoint.js", "context-layer-handoff.js"):
@@ -261,6 +265,8 @@ def deploy_hooks_and_plugin(project_root: Path):
         if not dst.exists() or dst.read_text() != src.read_text():
             dst.write_text(src.read_text())
             print(f"  [OK] hooks/{name}")
+    if not platforms.get("opencode"):
+        return
     plugin_dir = project_root / ".opencode" / "plugins"
     plugin_dir.mkdir(parents=True, exist_ok=True)
     src = ROOT / "adapters" / "opencode" / "context-layer-plugin.ts"
@@ -289,8 +295,22 @@ def ensure_identity(project_root: Path, slug: str):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Initialize Context Layer integrations in this project.")
+    parser.add_argument("command", nargs="?", choices=("init",), default="init")
+    parser.add_argument(
+        "--client", action="append", choices=PLATFORM_DEFAULTS,
+        help="Enable only the named client(s); repeat as needed. By default, all project-scoped clients are enabled.",
+    )
+    parser.add_argument("--no-db", action="store_true", help="Generate project config without starting SurrealDB.")
+    args = parser.parse_args()
+
     project_root = Path.cwd()
     cfg_file, server, slug, platforms = load_or_create_config(project_root)
+    selected = set(args.client) if args.client else set(PROJECT_PLATFORMS)
+    platforms = {name: name in selected for name in PLATFORM_DEFAULTS}
+    cfg = json.loads(cfg_file.read_text(encoding="utf-8"))
+    cfg["platforms"] = platforms
+    cfg_file.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
 
     if not os.path.isabs(server["cwd"]):
         server["cwd"] = str(project_root / server["cwd"])
@@ -312,10 +332,10 @@ def main():
     if platforms.get("codex"):
         write_codex_hooks(project_root)
 
-    deploy_hooks_and_plugin(project_root)
+    deploy_hooks_and_plugin(project_root, platforms)
     ensure_identity(project_root, slug)
 
-    if "--no-db" not in sys.argv:
+    if not args.no_db:
         print("\n[DB] ensuring SurrealDB backend...")
         start_db_script = ROOT / "scripts" / "start_db.py"
         if not start_db_script.is_file():

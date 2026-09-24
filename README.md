@@ -66,7 +66,7 @@ source venv/bin/activate
 python start_mcp.py
 ```
 
-`bootstrap.py` checks for SurrealDB, creates the virtual environment if needed, installs the package, generates the project’s configured client files and identity, starts the database, and runs readiness diagnostics. The default diagnostic pass checks for a locally cached embedding model without downloading one. The MCP server starts SurrealDB if it is not already reachable and applies pending migrations.
+`bootstrap.py` checks for SurrealDB, creates the virtual environment if needed, installs the package, registers the `context-layer` command in the Windows user PATH, generates client files and project identity, starts the database, and runs readiness diagnostics. Reopen terminals after bootstrap so they load the updated PATH. On macOS/Linux, activate the virtual environment or add its `bin` directory to PATH manually. The default diagnostic pass checks for a locally cached embedding model without downloading one. The MCP server starts SurrealDB if it is not already reachable and applies pending migrations.
 
 Configured `stdio` clients normally launch the MCP server as a child process; in that case, do not start a second copy manually. To run it directly for development or diagnosis, use `python start_mcp.py` from the project root and keep that terminal open. The starter checks SurrealDB first, starts the local database when possible, and prints a clear recovery message to stderr if the database or configuration is not ready. When it reports that it is waiting for an MCP client, that is normal: do not type into that terminal; connect a configured MCP client or press Ctrl+C to stop. MCP protocol output stays on stdout.
 
@@ -88,7 +88,19 @@ Install SurrealDB before running the server. `setup_mcp.py --no-db` writes the c
 
 ## Connecting an MCP client
 
-`setup_mcp.py` generates configuration for the clients enabled in `.mcp/config.json`. Generated settings use the project’s virtual environment and the `start_mcp.py` launcher, which reports database startup problems on stderr without mixing messages into MCP protocol output.
+For another project, open a terminal in that project's root and run the Context Layer command. By default it configures every project-scoped client integration. Install Context Layer in editable mode once in its virtual environment to register the `context-layer` command. Activate that environment in the terminal where you run the command (or add its `Scripts`/`bin` directory to your user `PATH` once):
+
+```powershell
+# One time, from the Context Layer checkout (with its venv active):
+python -m pip install -e .
+
+# For each project, from that project's root:
+context-layer init
+```
+
+It creates or updates project settings for VS Code, Cursor, OpenCode, Claude Code, Copilot, and Codex, and saves the selection in the project's ignored `.mcp/config.json`. Use `--client codex` to configure just one client; repeat `--client` for multiple clients. Claude Desktop is opt-in with `--client claude_desktop` because its configuration is global and written outside the project. Add `--no-db` to skip starting SurrealDB. Keep the Context Layer checkout in place; generated client settings point to its installation path.
+
+`setup_mcp.py` generates configuration for the clients enabled in `.mcp/config.json`. Generated settings use the project's virtual environment and the `start_mcp.py` launcher, which reports database startup problems on stderr without mixing messages into MCP protocol output.
 
 For Codex, the setup script configures this project’s lifecycle hooks in `.codex/hooks.json`. Register the MCP server with Codex separately, for example:
 
