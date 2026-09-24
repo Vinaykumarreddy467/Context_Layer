@@ -35,6 +35,7 @@ context_layer/
 │   ├── migrations/                   # Versioned migrations applied by the server
 │   └── 001_schema.surql              # Human-readable schema/query reference
 ├── tests/                            # Executable integration scripts
+├── docs/                             # User, operator, architecture, and contributor guides
 ├── mcp_server.py                     # Compatibility launcher
 ├── start_mcp.py                      # Friendly MCP starter with DB readiness messages
 ├── setup_mcp.py                      # Generate supported client configurations
@@ -45,7 +46,7 @@ context_layer/
 └── FOLDER_STRUCTURE.md               # This file
 ```
 
-The generated `graphify-out/` directory contains `graph.json` (graph data), `graph.html` (interactive viewer), `GRAPH_REPORT.md` (text analysis), `manifest.json`, `cost.json`, and reviewed community labels. These portable outputs are tracked for contributor reference. Graphify's cache, dated backups, signatures, and machine-specific metadata are local-only and ignored. See the README's [Code graph](README.md#code-graph) section for refreshing the files.
+The generated `graphify-out/` directory contains `graph.json` (graph data), `graph.html` (interactive viewer), `GRAPH_REPORT.md` (text analysis), `manifest.json`, `cost.json`, and reviewed community labels. These portable outputs are tracked for contributor reference. Graphify's cache, dated backups, signatures, and machine-specific metadata are local-only and ignored. See the [README](README.md) for viewing the graph and the [documentation index](docs/architecture.md) for architecture details.
 
 ## Entry points
 
@@ -80,4 +81,4 @@ Review generated configuration before sharing it. Keep credentials and machine-s
 
 ## Schema files
 
-`sql/migrations/` is the versioned migration source used by the MCP server at startup. `sql/001_schema.surql` is a reference file for manual inspection and query examples; the server does not apply it as a migration. See [sql/migrations/README.md](sql/migrations/README.md).
+`sql/migrations/` is the versioned migration source used by the MCP server at startup. `sql/001_schema.surql` is a reference file for manual inspection and query examples; the server does not apply it as a migration. See [sql/migrations/README.md](sql/migrations/README.md). Start with the [documentation index](README.md#documentation) for user and contributor guides.
