@@ -279,10 +279,10 @@ async def _check_mcp(command: str, args: list[str], cwd: Path, env: dict[str, st
             action = "Check the command, arguments, and cwd in .mcp/config.json."
         elif isinstance(exc, asyncio.TimeoutError):
             detail = f"MCP did not complete its handshake within {timeout} seconds."
-            action = "Run python mcp_server.py to inspect startup errors, or retry with --timeout 180."
+            action = "Run python start_mcp.py to inspect startup errors, or retry with --timeout 180."
         else:
             detail = f"{type(exc).__name__}: {exc}"
-            action = "Run python mcp_server.py to inspect startup errors, then check .mcp/config.json."
+            action = "Run python start_mcp.py to inspect startup errors, then check .mcp/config.json."
         return _result(
             "MCP stdio connection",
             "NOT READY",

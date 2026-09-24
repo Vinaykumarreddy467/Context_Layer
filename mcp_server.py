@@ -1,4 +1,4 @@
-"""Compatibility entry point for the Context Layer MCP server."""
+"""Compatibility entry point; ``start_mcp.py`` is the friendly starter."""
 
 from context_layer.server import main
 

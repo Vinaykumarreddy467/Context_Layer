@@ -3,17 +3,20 @@ MCP server exposing the context-layer as tools for any MCP-compatible
 agent (Claude Code, Claude Desktop, Cursor, etc.) to call directly.
 
 Requires: pip install "mcp[cli]"
-Run with: python mcp_server.py
+Run with: python start_mcp.py
 """
 
 import base64
 import os
+import shutil
+import socket
 import sys
 from collections.abc import Mapping
 from datetime import date, datetime
 from decimal import Decimal
 from pathlib import Path
 from typing import Optional
+from urllib.parse import urlsplit
 from uuid import UUID
 
 from mcp.server.fastmcp import FastMCP
@@ -31,12 +34,6 @@ from context_layer import export_capsule as capsule
 
 mcp = FastMCP("context-layer")
 
-# Preload the embedding model before mcp.run() starts the event loop:
-# fastembed hangs if first loaded after the server is running.
-# Use async warmup to avoid blocking.
-import asyncio
-asyncio.run(cl._ensure_embedder_loaded())
-
 # --- Zero-setup: auto-start SurrealDB + apply schema if needed ---
 ROOT = Path(__file__).resolve().parent.parent
 DB_DIR = ROOT / "data" / "handoffs.db"
@@ -48,12 +45,22 @@ def _db_reachable() -> bool:
 
         async def probe():
             db = await cl._connect()
-            await db.query("INFO FOR DB;")
-            await db.close()
+            try:
+                await db.query("INFO FOR DB;")
+            finally:
+                await db.close()
 
         asyncio.run(probe())
         return True
     except Exception:
+        return False
+
+
+def _tcp_reachable(host: str, port: int) -> bool:
+    try:
+        with socket.create_connection((host, port), timeout=1):
+            return True
+    except OSError:
         return False
 
 
@@ -100,7 +107,7 @@ def _apply_schema() -> None:
                 if version in applied:
                     continue
 
-                print(f"schema: applying migration {version:04d}: {description}")
+                print(f"schema: applying migration {version:04d}: {description}", file=sys.stderr)
                 sql = mf.read_text(encoding="utf-8")
                 for stmt in sql.split(";"):
                     stmt = stmt.strip()
@@ -123,38 +130,79 @@ def _apply_schema() -> None:
 def _ensure_surreal() -> None:
     """Start SurrealDB as a subprocess if not reachable, then apply schema.
 
-    The DB process outlives this server (intended): adapters and other
-    tools connect to the same ws://127.0.0.1:8010 endpoint.
-    HTTP endpoint (--http) is also enabled for hooks that use REST API.
+The DB process outlives this server (intended): adapters and other tools
+connect to the configured SurrealDB endpoint.
     """
     if not _db_reachable():
         import subprocess
         import time
 
-        DB_DIR.parent.mkdir(parents=True, exist_ok=True)
-        try:
-            proc = subprocess.Popen(
-                ["surreal", "start", "--http", "--user", "root", "--pass", "root",
-                 "--bind", "127.0.0.1:8010", f"rocksdb://{DB_DIR}"],
-                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        endpoint = urlsplit(cl.SURREAL_URL)
+        host = endpoint.hostname or "127.0.0.1"
+        port = endpoint.port or (443 if endpoint.scheme == "wss" else 8000)
+        if _tcp_reachable(host, port):
+            raise RuntimeError(
+                f"SurrealDB is responding at {cl.SURREAL_URL}, but Context Layer could not "
+                "authenticate or select the configured namespace/database. Check SURREAL_USER, "
+                "SURREAL_PASS, SURREAL_NS, and SURREAL_DB in .env."
             )
-        except FileNotFoundError:
-            print("surreal binary not found on PATH. Install from https://surrealdb.com/install",
-                  file=sys.stderr)
-            raise
+        if not cl.SURREAL_PASS:
+            raise RuntimeError(
+                "SURREAL_PASS is missing. Copy .env.example to .env and set the local "
+                "SurrealDB password before starting the MCP server."
+            )
+        if host not in {"localhost", "127.0.0.1", "::1"}:
+            raise RuntimeError(
+                f"SurrealDB is not reachable at {cl.SURREAL_URL}. This is not a local "
+                "endpoint, so Context Layer cannot start a database process for it. Check "
+                "the remote database service and .env settings."
+            )
+        surreal_executable = shutil.which("surreal")
+        if not surreal_executable:
+            raise RuntimeError(
+                f"SurrealDB is not reachable at {cl.SURREAL_URL}, and the `surreal` "
+                "executable is not on PATH. Install SurrealDB, then run "
+                "`python scripts/diagnostics.py` for a readiness check."
+            )
+
+        print(f"[Context Layer] SurrealDB is asleep; starting it at {cl.SURREAL_URL}...",
+              file=sys.stderr)
+        DB_DIR.parent.mkdir(parents=True, exist_ok=True)
+        db_log = DB_DIR.parent / "surrealdb.log"
+        try:
+            bind_address = f"[{host}]:{port}" if ":" in host else f"{host}:{port}"
+            with db_log.open("wb") as log_file:
+                proc = subprocess.Popen(
+                    [surreal_executable, "start", "--username", cl.SURREAL_USER,
+                     "--password", cl.SURREAL_PASS, "--bind", bind_address,
+                     f"rocksdb://{DB_DIR}"],
+                    stdout=log_file, stderr=subprocess.STDOUT,
+                )
+        except OSError as exc:
+            raise RuntimeError(f"Could not launch SurrealDB: {exc}") from exc
         # Wait for readiness with timeout, capture stderr on failure
         for _ in range(30):
             time.sleep(1)
             if _db_reachable():
+                print(f"[Context Layer] SurrealDB is ready at {cl.SURREAL_URL}.", file=sys.stderr)
                 break
+            if proc.poll() is not None:
+                detail = db_log.read_text(encoding="utf-8", errors="replace")[-1200:].strip()
+                raise RuntimeError(
+                    "SurrealDB exited before it became ready. "
+                    + (f"Startup detail: {detail}" if detail else f"See {db_log} for details.")
+                )
         else:
-            # Timeout - try to get error output
-            try:
-                _, stderr = proc.communicate(timeout=2)
-                print(f"SurrealDB failed to start: {stderr.decode()[:500]}", file=sys.stderr)
-            except Exception:
-                pass
-            raise RuntimeError("SurrealDB did not become ready within 30 seconds")
+            if proc.poll() is not None:
+                detail = db_log.read_text(encoding="utf-8", errors="replace")[-1200:].strip()
+                raise RuntimeError(
+                    "SurrealDB exited before it became ready. "
+                    + (f"Startup detail: {detail}" if detail else f"See {db_log} for details.")
+                )
+            raise RuntimeError(
+                f"SurrealDB did not become ready at {cl.SURREAL_URL} within 30 seconds. "
+                f"Check .env and the port; SurrealDB logs are at {db_log}."
+            )
     _apply_schema()  # idempotent; safe on every start
 
 
@@ -502,7 +550,7 @@ async def ensure_project_ready(project_path: str, task_slug: str = "") -> dict:
         vscode.parent.mkdir(parents=True, exist_ok=True)
         server_root = ROOT
         vscode.write_text(_json.dumps({"servers": {"context-layer": {
-            "type": "stdio", "command": _sys.executable, "args": ["mcp_server.py"],
+            "type": "stdio", "command": _sys.executable, "args": ["start_mcp.py"],
             "cwd": str(server_root), "env": {}}}}, indent=2) + "\n",
             encoding="utf-8")
         created.append(".vscode/mcp.json")
@@ -513,9 +561,34 @@ async def ensure_project_ready(project_path: str, task_slug: str = "") -> dict:
     return {"ready": True, "slug": slug, "created": created}
 
 
-def main() -> None:
-    _ensure_surreal()
+def main() -> int:
+    print("[Context Layer] Checking SurrealDB before starting MCP...", file=sys.stderr)
+    try:
+        _ensure_surreal()
+    except Exception as exc:
+        print("\n🚧 Context Layer could not get its database ready; the MCP server was not started.",
+              file=sys.stderr)
+        print(f"   {exc}", file=sys.stderr)
+        print("   Check SurrealDB and .env, then run `python scripts/diagnostics.py`.", file=sys.stderr)
+        return 1
+    print("[Context Layer] SurrealDB and migrations are ready.", file=sys.stderr)
+
+    try:
+        # Warm the embedding model before MCP starts serving stdio requests.
+        import asyncio
+        asyncio.run(cl._ensure_embedder_loaded())
+    except Exception as exc:
+        print("\n🚧 SurrealDB is ready, but Context Layer could not load its embedding model.",
+              file=sys.stderr)
+        print(f"   {type(exc).__name__}: {exc}", file=sys.stderr)
+        print("   Run `python scripts/diagnostics.py` for details.", file=sys.stderr)
+        return 1
+
+    print("[Context Layer] MCP is ready and waiting for a client over stdio.", file=sys.stderr)
+    print("   This terminal is not an interactive prompt. Connect an MCP client or press Ctrl+C to stop.",
+          file=sys.stderr)
     mcp.run()
+    return 0
 
 
 if __name__ == "__main__":

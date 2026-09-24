@@ -3,7 +3,7 @@
 installs deps, writes platform MCP configs + project identity.
 
 Usage:  python bootstrap.py
-After:  python mcp_server.py   (auto-starts SurrealDB + applies schema)
+After:  python start_mcp.py    (checks SurrealDB, then starts MCP)
 """
 import shutil
 import subprocess
@@ -54,7 +54,7 @@ def main() -> int:
         print("Readiness checks found items needing attention; rerun scripts/diagnostics.py for details.")
 
     print("\nStart the MCP server (it also checks SurrealDB and applies pending schema migrations):")
-    print("  python mcp_server.py")
+    print("  python start_mcp.py")
     return 0
 
 

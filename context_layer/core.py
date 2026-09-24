@@ -304,7 +304,7 @@ async def assemble_context(
             )
             semantic_rows = await hybrid_search_handoffs(fallback_query, task_slug=task_slug, limit=5)
             if semantic_rows:
-                semantic_content = f"# Related Context (hybrid search: '{search_q}')\n"
+                semantic_content = f"# Related Context (hybrid search: '{fallback_query}')\n"
                 for h in semantic_rows:
                     if h["id"] == latest["id"]:
                         continue  # skip self
@@ -436,8 +436,7 @@ async def resume_handoff(task_slug: str) -> Optional[dict]:
             return None
 
         latest = rows[0]
-        await db.update(latest["id"]).merge({"status": "resumed"})
-        return latest
+        return await db.update(latest["id"]).merge({"status": "resumed"})
     finally:
         await db.close()
 
@@ -634,10 +633,14 @@ async def summarize_for_window(
         return {"action": "none", "context": ctx, "reason": "already within budget"}
     
     # Extract key info for compression
-    latest_result = await (await _connect()).query(
-        "SELECT * FROM handoff WHERE task_slug = $slug ORDER BY timestamp DESC LIMIT 1;",
-        {"slug": task_slug},
-    )
+    db = await _connect()
+    try:
+        latest_result = await db.query(
+            "SELECT * FROM handoff WHERE task_slug = $slug ORDER BY timestamp DESC LIMIT 1;",
+            {"slug": task_slug},
+        )
+    finally:
+        await db.close()
     latest_rows = latest_result[0] if latest_result else []
     if not latest_rows:
         return {"action": "none", "context": ctx, "reason": "no handoffs"}
@@ -682,8 +685,13 @@ async def summarize_for_window(
         await db.close()
 
 
-async def get_lineage_ids(handoff_id: str) -> list:
+async def get_lineage_ids(handoff_id: str, _seen: Optional[set[str]] = None) -> list:
     """Get all predecessor handoff IDs in the chain."""
+    seen = _seen if _seen is not None else set()
+    current_id = str(handoff_id)
+    if current_id in seen:
+        return []
+    seen.add(current_id)
     db = await _connect()
     try:
         result = await db.query(
@@ -691,10 +699,14 @@ async def get_lineage_ids(handoff_id: str) -> list:
             {"id": handoff_id},
         )
         rows = result[0] if result else []
-        ids = [str(r["id"]) for r in rows]
-        # Recursively get deeper lineage
+        ids = []
+        # Recursively get deeper lineage while avoiding cyclic/repeated records.
         for r in rows:
-            ids.extend(await get_lineage_ids(r["id"]))
+            predecessor_id = str(r["id"])
+            if predecessor_id in seen:
+                continue
+            ids.append(predecessor_id)
+            ids.extend(await get_lineage_ids(predecessor_id, seen))
         return ids
     finally:
         await db.close()
@@ -706,10 +718,14 @@ async def get_token_budget_report(task_slug: str) -> dict:
     Useful for monitoring and debugging window pressure.
     """
     ctx = await assemble_context(task_slug, max_tokens=32000)
-    latest_result = await (await _connect()).query(
-        "SELECT * FROM handoff WHERE task_slug = $slug ORDER BY timestamp DESC LIMIT 1;",
-        {"slug": task_slug},
-    )
+    db = await _connect()
+    try:
+        latest_result = await db.query(
+            "SELECT * FROM handoff WHERE task_slug = $slug ORDER BY timestamp DESC LIMIT 1;",
+            {"slug": task_slug},
+        )
+    finally:
+        await db.close()
     latest_rows = latest_result[0] if latest_result else []
     
     return {

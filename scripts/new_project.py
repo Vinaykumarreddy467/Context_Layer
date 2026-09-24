@@ -23,7 +23,7 @@ def main() -> int:
     slug_arg = sys.argv[2] if len(sys.argv) > 2 else None
     (target / ".vscode").mkdir(parents=True, exist_ok=True)
     (target / ".vscode" / "mcp.json").write_text(json.dumps({"servers": {"context-layer": {
-        "type": "stdio", "command": str(PYTHON), "args": ["mcp_server.py"],
+        "type": "stdio", "command": str(PYTHON), "args": ["start_mcp.py"],
         "cwd": str(ROOT), "env": {}}}}, indent=2) + "\n")
     slug = resolve_task_slug(str(target)) if not slug_arg else init_project_identity(str(target), slug_arg)
     if not slug_arg:

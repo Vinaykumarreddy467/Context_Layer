@@ -55,7 +55,7 @@ SERVER_CFG = {
     "name": "context-layer",
     "type": "stdio",
     "command": VENV_PYTHON,
-    "args": [str(ROOT / "mcp_server.py")],
+    "args": [str(ROOT / "start_mcp.py")],
     "cwd": str(ROOT),
     # Secrets and DB settings are loaded from the project .env by the server.
     # Keep them out of generated client configuration files.
@@ -68,14 +68,37 @@ PLATFORM_DEFAULTS = {
 }
 
 
+def _read_json_object(path: Path, default: dict) -> dict:
+    """Read a config object without silently replacing malformed user config."""
+    if not path.exists():
+        return default
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"Cannot safely merge {path}: {exc}") from exc
+    if not isinstance(data, dict):
+        raise RuntimeError(f"Cannot safely merge {path}: expected a JSON object")
+    return data
+
+
 def load_or_create_config(project_root: Path):
     cfg_file = project_root / ".mcp" / "config.json"
     if cfg_file.exists():
         cfg = json.loads(cfg_file.read_text())
         server = {**SERVER_CFG, **cfg.get("server", {})}
+        needs_write = False
+        configured_args = server.get("args", [])
+        if configured_args and Path(configured_args[0]).name == "mcp_server.py":
+            server["args"] = [str(project_root / "start_mcp.py")]
+            cfg.setdefault("server", {})["args"] = server["args"]
+            needs_write = True
         if server.get("env"):
             server["env"] = {}
             cfg.setdefault("server", {})["env"] = {}
+            needs_write = True
+        if needs_write:
+            cfg.setdefault("server", {})["args"] = server["args"]
+            cfg["server"]["env"] = {}
             cfg_file.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
         server["env"] = {}
         slug = cfg.get("identity", {}).get("task_slug", "")
@@ -95,35 +118,45 @@ def load_or_create_config(project_root: Path):
 def write_vscode(project_root: Path, server: dict):
     d = project_root / ".vscode"
     d.mkdir(parents=True, exist_ok=True)
-    (d / "mcp.json").write_text(json.dumps({"servers": {server["name"]: {
+    target = d / "mcp.json"
+    data = _read_json_object(target, {})
+    servers = data.setdefault("servers", {})
+    if not isinstance(servers, dict):
+        raise RuntimeError(f"Cannot safely merge {target}: 'servers' must be an object")
+    servers[server["name"]] = {
         "type": server["type"], "command": server["command"], "args": server["args"],
         "cwd": server["cwd"], "env": server["env"],
-    }}}, indent=2) + "\n")
+    }
+    target.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     print(f"  [OK] .vscode/mcp.json")
 
 
 def write_cursor(project_root: Path, server: dict):
     d = project_root / ".cursor"
     d.mkdir(parents=True, exist_ok=True)
-    (d / "mcp.json").write_text(json.dumps({"mcpServers": {server["name"]: {
+    target = d / "mcp.json"
+    data = _read_json_object(target, {})
+    servers = data.setdefault("mcpServers", {})
+    if not isinstance(servers, dict):
+        raise RuntimeError(f"Cannot safely merge {target}: 'mcpServers' must be an object")
+    servers[server["name"]] = {
         "type": server["type"], "command": server["command"], "args": server["args"],
         "cwd": server["cwd"], "env": server["env"],
-    }}}, indent=2) + "\n")
+    }
+    target.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     print(f"  [OK] .cursor/mcp.json")
 
 
 def write_opencode(project_root: Path, server: dict):
     target = next((project_root / n for n in ("opencode.jsonc", "opencode.json")
                    if (project_root / n).exists()), project_root / "opencode.json")
-    data = {}
-    if target.exists():
-        try:
-            data = json.loads(target.read_text())
-        except Exception:
-            data = {}
-    data.setdefault("mcp", {})[server["name"]] = {
+    data = _read_json_object(target, {})
+    mcp = data.setdefault("mcp", {})
+    if not isinstance(mcp, dict):
+        raise RuntimeError(f"Cannot safely merge {target}: 'mcp' must be an object")
+    mcp[server["name"]] = {
         "type": "local",
-        "command": [server["command"], str(ROOT / "mcp_server.py")],
+        "command": [server["command"], *server["args"]],
         "environment": server["env"],
         "enabled": True,
     }
@@ -134,22 +167,26 @@ def write_opencode(project_root: Path, server: dict):
 def write_claude_code(project_root: Path, server: dict):
     d = project_root / ".claude"
     d.mkdir(parents=True, exist_ok=True)
-    (d / "settings.json").write_text(json.dumps({"mcpServers": {server["name"]: {
+    target = d / "settings.json"
+    data = _read_json_object(target, {})
+    servers = data.setdefault("mcpServers", {})
+    if not isinstance(servers, dict):
+        raise RuntimeError(f"Cannot safely merge {target}: 'mcpServers' must be an object")
+    servers[server["name"]] = {
         "command": server["command"], "args": server["args"], "env": server["env"],
-    }}}, indent=2) + "\n")
+    }
+    target.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     print(f"  [OK] .claude/settings.json")
 
 
 def write_claude_desktop(server: dict):
     cfg = claude_desktop_config_path()
     cfg.parent.mkdir(parents=True, exist_ok=True)
-    data = {"mcpServers": {}}
-    if cfg.exists():
-        try:
-            data = json.loads(cfg.read_text())
-        except Exception:
-            pass
-    data.setdefault("mcpServers", {})[server["name"]] = {
+    data = _read_json_object(cfg, {"mcpServers": {}})
+    servers = data.setdefault("mcpServers", {})
+    if not isinstance(servers, dict):
+        raise RuntimeError(f"Cannot safely merge {cfg}: 'mcpServers' must be an object")
+    servers[server["name"]] = {
         "command": server["command"], "args": server["args"], "env": server["env"],
     }
     cfg.write_text(json.dumps(data, indent=2) + "\n")

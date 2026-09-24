@@ -50,31 +50,38 @@ def main() -> int:
         return 0
 
     DB_DIR.parent.mkdir(parents=True, exist_ok=True)
+    log_path = DB_DIR.parent / "surrealdb.log"
     try:
-        proc = subprocess.Popen(
-            ["surreal", "start", "--http", "--user", SURREAL_USER, "--pass", SURREAL_PASS,
-             "--bind", "127.0.0.1:8010", f"rocksdb://{DB_DIR}"],
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-        )
+        log_file = log_path.open("ab")
+        try:
+            proc = subprocess.Popen(
+                ["surreal", "start", "--username", SURREAL_USER, "--password", SURREAL_PASS,
+                 "--bind", "127.0.0.1:8010", f"rocksdb://{DB_DIR}"],
+                stdout=log_file, stderr=subprocess.STDOUT,
+            )
+        finally:
+            log_file.close()
     except FileNotFoundError:
         print("surreal binary not found on PATH. Install from https://surrealdb.com/install",
               file=sys.stderr)
         return 1
 
-    # Wait for readiness with timeout, capture stderr on failure
+    # Wait for readiness with a bounded timeout; logs are drained to disk.
     for _ in range(30):
         time.sleep(1)
         if _db_reachable():
             print("SurrealDB started successfully")
             return 0
     else:
-        # Timeout - try to get error output
-        try:
-            _, stderr = proc.communicate(timeout=2)
-            print(f"SurrealDB failed to start: {stderr.decode()[:500]}", file=sys.stderr)
-        except Exception:
-            pass
-        print("SurrealDB did not become ready within 30 seconds", file=sys.stderr)
+        detail = ""
+        if proc.poll() is not None and log_path.is_file():
+            detail = log_path.read_text(encoding="utf-8", errors="replace")[-1000:].strip()
+        message = "SurrealDB did not become ready within 30 seconds"
+        if detail:
+            message += f". Startup detail: {detail}"
+        else:
+            message += f". Check logs at {log_path}"
+        print(message, file=sys.stderr)
         return 1
 
 

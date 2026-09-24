@@ -36,6 +36,7 @@ context_layer/
 │   └── 001_schema.surql              # Human-readable schema/query reference
 ├── tests/                            # Executable integration scripts
 ├── mcp_server.py                     # Compatibility launcher
+├── start_mcp.py                      # Friendly MCP starter with DB readiness messages
 ├── setup_mcp.py                      # Generate supported client configurations
 ├── bootstrap.py                      # First-time local setup
 ├── pyproject.toml                    # Package metadata and dependencies
@@ -51,7 +52,8 @@ Run commands from the project root unless noted otherwise.
 | Command | Purpose |
 |---|---|
 | `python bootstrap.py` | Check prerequisites, install the package, generate client configs and identity, and start the local database. |
-| `python mcp_server.py` | Start the MCP server; normally ensures SurrealDB is running and applies pending migrations. |
+| `python start_mcp.py` | Start the MCP server, attempt local SurrealDB startup, and print actionable readiness errors. |
+| `python mcp_server.py` | Compatibility entry point for existing MCP client configurations. |
 | `python -m context_layer.server` | Start the package server directly. |
 | `python setup_mcp.py --no-db` | Generate configured client files without starting SurrealDB. |
 | `python scripts/run_migrations.py --status` | Show migration status; SurrealDB must already be running. |
