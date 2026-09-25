@@ -14,7 +14,8 @@
  * No config registration needed.
  *
  * Env: CONTEXT_LAYER_DIR (defaults to the context_layer checkout),
- *      CONTEXT_LAYER_CHECKPOINT_JS (defaults to the deployed hook).
+ *      CONTEXT_LAYER_CHECKPOINT_JS (defaults to the deployed hook),
+ *      CONTEXT_LAYER_PYTHON (defaults to the context_layer venv python).
  */
 
 import type { Plugin } from "@opencode-ai/plugin"
@@ -23,6 +24,8 @@ const CONTEXT_LAYER_DIR =
   process.env.CONTEXT_LAYER_DIR ?? "__CONTEXT_LAYER_DIR__"
 const CHECKPOINT_JS =
   process.env.CONTEXT_LAYER_CHECKPOINT_JS ?? "__CHECKPOINT_JS__"
+const CONTEXT_LAYER_PYTHON =
+  process.env.CONTEXT_LAYER_PYTHON ?? "__CONTEXT_LAYER_PYTHON__"
 
 export const ContextLayerPlugin: Plugin = async ({ project, client, $, directory }) => {
   const projectDir = directory ?? project?.path ?? process.cwd()
@@ -72,7 +75,7 @@ export const ContextLayerPlugin: Plugin = async ({ project, client, $, directory
       const sessionID = input?.sessionID ?? input?.session?.id ?? input?.id
       const transcript = await transcriptFor(sessionID)
       try {
-        const result = await $`python ${CONTEXT_LAYER_DIR}/adapters/opencode/save_before_compact.py --cwd ${projectDir}`
+        const result = await $`${CONTEXT_LAYER_PYTHON} ${CONTEXT_LAYER_DIR}/adapters/opencode/save_before_compact.py --cwd ${projectDir}`
           .cwd(CONTEXT_LAYER_DIR)
           .env({ ...process.env, CONTEXT_LAYER_TRANSCRIPT: transcript, CONTEXT_LAYER_SESSION_ID: sessionID ?? "" })
           .text()

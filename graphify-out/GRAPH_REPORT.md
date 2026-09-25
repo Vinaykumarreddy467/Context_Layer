@@ -1,17 +1,17 @@
 # Graph Report - context_layer  (2026-09-25)
 
 ## Corpus Check
-- 62 files · ~48,016 words
+- 64 files · ~48,820 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 7 file(s) not represented in the graph (top: .surql 5, .example 1, (none) 1)
 
 ## Summary
-- 503 nodes · 788 edges · 48 communities (30 shown, 18 thin omitted)
+- 511 nodes · 796 edges · 49 communities (30 shown, 19 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 13 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6d458f31`
+- Built from commit: `7c31ea50`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -61,6 +61,7 @@
 - handoff_cli.py
 - test_reliability.py
 - eval_fixture.py
+- ContextLayerPlugin
 - test_mcp_live.py
 
 ## God Nodes (most connected - your core abstractions)
@@ -93,11 +94,11 @@
 ## Hyperedges (group relationships)
 - **Handoff context persistence and retrieval flow** — readme_project_handoffs, readme_surrealdb_storage, readme_mcp_interface, readme_context_assembly [EXTRACTED 1.00]
 
-## Communities (48 total, 18 thin omitted)
+## Communities (49 total, 19 thin omitted)
 
 ### Community 0 - "core.py"
-Cohesion: 0.07
-Nodes (57): AsyncSurreal, append_next_step(), assemble_context(), _budget_recommendations(), check_api_key(), close_handoff(), _connect(), _content_hash() (+49 more)
+Cohesion: 0.06
+Nodes (59): AsyncSurreal, append_next_step(), assemble_context(), _budget_recommendations(), check_api_key(), close_handoff(), _connect(), _content_hash() (+51 more)
 
 ### Community 1 - "server.py"
 Cohesion: 0.05
@@ -116,12 +117,12 @@ Cohesion: 0.17
 Nodes (9): BaseHTTPRequestHandler, Exception, ApiError, Handler, _parse_int(), REST API for Context Layer, so ANY agent or script can read and write context…, Structured error: rendered as {"error": {"code", "message"}}., _require_slug() (+1 more)
 
 ### Community 5 - "setup_mcp.py"
-Cohesion: 0.16
+Cohesion: 0.15
 Nodes (25): install_windows_cli(), main(), Path, Expose the installed CLI globally for this Windows user., One-command setup for context_layer: checks surreal, creates venv, installs…, claude_desktop_config_path(), deploy_hooks_and_plugin(), ensure_identity() (+17 more)
 
 ### Community 6 - "context-layer-checkpoint.js"
-Cohesion: 0.22
-Nodes (12): autoSlug(), { execFileSync }, fail(), fs, gitBranch(), GROWTH_PCT, latestHandoff(), main() (+4 more)
+Cohesion: 0.18
+Nodes (13): autoSlug(), { execFileSync }, fail(), fs, gitBranch(), GROWTH_PCT, latestHandoff(), main() (+5 more)
 
 ### Community 7 - "HandoffTrigger"
 Cohesion: 0.14
@@ -136,8 +137,8 @@ Cohesion: 0.24
 Nodes (13): apply_migration(), _connect(), ensure_version_table(), get_applied_versions(), main(), Show migration status., Migration runner for Context Layer SurrealDB schema. Usage: python…, Create schema_version table if it doesn't exist. (+5 more)
 
 ### Community 10 - "context-layer-handoff.js"
-Cohesion: 0.39
-Nodes (8): autoSlug(), { execFileSync }, fail(), fs, main(), IMPORTANT: SurrealDB must be started with HTTP endpoint enabled:, resume(), summarize()
+Cohesion: 0.29
+Nodes (9): autoSlug(), { execFileSync }, fail(), fs, main(), path, IMPORTANT: SurrealDB must be started with HTTP endpoint enabled:, resume() (+1 more)
 
 ### Community 11 - "Getting started"
 Cohesion: 0.25
@@ -204,8 +205,8 @@ Cohesion: 0.11
 Nodes (28): _embed(), _get_embedder(), Get embedder, loading synchronously if not ready (fallback)., Embed text locally into a 384-dim vector., _capsule_text(), export_capsule(), Path, Export a portable "context capsule" -- a plain markdown primer you can paste… (+20 more)
 
 ### Community 45 - "test_reliability.py"
-Cohesion: 0.33
-Nodes (10): _embed_async(), Async version that ensures embedder is loaded without blocking., _free_port(), main(), Focused reliability tests for Context Layer: 1. Duplicate-checkpoint guard:…, _request(), test_api_validation(), test_duplicate_guard() (+2 more)
+Cohesion: 0.42
+Nodes (8): _free_port(), main(), Focused reliability tests for Context Layer: 1. Duplicate-checkpoint guard:…, _request(), test_api_validation(), test_duplicate_guard(), test_lineage_safety(), _wipe()
 
 ### Community 46 - "eval_fixture.py"
 Cohesion: 0.70
@@ -216,9 +217,9 @@ Cohesion: 0.53
 Nodes (5): check(), _json(), main(), Live MCP test: drive the Context Layer MCP server over stdio with a real MCP…, _text()
 
 ## Knowledge Gaps
-- **62 isolated node(s):** `C:\Users\Vinaykumar.R\Downloads\context_layer\context_layer\venv\Scripts\python.exe`, `{ execFileSync }`, `fs`, `TOKENS`, `MIN_INTERVAL` (+57 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 225 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **64 isolated node(s):** `C:\Users\Vinaykumar.R\Downloads\context_layer\context_layer\venv\Scripts\python.exe`, `{ execFileSync }`, `fs`, `path`, `TOKENS` (+59 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 232 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **19 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -226,11 +227,11 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `init_project_identity()` connect `auto_handoff.py` to `setup_mcp.py`?**
   _High betweenness centrality (0.032) - this node is a cross-community bridge._
 - **Why does `load_local_env()` connect `diagnostics.py` to `core.py`?**
-  _High betweenness centrality (0.031) - this node is a cross-community bridge._
+  _High betweenness centrality (0.030) - this node is a cross-community bridge._
 - **What connects `C:\Users\Vinaykumar.R\Downloads\context_layer\context_layer\venv\Scripts\python.exe`, `{ execFileSync }`, `fs` to the rest of the system?**
-  _62 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _64 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `core.py` be split into smaller, more focused modules?**
-  _Cohesion score 0.06604324956165984 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06448087431693988 - nodes in this community are weakly interconnected._
 - **Should `server.py` be split into smaller, more focused modules?**
   _Cohesion score 0.053410893707033315 - nodes in this community are weakly interconnected._
 - **Should `diagnostics.py` be split into smaller, more focused modules?**

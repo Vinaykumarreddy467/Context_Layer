@@ -60,26 +60,26 @@
     "semantic_hash": "02a40dd3b8dbcb8147b1efe04a537b64"
   },
   ".claude/settings.json": {
-    "mtime": 1790228754.250227,
-    "seen": 1790235031.3895237,
+    "mtime": 1790331891.181165,
+    "seen": 1790332071.6287117,
     "ast_hash": "ff523abf067305f54566f5867a8e6f02",
     "semantic_hash": "ff523abf067305f54566f5867a8e6f02"
   },
   ".codex/hooks.json": {
-    "mtime": 1790166939.7411025,
-    "seen": 1790235031.3895326,
-    "ast_hash": "7e1a76f68d8057ade449dc903f417e45",
-    "semantic_hash": "7e1a76f68d8057ade449dc903f417e45"
+    "mtime": 1790331891.186161,
+    "seen": 1790332071.6287205,
+    "ast_hash": "7147ef9a64a2f7c4de2ffa3402ebbd31",
+    "semantic_hash": ""
   },
   ".context-layer.json": {
-    "mtime": 1790145833.2194822,
-    "seen": 1790235031.389537,
-    "ast_hash": "fc3a2f992fab7281b3f0db5358455463",
-    "semantic_hash": "fc3a2f992fab7281b3f0db5358455463"
+    "mtime": 1790331891.7755113,
+    "seen": 1790332071.6287246,
+    "ast_hash": "95735f2c3f85948a954db73e73a1df62",
+    "semantic_hash": ""
   },
   ".cursor/mcp.json": {
-    "mtime": 1790228754.251227,
-    "seen": 1790235031.3895402,
+    "mtime": 1790331891.1761682,
+    "seen": 1790332071.6287284,
     "ast_hash": "5d2fa9be97c3b2122cf9989a5436c9fb",
     "semantic_hash": "5d2fa9be97c3b2122cf9989a5436c9fb"
   },
@@ -90,10 +90,10 @@
     "semantic_hash": ""
   },
   "adapters/opencode/context-layer-plugin.ts": {
-    "mtime": 1790151258.6948938,
-    "seen": 1790235031.38956,
-    "ast_hash": "bb281c7236265403ec54ef8aa879771c",
-    "semantic_hash": "bb281c7236265403ec54ef8aa879771c"
+    "mtime": 1790331584.130424,
+    "seen": 1790332071.6287537,
+    "ast_hash": "8d51dc170a9caec44934bc0976854f44",
+    "semantic_hash": ""
   },
   "bootstrap.py": {
     "mtime": 1790243108.9475799,
@@ -150,22 +150,22 @@
     "semantic_hash": "fe8143bf9ed336fcb128549030dd213a"
   },
   "hooks/context-layer-checkpoint.js": {
-    "mtime": 1790165421.8928363,
-    "seen": 1790235031.3895912,
-    "ast_hash": "d1403573db55053f5bb18746254f0350",
-    "semantic_hash": "d1403573db55053f5bb18746254f0350"
+    "mtime": 1790331738.7773392,
+    "seen": 1790332071.628793,
+    "ast_hash": "ae22487f33485991813509ee3e02638b",
+    "semantic_hash": ""
   },
   "hooks/context-layer-handoff.js": {
-    "mtime": 1790165421.1972692,
-    "seen": 1790235031.389594,
-    "ast_hash": "9b1b6cf9f66f38993cde18985c10286b",
-    "semantic_hash": "9b1b6cf9f66f38993cde18985c10286b"
+    "mtime": 1790331726.1873384,
+    "seen": 1790332071.6287959,
+    "ast_hash": "0051c83f3b9b048ce2f3f9d5c62c5eed",
+    "semantic_hash": ""
   },
   "opencode.json": {
-    "mtime": 1790228754.2522266,
-    "seen": 1790235031.3896024,
-    "ast_hash": "e366406a74b3a6437ccc6912a59e893d",
-    "semantic_hash": "e366406a74b3a6437ccc6912a59e893d"
+    "mtime": 1790331891.179165,
+    "seen": 1790332071.6288047,
+    "ast_hash": "2e5aa83918e5a4e4f1dea6734c7f4bc2",
+    "semantic_hash": ""
   },
   "pyproject.toml": {
     "mtime": 1790238811.185512,
@@ -222,9 +222,9 @@
     "semantic_hash": "3f0f674c20fd52cbf8fd8d171e2e6646"
   },
   "setup_mcp.py": {
-    "mtime": 1790242509.4059896,
-    "seen": 1790313639.2945352,
-    "ast_hash": "a6e056abad0c97b63aa058ec037e2438",
+    "mtime": 1790332984.180446,
+    "seen": 1790333003.2128315,
+    "ast_hash": "f481a65aa43142bd7e3f10da20278672",
     "semantic_hash": ""
   },
   "start_mcp.py": {
@@ -483,6 +483,18 @@
     "mtime": 1790321930.2644844,
     "seen": 1790322233.1010365,
     "ast_hash": "c8e54cbd88f1ac92d11f7cd0631ac8fb",
+    "semantic_hash": ""
+  },
+  ".opencode/plugins/context-layer.ts": {
+    "mtime": 1790331701.9303422,
+    "seen": 1790332071.628732,
+    "ast_hash": "aa1c36d4e13def2a74a9ef3da0459fb8",
+    "semantic_hash": ""
+  },
+  "copilot-hooks.json": {
+    "mtime": 1790331891.1831627,
+    "seen": 1790332071.62879,
+    "ast_hash": "fcbe239a8de7f39dd4bfc536d3b10a71",
     "semantic_hash": ""
   }
 }

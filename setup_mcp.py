@@ -206,19 +206,32 @@ def write_copilot_hooks(project_root: Path):
     data.setdefault("hooks", {})
     data["hooks"].setdefault("sessionStart", [])
     data["hooks"].setdefault("userPromptSubmitted", [])
+    hooks_dir = project_root / "hooks"
+    handoff_js = (hooks_dir / "context-layer-handoff.js").as_posix()
+    checkpoint_js = (hooks_dir / "context-layer-checkpoint.js").as_posix()
+    handoff_js_ps = str(hooks_dir / "context-layer-handoff.js")
+    checkpoint_js_ps = str(hooks_dir / "context-layer-checkpoint.js")
     resume = {"type": "command",
-              "bash": 'node "${PLUGIN_ROOT}/hooks/context-layer-handoff.js" --resume-auto',
-              "powershell": 'node "${PLUGIN_ROOT}\\hooks\\context-layer-handoff.js" --resume-auto',
+              "bash": f'node "{handoff_js}" --resume-auto',
+              "powershell": f'node "{handoff_js_ps}" --resume-auto',
               "timeoutSec": 10}
     checkpoint = {"type": "command",
-                  "bash": 'node "${PLUGIN_ROOT}/hooks/context-layer-checkpoint.js"',
-                  "powershell": 'node "${PLUGIN_ROOT}\\hooks\\context-layer-checkpoint.js"',
+                  "bash": f'node "{checkpoint_js}"',
+                  "powershell": f'node "{checkpoint_js_ps}"',
                   "timeoutSec": 10}
-    if not any("context-layer-handoff" in str(e.get("bash", ""))
-               for e in data["hooks"]["sessionStart"]):
+    # Update or add resume hook
+    resume_idx = next((i for i, e in enumerate(data["hooks"]["sessionStart"])
+                       if "context-layer-handoff" in str(e.get("bash", ""))), None)
+    if resume_idx is not None:
+        data["hooks"]["sessionStart"][resume_idx] = resume
+    else:
         data["hooks"]["sessionStart"].append(resume)
-    if not any("context-layer-checkpoint" in str(e.get("bash", ""))
-               for e in data["hooks"]["userPromptSubmitted"]):
+    # Update or add checkpoint hook
+    checkpoint_idx = next((i for i, e in enumerate(data["hooks"]["userPromptSubmitted"])
+                           if "context-layer-checkpoint" in str(e.get("bash", ""))), None)
+    if checkpoint_idx is not None:
+        data["hooks"]["userPromptSubmitted"][checkpoint_idx] = checkpoint
+    else:
         data["hooks"]["userPromptSubmitted"].append(checkpoint)
     target.write_text(json.dumps(data, indent=2) + "\n")
     print(f"  [OK] copilot-hooks.json (merged)")
@@ -236,11 +249,22 @@ def write_codex_hooks(project_root: Path):
             pass
     hooks = data.setdefault("hooks", {})
     command = f'"{VENV_PYTHON}" "{ROOT / "adapters" / "codex" / "hook.py"}"'
+
+    # Normalize command for comparison (handle path separators, etc.)
+    def normalize_cmd(cmd: str) -> str:
+        return cmd.replace("\\", "/").replace('"', '').lower()
+
+    normalized_command = normalize_cmd(command)
+
     for event, matcher in (("SessionStart", "startup|resume|compact"),
                            ("PreCompact", ".*"), ("SessionEnd", None)):
         groups = hooks.setdefault(event, [])
-        if any("adapters\\codex\\hook.py" in str(group)
-               or "adapters/codex/hook.py" in str(group) for group in groups):
+        # Check if a Context Layer hook already exists for this event
+        has_context_layer = any(
+            normalize_cmd(str(group.get("hooks", [{}])[0].get("command", ""))) == normalized_command
+            for group in groups
+        )
+        if has_context_layer:
             continue
         group = {"hooks": [{"type": "command", "command": command,
                             "statusMessage": "Loading Context Layer context"
@@ -271,9 +295,12 @@ def deploy_hooks_and_plugin(project_root: Path, platforms: dict):
     plugin_dir.mkdir(parents=True, exist_ok=True)
     src = ROOT / "adapters" / "opencode" / "context-layer-plugin.ts"
     dst = plugin_dir / "context-layer.ts"
+    hooks_dir = project_root / "hooks"
+    venv_python = venv_python_path(ROOT).as_posix()
     text = (src.read_text()
             .replace("__CONTEXT_LAYER_DIR__", ROOT.as_posix())
-            .replace("__CHECKPOINT_JS__", str(hooks_dir / "context-layer-checkpoint.js")))
+            .replace("__CHECKPOINT_JS__", (hooks_dir / "context-layer-checkpoint.js").as_posix())
+            .replace("__CONTEXT_LAYER_PYTHON__", venv_python))
     if not dst.exists() or dst.read_text() != text:
         dst.write_text(text)
         print(f"  [OK] .opencode/plugins/context-layer.ts")
@@ -281,17 +308,27 @@ def deploy_hooks_and_plugin(project_root: Path, platforms: dict):
 
 def ensure_identity(project_root: Path, slug: str):
     idf = project_root / ".context-layer.json"
+    existing_slug = ""
     if idf.exists():
         try:
             current = json.loads(idf.read_text()).get("task_slug")
             if current:
+                existing_slug = current
                 print(f"  [OK] existing slug: {current}")
-                return
         except Exception:
             pass
     from context_layer.project_identity import init_project_identity
-    final = init_project_identity(str(project_root), slug or project_root.name)
+    final = init_project_identity(str(project_root), slug or existing_slug or project_root.name)
     print(f"  [OK] .context-layer.json -> slug: {final}")
+
+    # Update .mcp/config.json with the resolved slug
+    cfg_file = project_root / ".mcp" / "config.json"
+    if cfg_file.exists():
+        cfg = json.loads(cfg_file.read_text(encoding="utf-8"))
+        if cfg.get("identity", {}).get("task_slug") != final:
+            cfg.setdefault("identity", {})["task_slug"] = final
+            cfg_file.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+            print(f"  [OK] .mcp/config.json identity updated -> slug: {final}")
 
 
 def main():

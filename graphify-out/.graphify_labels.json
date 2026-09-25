@@ -46,5 +46,6 @@
   "44": "handoff_cli.py",
   "45": "test_reliability.py",
   "46": "eval_fixture.py",
+  "47": "ContextLayerPlugin",
   "51": "test_mcp_live.py"
 }

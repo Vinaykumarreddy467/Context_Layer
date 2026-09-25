@@ -24,12 +24,35 @@
 
 const { execFileSync } = require("child_process");
 const fs = require("fs");
+const path = require("path");
 
-const URL = process.env.CONTEXT_LAYER_URL || "http://127.0.0.1:8010";
-const NS = process.env.CONTEXT_LAYER_NS || "dev";
-const DB = process.env.CONTEXT_LAYER_DB || "context_layer";
-const USER = process.env.CONTEXT_LAYER_USER || "root";
-const PASS = process.env.CONTEXT_LAYER_PASS || "root";
+function loadEnv() {
+  const envPath = path.join(process.cwd(), ".env");
+  if (fs.existsSync(envPath)) {
+    const content = fs.readFileSync(envPath, "utf-8");
+    for (const line of content.split("\n")) {
+      const trimmed = line.trim();
+      if (trimmed && !trimmed.startsWith("#")) {
+        const eqIdx = trimmed.indexOf("=");
+        if (eqIdx > 0) {
+          const key = trimmed.slice(0, eqIdx).trim();
+          const val = trimmed.slice(eqIdx + 1).trim();
+          if (!process.env[key]) {
+            process.env[key] = val;
+          }
+        }
+      }
+    }
+  }
+}
+
+loadEnv();
+
+const SURREAL_HTTP_URL = process.env.CONTEXT_LAYER_URL || process.env.SURREAL_HTTP_URL || "http://127.0.0.1:8010";
+const NS = process.env.CONTEXT_LAYER_NS || process.env.SURREAL_NS || "dev";
+const DB = process.env.CONTEXT_LAYER_DB || process.env.SURREAL_DB || "context_layer";
+const USER = process.env.CONTEXT_LAYER_USER || process.env.SURREAL_USER || "root";
+const PASS = process.env.CONTEXT_LAYER_PASS || process.env.SURREAL_PASS || "root";
 const PYTHON =
   process.env.CONTEXT_LAYER_PYTHON ||
   "C:\\Users\\Vinaykumar.R\\Downloads\\context_layer\\context_layer\\venv\\Scripts\\python.exe";
@@ -85,7 +108,7 @@ function gitBranch() {
 
 async function latestHandoff(taskSlug) {
   const query = "SELECT id, timestamp, token_count FROM handoff WHERE task_slug = $slug ORDER BY timestamp DESC LIMIT 1;";
-  const sqlUrl = new URL(`${URL}/sql`);
+  const sqlUrl = new URL(`${SURREAL_HTTP_URL}/sql`);
   sqlUrl.searchParams.set("slug", taskSlug);
   let res;
   try {
@@ -102,7 +125,7 @@ async function latestHandoff(taskSlug) {
       body: query,
     });
   } catch (e) {
-    fail(`SurrealDB unreachable at ${URL}: ${e.message}`);
+    fail(`SurrealDB unreachable at ${SURREAL_HTTP_URL}: ${e.message}`);
   }
   if (!res.ok) fail(`SurrealDB HTTP ${res.status}`);
   const rows = await res.json();

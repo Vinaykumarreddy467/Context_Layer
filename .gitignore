@@ -45,3 +45,7 @@ graphify-out/.graphify_labels.json.sig
 # Generated artifacts: retrieval-eval gold sets and synced CONTEXT.md
 output/
 CONTEXT.md
+
+# Generated client configs (created by setup_mcp.py)
+.opencode/
+copilot-hooks.json
