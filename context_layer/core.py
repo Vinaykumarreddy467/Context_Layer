@@ -7,6 +7,7 @@ Schema is managed by the versioned migrations in `sql/migrations/`.
 """
 
 import asyncio
+import hashlib
 import os
 import re
 from datetime import datetime, timezone
@@ -90,6 +91,12 @@ def _to_record_id(s: str) -> RecordID:
     """Parse 'handoff:abc' (or 'handoff:⟨...⟩') into a RecordID for RELATE."""
     table, _, key = s.partition(":")
     return RecordID(table, key.strip("⟨⟩"))
+
+
+def _content_hash(raw_content: str) -> str:
+    """SHA-256 over whitespace-normalized raw_content for duplicate detection."""
+    normalized = " ".join(raw_content.split())
+    return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
 
 
 def _tenant_ns(base_ns: str) -> str:
@@ -376,10 +383,10 @@ async def get_current_context(task_slug: str) -> Optional[dict]:
 
 async def create_handoff(
     task_slug: str,
-    git_branch: str,
-    decisions: list[dict],
-    next_steps: list[str],
-    raw_content: str,
+    git_branch: Optional[str] = None,
+    decisions: Optional[list[dict]] = None,
+    next_steps: Optional[list[str]] = None,
+    raw_content: str = "",
     token_count: int = 0,
     continues_from_id: Optional[str] = None,
     summary: str = "",
@@ -392,22 +399,22 @@ async def create_handoff(
     (e.g. Claude Code's session_id), stored purely as metadata for
     debugging/traceability. It is NOT a linking key -- task_slug is the
     only thing that links handoffs across platforms.
+
+    Duplicate guard: hooks (PreCompact + SessionEnd) can fire twice with
+    identical content. A handoff with the same task_slug AND the same
+    normalized content (content_hash) stored within the last 60 seconds
+    is treated as a duplicate and the existing record is returned.
+    platform_session_id alone is never a duplicate signal.
     """
+    decisions = decisions or []
+    next_steps = next_steps or []
     db = await _connect()
     try:
-        # Duplicate-checkpoint guard: hooks (PreCompact + SessionEnd) can
-        # fire twice with identical content. Skip creating a duplicate if
-        # an identical handoff (same raw_content, or same platform session)
-        # was stored within the last 60 seconds.
-        dup_where = "raw_content = $raw"
-        dup_params = {"slug": task_slug, "raw": raw_content}
-        if platform_session_id:
-            dup_where += " OR platform_session_id = $sid"
-            dup_params["sid"] = platform_session_id
+        content_hash = _content_hash(raw_content)
         dup = await db.query(
-            "SELECT * FROM handoff WHERE task_slug = $slug AND timestamp > time::now() - 60s "
-            f"AND ({dup_where}) ORDER BY timestamp DESC LIMIT 1;",
-            dup_params,
+            "SELECT * FROM handoff WHERE task_slug = $slug AND content_hash = $hash "
+            "AND timestamp > time::now() - 60s ORDER BY timestamp DESC LIMIT 1;",
+            {"slug": task_slug, "hash": content_hash},
         )
         rows = dup[0] if dup else []
         if rows:
@@ -418,34 +425,53 @@ async def create_handoff(
             " ".join(d.get("text", "") for d in decisions),
             " ".join(next_steps),
         )
-        created = await db.create(
-            "handoff",
-            {
-                "task_slug": task_slug,
-                "git_branch": git_branch,
-                "status": "open",
-                "version": 1,
-                "decisions": decisions,
-                "next_steps": next_steps,
-                "raw_content": raw_content,
-                "summary": summary,
-                "platform_session_id": platform_session_id,
-                "token_count": token_count,
-                "files": files,
-                "refs": refs,
-                "embedding": await _embed_async(raw_content),
-                # timestamp omitted: schema default time::now() sets it
-            },
-        )
-        record = created[0] if isinstance(created, list) else created
+        data = {
+            "task_slug": task_slug,
+            "git_branch": git_branch,
+            "status": "open",
+            "version": 1,
+            "decisions": decisions,
+            "next_steps": next_steps,
+            "raw_content": raw_content,
+            "summary": summary,
+            "platform_session_id": platform_session_id,
+            "token_count": token_count,
+            "files": files,
+            "refs": refs,
+            "content_hash": content_hash,
+            "embedding": await _embed_async(raw_content),
+            # timestamp omitted: schema default time::now() sets it
+        }
 
         if continues_from_id:
-            await db.query(
-                "RELATE $new->continues_from->$prev;",
-                {"new": record["id"], "prev": _to_record_id(continues_from_id)},
+            # Validate the predecessor up front: RELATE to a missing record
+            # silently creates a dangling edge instead of failing.
+            prev = _to_record_id(continues_from_id)
+            exists = await db.query(
+                "SELECT VALUE count() FROM type::record($prev) GROUP ALL;",
+                {"prev": prev},
             )
+            if not exists or not exists[0] or not exists[0][0]:
+                raise ValueError(f"continues_from_id not found: {continues_from_id}")
+            # Create the handoff and its lineage edge atomically: if any
+            # statement fails the transaction rolls back, so no orphan
+            # handoff is left behind.
+            result = await db.query(
+                "BEGIN TRANSACTION; "
+                "LET $new = CREATE handoff CONTENT $data; "
+                "LET $new_id = $new[0].id; "
+                "RELATE $new_id->continues_from->$prev; "
+                "COMMIT TRANSACTION; "
+                "SELECT * FROM $new_id;",
+                {"data": data, "prev": prev},
+            )
+            rows = result[-1] if result else []
+            if not rows:
+                raise RuntimeError("handoff created but lineage could not be confirmed")
+            return rows[0]
 
-        return record
+        created = await db.create("handoff", data)
+        return created[0] if isinstance(created, list) else created
     finally:
         await db.close()
 
@@ -714,6 +740,7 @@ async def summarize_for_window(
             "token_count": _estimate_tokens(compressed),
             "files": files,
             "refs": refs,
+            "content_hash": _content_hash(compressed),
             "embedding": await _embed_async(compressed),
         })
         record = created[0] if isinstance(created, list) else created

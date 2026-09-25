@@ -41,7 +41,7 @@ See [Migration workflow](../sql/migrations/README.md) before changing the schema
 
 ## Retrieval evaluation
 
-`scripts/evaluate_retrieval.py` compares search results with a hand-labeled JSON dataset. Each case needs a query, project `task_slug`, and one or more relevant handoff IDs. Start a small dataset like this, replacing the example IDs with real IDs from your handoff records:
+`scripts/evaluate_retrieval.py` compares search results with a labeled JSON dataset. Each case needs a query, project `task_slug`, and one or more relevant handoff IDs:
 
 ```json
 {
@@ -55,18 +55,27 @@ See [Migration workflow](../sql/migrations/README.md) before changing the schema
 }
 ```
 
-The repository ships a labeled set at `scripts/gold_set.json` (six queries against real handoffs) with a recorded baseline: hybrid `-k 5` gives hit rate 1.000, mean recall 1.000, MRR 0.639. Re-run it after retrieval changes to compare:
+The baseline is reproducible: `scripts/eval_fixture.py` creates six deterministic handoffs under the `eval-fixture` task slug (fixed content, so embeddings and scores are stable), writes a gold set with the real record IDs to `output/eval/gold_set.json`, and prints the evaluation command. No machine-specific handoff IDs are committed. Recreate the fixture and re-run the baseline after retrieval changes:
 
 ```text
-python scripts/evaluate_retrieval.py scripts/gold_set.json --search hybrid -k 5
+python scripts/eval_fixture.py
+python scripts/evaluate_retrieval.py output/eval/gold_set.json --search hybrid -k 5
 ```
+
+Recorded baseline (hybrid `-k 5`): hit rate 1.000, mean recall 1.000, mean precision 0.200, MRR 0.917.
 
 Run each search mode against the same labeled set to compare rankings:
 
 ```text
-python scripts/evaluate_retrieval.py retrieval-eval.json --search hybrid -k 5
-python scripts/evaluate_retrieval.py retrieval-eval.json --search text -k 5 --json
-python scripts/evaluate_retrieval.py retrieval-eval.json --search semantic -k 5 --min-mrr 0.6
+python scripts/evaluate_retrieval.py output/eval/gold_set.json --search hybrid -k 5
+python scripts/evaluate_retrieval.py output/eval/gold_set.json --search text -k 5 --json
+python scripts/evaluate_retrieval.py output/eval/gold_set.json --search semantic -k 5 --min-mrr 0.6
+```
+
+Remove the fixture handoffs when done:
+
+```text
+python scripts/eval_fixture.py --cleanup
 ```
 
 The evaluator only reads/searches the configured database; it does not create handoffs. `hit_rate@k` is the fraction of queries with any expected handoff in the results; `mean_recall@k` is the average fraction of expected handoffs found; `mean_precision@k` is the average fraction of returned slots that are relevant; `MRR@k` rewards putting a relevant result near the top. These scores reflect the quality of the labeled examples, so review expected IDs carefully and keep the dataset representative of real resume questions.

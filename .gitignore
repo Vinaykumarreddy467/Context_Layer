@@ -41,3 +41,7 @@ graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
 graphify-out/.graphify_python
 graphify-out/.graphify_root
 graphify-out/.graphify_labels.json.sig
+
+# Generated artifacts: retrieval-eval gold sets and synced CONTEXT.md
+output/
+CONTEXT.md

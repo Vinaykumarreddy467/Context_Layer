@@ -21,6 +21,19 @@
   },
   "nodes": [
     {
+      "id": "scripts_api_server_apierror",
+      "label": "ApiError",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Handler",
+      "file_type": "code",
+      "norm_label": "apierror",
+      "source_file": "scripts/api_server.py",
+      "source_location": "L46"
+    },
+    {
       "id": "scripts_api_server_handler",
       "label": "Handler",
       "_callable": true,
@@ -31,7 +44,7 @@
       "file_type": "code",
       "norm_label": "handler",
       "source_file": "scripts/api_server.py",
-      "source_location": "L46"
+      "source_location": "L75"
     },
     {
       "id": "adapters_generic_loop_contextlayerhooks",
@@ -69,7 +82,7 @@
       "file_type": "code",
       "norm_label": "append_next_step()",
       "source_file": "context_layer/core.py",
-      "source_location": "L627"
+      "source_location": "L653"
     },
     {
       "id": "context_layer_core_assemble_context",
@@ -81,7 +94,7 @@
       "file_type": "code",
       "norm_label": "assemble_context()",
       "source_file": "context_layer/core.py",
-      "source_location": "L219"
+      "source_location": "L226"
     },
     {
       "id": "context_layer_core_budget_recommendations",
@@ -93,7 +106,7 @@
       "file_type": "code",
       "norm_label": "_budget_recommendations()",
       "source_file": "context_layer/core.py",
-      "source_location": "L786"
+      "source_location": "L813"
     },
     {
       "id": "context_layer_core_check_api_key",
@@ -105,7 +118,7 @@
       "file_type": "code",
       "norm_label": "check_api_key()",
       "source_file": "context_layer/core.py",
-      "source_location": "L111"
+      "source_location": "L118"
     },
     {
       "id": "context_layer_core_close_handoff",
@@ -117,7 +130,7 @@
       "file_type": "code",
       "norm_label": "close_handoff()",
       "source_file": "context_layer/core.py",
-      "source_location": "L640"
+      "source_location": "L666"
     },
     {
       "id": "context_layer_core_connect",
@@ -129,7 +142,19 @@
       "file_type": "code",
       "norm_label": "_connect()",
       "source_file": "context_layer/core.py",
-      "source_location": "L102"
+      "source_location": "L109"
+    },
+    {
+      "id": "context_layer_core_content_hash",
+      "label": "_content_hash()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "code",
+      "norm_label": "_content_hash()",
+      "source_file": "context_layer/core.py",
+      "source_location": "L96"
     },
     {
       "id": "context_layer_core_count_tokens",
@@ -141,7 +166,7 @@
       "file_type": "code",
       "norm_label": "_count_tokens()",
       "source_file": "context_layer/core.py",
-      "source_location": "L178"
+      "source_location": "L185"
     },
     {
       "id": "context_layer_core_create_handoff",
@@ -153,31 +178,7 @@
       "file_type": "code",
       "norm_label": "create_handoff()",
       "source_file": "context_layer/core.py",
-      "source_location": "L377"
-    },
-    {
-      "id": "context_layer_core_embed",
-      "label": "_embed()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "code",
-      "norm_label": "_embed()",
-      "source_file": "context_layer/core.py",
-      "source_location": "L78"
-    },
-    {
-      "id": "context_layer_core_embed_async",
-      "label": "_embed_async()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "code",
-      "norm_label": "_embed_async()",
-      "source_file": "context_layer/core.py",
-      "source_location": "L83"
+      "source_location": "L384"
     },
     {
       "id": "context_layer_core_ensure_embedder_loaded",
@@ -189,7 +190,7 @@
       "file_type": "code",
       "norm_label": "_ensure_embedder_loaded()",
       "source_file": "context_layer/core.py",
-      "source_location": "L41"
+      "source_location": "L42"
     },
     {
       "id": "context_layer_core_estimate_tokens",
@@ -201,7 +202,7 @@
       "file_type": "code",
       "norm_label": "_estimate_tokens()",
       "source_file": "context_layer/core.py",
-      "source_location": "L186"
+      "source_location": "L193"
     },
     {
       "id": "context_layer_core_extract_files_refs",
@@ -213,7 +214,7 @@
       "file_type": "code",
       "norm_label": "extract_files_refs()",
       "source_file": "context_layer/core.py",
-      "source_location": "L141"
+      "source_location": "L148"
     },
     {
       "id": "context_layer_core_find_handoffs_by_file",
@@ -225,7 +226,7 @@
       "file_type": "code",
       "norm_label": "find_handoffs_by_file()",
       "source_file": "context_layer/core.py",
-      "source_location": "L589"
+      "source_location": "L615"
     },
     {
       "id": "context_layer_core_fmt_decisions",
@@ -237,7 +238,7 @@
       "file_type": "code",
       "norm_label": "_fmt_decisions()",
       "source_file": "context_layer/core.py",
-      "source_location": "L208"
+      "source_location": "L215"
     },
     {
       "id": "context_layer_core_fmt_steps",
@@ -249,7 +250,7 @@
       "file_type": "code",
       "norm_label": "_fmt_steps()",
       "source_file": "context_layer/core.py",
-      "source_location": "L215"
+      "source_location": "L222"
     },
     {
       "id": "context_layer_core_get_current_context",
@@ -261,19 +262,7 @@
       "file_type": "code",
       "norm_label": "get_current_context()",
       "source_file": "context_layer/core.py",
-      "source_location": "L366"
-    },
-    {
-      "id": "context_layer_core_get_embedder",
-      "label": "_get_embedder()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "code",
-      "norm_label": "_get_embedder()",
-      "source_file": "context_layer/core.py",
-      "source_location": "L68"
+      "source_location": "L373"
     },
     {
       "id": "context_layer_core_get_handoff_lineage",
@@ -285,7 +274,7 @@
       "file_type": "code",
       "norm_label": "get_handoff_lineage()",
       "source_file": "context_layer/core.py",
-      "source_location": "L606"
+      "source_location": "L632"
     },
     {
       "id": "context_layer_core_get_latest_handoff",
@@ -297,7 +286,7 @@
       "file_type": "code",
       "norm_label": "get_latest_handoff()",
       "source_file": "context_layer/core.py",
-      "source_location": "L453"
+      "source_location": "L479"
     },
     {
       "id": "context_layer_core_get_lineage_ids",
@@ -309,7 +298,7 @@
       "file_type": "code",
       "norm_label": "get_lineage_ids()",
       "source_file": "context_layer/core.py",
-      "source_location": "L731"
+      "source_location": "L758"
     },
     {
       "id": "context_layer_core_get_token_budget_report",
@@ -321,7 +310,7 @@
       "file_type": "code",
       "norm_label": "get_token_budget_report()",
       "source_file": "context_layer/core.py",
-      "source_location": "L758"
+      "source_location": "L785"
     },
     {
       "id": "context_layer_core_hybrid_search_handoffs",
@@ -333,7 +322,7 @@
       "file_type": "code",
       "norm_label": "hybrid_search_handoffs()",
       "source_file": "context_layer/core.py",
-      "source_location": "L541"
+      "source_location": "L567"
     },
     {
       "id": "context_layer_core_resume_handoff",
@@ -345,7 +334,7 @@
       "file_type": "code",
       "norm_label": "resume_handoff()",
       "source_file": "context_layer/core.py",
-      "source_location": "L468"
+      "source_location": "L494"
     },
     {
       "id": "context_layer_core_search_handoffs",
@@ -357,7 +346,7 @@
       "file_type": "code",
       "norm_label": "search_handoffs()",
       "source_file": "context_layer/core.py",
-      "source_location": "L480"
+      "source_location": "L506"
     },
     {
       "id": "context_layer_core_semantic_search_handoffs",
@@ -369,7 +358,7 @@
       "file_type": "code",
       "norm_label": "semantic_search_handoffs()",
       "source_file": "context_layer/core.py",
-      "source_location": "L509"
+      "source_location": "L535"
     },
     {
       "id": "context_layer_core_summarize_for_window",
@@ -381,7 +370,7 @@
       "file_type": "code",
       "norm_label": "summarize_for_window()",
       "source_file": "context_layer/core.py",
-      "source_location": "L658"
+      "source_location": "L684"
     },
     {
       "id": "context_layer_core_tenant_ns",
@@ -393,7 +382,7 @@
       "file_type": "code",
       "norm_label": "_tenant_ns()",
       "source_file": "context_layer/core.py",
-      "source_location": "L95"
+      "source_location": "L102"
     },
     {
       "id": "context_layer_core_to_record_id",
@@ -405,7 +394,7 @@
       "file_type": "code",
       "norm_label": "_to_record_id()",
       "source_file": "context_layer/core.py",
-      "source_location": "L89"
+      "source_location": "L90"
     },
     {
       "id": "context_layer_core_truncate_to_tokens",
@@ -417,7 +406,7 @@
       "file_type": "code",
       "norm_label": "_truncate_to_tokens()",
       "source_file": "context_layer/core.py",
-      "source_location": "L191"
+      "source_location": "L198"
     },
     {
       "id": "context_layer_server_append_next_step",
@@ -1332,12 +1321,240 @@
       "source_location": "L8"
     },
     {
+      "id": "adapters_codex_hook_git_branch",
+      "label": "_git_branch()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_git_branch()",
+      "source_file": "adapters/codex/hook.py",
+      "source_location": "L22"
+    },
+    {
+      "id": "adapters_codex_hook_latest_handoff_id",
+      "label": "_latest_handoff_id()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_latest_handoff_id()",
+      "source_file": "adapters/codex/hook.py",
+      "source_location": "L87"
+    },
+    {
+      "id": "adapters_codex_hook_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "adapters/codex/hook.py",
+      "source_location": "L138"
+    },
+    {
+      "id": "adapters_codex_hook_read_transcript",
+      "label": "_read_transcript()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_read_transcript()",
+      "source_file": "adapters/codex/hook.py",
+      "source_location": "L37"
+    },
+    {
+      "id": "adapters_codex_hook_save_handoff",
+      "label": "_save_handoff()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_save_handoff()",
+      "source_file": "adapters/codex/hook.py",
+      "source_location": "L121"
+    },
+    {
+      "id": "adapters_codex_hook_session_start",
+      "label": "_session_start()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_session_start()",
+      "source_file": "adapters/codex/hook.py",
+      "source_location": "L101"
+    },
+    {
+      "id": "adapters_copilot_pre_compact_get",
+      "label": "_get()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_get()",
+      "source_file": "adapters/copilot/pre_compact.py",
+      "source_location": "L33"
+    },
+    {
+      "id": "adapters_copilot_pre_compact_git_branch",
+      "label": "_git_branch()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_git_branch()",
+      "source_file": "adapters/copilot/pre_compact.py",
+      "source_location": "L79"
+    },
+    {
+      "id": "adapters_copilot_pre_compact_latest_handoff_id",
+      "label": "_latest_handoff_id()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_latest_handoff_id()",
+      "source_file": "adapters/copilot/pre_compact.py",
+      "source_location": "L90"
+    },
+    {
+      "id": "adapters_copilot_pre_compact_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "adapters/copilot/pre_compact.py",
+      "source_location": "L103"
+    },
+    {
+      "id": "adapters_copilot_pre_compact_read_transcript",
+      "label": "_read_transcript()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_read_transcript()",
+      "source_file": "adapters/copilot/pre_compact.py",
+      "source_location": "L41"
+    },
+    {
+      "id": "adapters_opencode_save_before_compact_git_branch",
+      "label": "_git_branch()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_git_branch()",
+      "source_file": "adapters/opencode/save_before_compact.py",
+      "source_location": "L25"
+    },
+    {
+      "id": "adapters_opencode_save_before_compact_latest_handoff_id",
+      "label": "_latest_handoff_id()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_latest_handoff_id()",
+      "source_file": "adapters/opencode/save_before_compact.py",
+      "source_location": "L36"
+    },
+    {
+      "id": "adapters_opencode_save_before_compact_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "adapters/opencode/save_before_compact.py",
+      "source_location": "L50"
+    },
+    {
+      "id": "context_layer_auto_handoff_clean",
+      "label": "_clean()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_clean()",
+      "source_file": "context_layer/auto_handoff.py",
+      "source_location": "L73"
+    },
+    {
+      "id": "context_layer_auto_handoff_extract_local",
+      "label": "_extract_local()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_extract_local()",
+      "source_file": "context_layer/auto_handoff.py",
+      "source_location": "L82"
+    },
+    {
+      "id": "context_layer_auto_handoff_extract_with_claude",
+      "label": "_extract_with_claude()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_extract_with_claude()",
+      "source_file": "context_layer/auto_handoff.py",
+      "source_location": "L200"
+    },
+    {
+      "id": "context_layer_auto_handoff_get_client",
+      "label": "_get_client()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_get_client()",
+      "source_file": "context_layer/auto_handoff.py",
+      "source_location": "L26"
+    },
+    {
+      "id": "context_layer_auto_handoff_summarize_and_store",
+      "label": "summarize_and_store()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "summarize_and_store()",
+      "source_file": "context_layer/auto_handoff.py",
+      "source_location": "L135"
+    },
+    {
       "id": "context_layer_project_identity_init_project_identity",
       "label": "init_project_identity()",
       "_callable": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "project_identity.py",
+      "community_name": "auto_handoff.py",
       "file_type": "code",
       "norm_label": "init_project_identity()",
       "source_file": "context_layer/project_identity.py",
@@ -1349,7 +1566,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "project_identity.py",
+      "community_name": "auto_handoff.py",
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "context_layer/project_identity.py",
@@ -1361,7 +1578,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "project_identity.py",
+      "community_name": "auto_handoff.py",
       "file_type": "code",
       "norm_label": "resolve_task_slug()",
       "source_file": "context_layer/project_identity.py",
@@ -1373,11 +1590,59 @@
       "_callable": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "project_identity.py",
+      "community_name": "auto_handoff.py",
       "file_type": "code",
       "norm_label": "ensure_project_ready()",
       "source_file": "context_layer/server.py",
       "source_location": "L534"
+    },
+    {
+      "id": "hooks_pre_compact_git_branch",
+      "label": "_git_branch()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_git_branch()",
+      "source_file": "hooks/pre_compact.py",
+      "source_location": "L95"
+    },
+    {
+      "id": "hooks_pre_compact_latest_handoff_id",
+      "label": "_latest_handoff_id()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_latest_handoff_id()",
+      "source_file": "hooks/pre_compact.py",
+      "source_location": "L107"
+    },
+    {
+      "id": "hooks_pre_compact_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "hooks/pre_compact.py",
+      "source_location": "L121"
+    },
+    {
+      "id": "hooks_pre_compact_read_transcript",
+      "label": "_read_transcript()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "_read_transcript()",
+      "source_file": "hooks/pre_compact.py",
+      "source_location": "L53"
     },
     {
       "id": "scripts_new_project_main",
@@ -1385,11 +1650,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "project_identity.py",
+      "community_name": "auto_handoff.py",
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "scripts/new_project.py",
       "source_location": "L18"
+    },
+    {
+      "id": "scripts_api_server_apierror_init",
+      "label": ".__init__()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Handler",
+      "file_type": "code",
+      "norm_label": ".__init__()",
+      "source_file": "scripts/api_server.py",
+      "source_location": "L49"
     },
     {
       "id": "scripts_api_server_handler_auth_ok",
@@ -1401,7 +1678,7 @@
       "file_type": "code",
       "norm_label": "._auth_ok()",
       "source_file": "scripts/api_server.py",
-      "source_location": "L59"
+      "source_location": "L91"
     },
     {
       "id": "scripts_api_server_handler_do_get",
@@ -1413,7 +1690,7 @@
       "file_type": "code",
       "norm_label": ".do_get()",
       "source_file": "scripts/api_server.py",
-      "source_location": "L129"
+      "source_location": "L183"
     },
     {
       "id": "scripts_api_server_handler_do_options",
@@ -1425,7 +1702,7 @@
       "file_type": "code",
       "norm_label": ".do_options()",
       "source_file": "scripts/api_server.py",
-      "source_location": "L135"
+      "source_location": "L189"
     },
     {
       "id": "scripts_api_server_handler_do_post",
@@ -1437,7 +1714,19 @@
       "file_type": "code",
       "norm_label": ".do_post()",
       "source_file": "scripts/api_server.py",
-      "source_location": "L132"
+      "source_location": "L186"
+    },
+    {
+      "id": "scripts_api_server_handler_error",
+      "label": "._error()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Handler",
+      "file_type": "code",
+      "norm_label": "._error()",
+      "source_file": "scripts/api_server.py",
+      "source_location": "L88"
     },
     {
       "id": "scripts_api_server_handler_get",
@@ -1449,7 +1738,7 @@
       "file_type": "code",
       "norm_label": "._get()",
       "source_file": "scripts/api_server.py",
-      "source_location": "L91"
+      "source_location": "L131"
     },
     {
       "id": "scripts_api_server_handler_json",
@@ -1461,7 +1750,7 @@
       "file_type": "code",
       "norm_label": "._json()",
       "source_file": "scripts/api_server.py",
-      "source_location": "L47"
+      "source_location": "L76"
     },
     {
       "id": "scripts_api_server_handler_log_message",
@@ -1473,7 +1762,7 @@
       "file_type": "code",
       "norm_label": ".log_message()",
       "source_file": "scripts/api_server.py",
-      "source_location": "L138"
+      "source_location": "L192"
     },
     {
       "id": "scripts_api_server_handler_post",
@@ -1485,7 +1774,7 @@
       "file_type": "code",
       "norm_label": "._post()",
       "source_file": "scripts/api_server.py",
-      "source_location": "L112"
+      "source_location": "L163"
     },
     {
       "id": "scripts_api_server_handler_read_body",
@@ -1497,7 +1786,7 @@
       "file_type": "code",
       "norm_label": "._read_body()",
       "source_file": "scripts/api_server.py",
-      "source_location": "L67"
+      "source_location": "L99"
     },
     {
       "id": "scripts_api_server_handler_route",
@@ -1509,7 +1798,7 @@
       "file_type": "code",
       "norm_label": "._route()",
       "source_file": "scripts/api_server.py",
-      "source_location": "L76"
+      "source_location": "L108"
     },
     {
       "id": "scripts_api_server_main",
@@ -1521,7 +1810,31 @@
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "scripts/api_server.py",
-      "source_location": "L142"
+      "source_location": "L196"
+    },
+    {
+      "id": "scripts_api_server_parse_int",
+      "label": "_parse_int()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Handler",
+      "file_type": "code",
+      "norm_label": "_parse_int()",
+      "source_file": "scripts/api_server.py",
+      "source_location": "L64"
+    },
+    {
+      "id": "scripts_api_server_require_slug",
+      "label": "_require_slug()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Handler",
+      "file_type": "code",
+      "norm_label": "_require_slug()",
+      "source_file": "scripts/api_server.py",
+      "source_location": "L56"
     },
     {
       "id": "scripts_api_server_run",
@@ -1533,7 +1846,7 @@
       "file_type": "code",
       "norm_label": "_run()",
       "source_file": "scripts/api_server.py",
-      "source_location": "L42"
+      "source_location": "L71"
     },
     {
       "id": "scripts_evaluate_retrieval_evaluate",
@@ -1618,6 +1931,66 @@
       "norm_label": "_wait_ready()",
       "source_file": "tests/test_api_and_sync.py",
       "source_location": "L52"
+    },
+    {
+      "id": "context_layer_core_embed",
+      "label": "_embed()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "handoff_cli.py",
+      "file_type": "code",
+      "norm_label": "_embed()",
+      "source_file": "context_layer/core.py",
+      "source_location": "L79"
+    },
+    {
+      "id": "context_layer_core_get_embedder",
+      "label": "_get_embedder()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "handoff_cli.py",
+      "file_type": "code",
+      "norm_label": "_get_embedder()",
+      "source_file": "context_layer/core.py",
+      "source_location": "L69"
+    },
+    {
+      "id": "context_layer_export_capsule_capsule_text",
+      "label": "_capsule_text()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "handoff_cli.py",
+      "file_type": "code",
+      "norm_label": "_capsule_text()",
+      "source_file": "context_layer/export_capsule.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "context_layer_export_capsule_export_capsule",
+      "label": "export_capsule()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "handoff_cli.py",
+      "file_type": "code",
+      "norm_label": "export_capsule()",
+      "source_file": "context_layer/export_capsule.py",
+      "source_location": "L47"
+    },
+    {
+      "id": "context_layer_export_capsule_sync_capsule",
+      "label": "sync_capsule()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "handoff_cli.py",
+      "file_type": "code",
+      "norm_label": "sync_capsule()",
+      "source_file": "context_layer/export_capsule.py",
+      "source_location": "L55"
     },
     {
       "id": "scripts_handoff_cli_backup",
@@ -1752,232 +2125,136 @@
       "source_location": "L61"
     },
     {
-      "id": "context_layer_auto_handoff_clean",
-      "label": "_clean()",
+      "id": "context_layer_core_embed_async",
+      "label": "_embed_async()",
       "_callable": true,
       "_origin": "ast",
-      "community": 46,
-      "community_name": "auto_handoff.py",
+      "community": 45,
+      "community_name": "test_reliability.py",
       "file_type": "code",
-      "norm_label": "_clean()",
-      "source_file": "context_layer/auto_handoff.py",
-      "source_location": "L73"
+      "norm_label": "_embed_async()",
+      "source_file": "context_layer/core.py",
+      "source_location": "L84"
     },
     {
-      "id": "context_layer_auto_handoff_extract_local",
-      "label": "_extract_local()",
+      "id": "tests_test_reliability_free_port",
+      "label": "_free_port()",
       "_callable": true,
       "_origin": "ast",
-      "community": 46,
-      "community_name": "auto_handoff.py",
+      "community": 45,
+      "community_name": "test_reliability.py",
       "file_type": "code",
-      "norm_label": "_extract_local()",
-      "source_file": "context_layer/auto_handoff.py",
-      "source_location": "L82"
+      "norm_label": "_free_port()",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L143"
     },
     {
-      "id": "context_layer_auto_handoff_extract_with_claude",
-      "label": "_extract_with_claude()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "auto_handoff.py",
-      "file_type": "code",
-      "norm_label": "_extract_with_claude()",
-      "source_file": "context_layer/auto_handoff.py",
-      "source_location": "L200"
-    },
-    {
-      "id": "context_layer_auto_handoff_get_client",
-      "label": "_get_client()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "auto_handoff.py",
-      "file_type": "code",
-      "norm_label": "_get_client()",
-      "source_file": "context_layer/auto_handoff.py",
-      "source_location": "L26"
-    },
-    {
-      "id": "context_layer_auto_handoff_summarize_and_store",
-      "label": "summarize_and_store()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "auto_handoff.py",
-      "file_type": "code",
-      "norm_label": "summarize_and_store()",
-      "source_file": "context_layer/auto_handoff.py",
-      "source_location": "L135"
-    },
-    {
-      "id": "adapters_codex_hook_git_branch",
-      "label": "_git_branch()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "hook.py",
-      "file_type": "code",
-      "norm_label": "_git_branch()",
-      "source_file": "adapters/codex/hook.py",
-      "source_location": "L22"
-    },
-    {
-      "id": "adapters_codex_hook_latest_handoff_id",
-      "label": "_latest_handoff_id()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "hook.py",
-      "file_type": "code",
-      "norm_label": "_latest_handoff_id()",
-      "source_file": "adapters/codex/hook.py",
-      "source_location": "L87"
-    },
-    {
-      "id": "adapters_codex_hook_main",
+      "id": "tests_test_reliability_main",
       "label": "main()",
       "_callable": true,
       "_origin": "ast",
-      "community": 47,
-      "community_name": "hook.py",
+      "community": 45,
+      "community_name": "test_reliability.py",
       "file_type": "code",
       "norm_label": "main()",
-      "source_file": "adapters/codex/hook.py",
-      "source_location": "L138"
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L235"
     },
     {
-      "id": "adapters_codex_hook_read_transcript",
-      "label": "_read_transcript()",
+      "id": "tests_test_reliability_request",
+      "label": "_request()",
       "_callable": true,
       "_origin": "ast",
-      "community": 47,
-      "community_name": "hook.py",
+      "community": 45,
+      "community_name": "test_reliability.py",
       "file_type": "code",
-      "norm_label": "_read_transcript()",
-      "source_file": "adapters/codex/hook.py",
-      "source_location": "L37"
+      "norm_label": "_request()",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L149"
     },
     {
-      "id": "adapters_codex_hook_save_handoff",
-      "label": "_save_handoff()",
+      "id": "tests_test_reliability_test_api_validation",
+      "label": "test_api_validation()",
       "_callable": true,
       "_origin": "ast",
-      "community": 47,
-      "community_name": "hook.py",
+      "community": 45,
+      "community_name": "test_reliability.py",
       "file_type": "code",
-      "norm_label": "_save_handoff()",
-      "source_file": "adapters/codex/hook.py",
-      "source_location": "L121"
+      "norm_label": "test_api_validation()",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L164"
     },
     {
-      "id": "adapters_codex_hook_session_start",
-      "label": "_session_start()",
+      "id": "tests_test_reliability_test_duplicate_guard",
+      "label": "test_duplicate_guard()",
       "_callable": true,
       "_origin": "ast",
-      "community": 47,
-      "community_name": "hook.py",
+      "community": 45,
+      "community_name": "test_reliability.py",
       "file_type": "code",
-      "norm_label": "_session_start()",
-      "source_file": "adapters/codex/hook.py",
-      "source_location": "L101"
+      "norm_label": "test_duplicate_guard()",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L51"
     },
     {
-      "id": "context_layer_export_capsule_capsule_text",
-      "label": "_capsule_text()",
+      "id": "tests_test_reliability_test_lineage_safety",
+      "label": "test_lineage_safety()",
       "_callable": true,
       "_origin": "ast",
-      "community": 48,
-      "community_name": "export_capsule.py",
+      "community": 45,
+      "community_name": "test_reliability.py",
       "file_type": "code",
-      "norm_label": "_capsule_text()",
-      "source_file": "context_layer/export_capsule.py",
-      "source_location": "L15"
+      "norm_label": "test_lineage_safety()",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L108"
     },
     {
-      "id": "context_layer_export_capsule_export_capsule",
-      "label": "export_capsule()",
+      "id": "tests_test_reliability_wipe",
+      "label": "_wipe()",
       "_callable": true,
       "_origin": "ast",
-      "community": 48,
-      "community_name": "export_capsule.py",
+      "community": 45,
+      "community_name": "test_reliability.py",
       "file_type": "code",
-      "norm_label": "export_capsule()",
-      "source_file": "context_layer/export_capsule.py",
-      "source_location": "L47"
+      "norm_label": "_wipe()",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L42"
     },
     {
-      "id": "context_layer_export_capsule_sync_capsule",
-      "label": "sync_capsule()",
+      "id": "scripts_eval_fixture_cleanup",
+      "label": "cleanup()",
       "_callable": true,
       "_origin": "ast",
-      "community": 48,
-      "community_name": "export_capsule.py",
+      "community": 46,
+      "community_name": "eval_fixture.py",
       "file_type": "code",
-      "norm_label": "sync_capsule()",
-      "source_file": "context_layer/export_capsule.py",
-      "source_location": "L55"
+      "norm_label": "cleanup()",
+      "source_file": "scripts/eval_fixture.py",
+      "source_location": "L89"
     },
     {
-      "id": "adapters_copilot_pre_compact_get",
-      "label": "_get()",
+      "id": "scripts_eval_fixture_create_fixture",
+      "label": "create_fixture()",
       "_callable": true,
       "_origin": "ast",
-      "community": 49,
-      "community_name": "copilot/pre_compact.py",
+      "community": 46,
+      "community_name": "eval_fixture.py",
       "file_type": "code",
-      "norm_label": "_get()",
-      "source_file": "adapters/copilot/pre_compact.py",
-      "source_location": "L33"
+      "norm_label": "create_fixture()",
+      "source_file": "scripts/eval_fixture.py",
+      "source_location": "L97"
     },
     {
-      "id": "adapters_copilot_pre_compact_git_branch",
-      "label": "_git_branch()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "copilot/pre_compact.py",
-      "file_type": "code",
-      "norm_label": "_git_branch()",
-      "source_file": "adapters/copilot/pre_compact.py",
-      "source_location": "L79"
-    },
-    {
-      "id": "adapters_copilot_pre_compact_latest_handoff_id",
-      "label": "_latest_handoff_id()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "copilot/pre_compact.py",
-      "file_type": "code",
-      "norm_label": "_latest_handoff_id()",
-      "source_file": "adapters/copilot/pre_compact.py",
-      "source_location": "L90"
-    },
-    {
-      "id": "adapters_copilot_pre_compact_main",
+      "id": "scripts_eval_fixture_main",
       "label": "main()",
       "_callable": true,
       "_origin": "ast",
-      "community": 49,
-      "community_name": "copilot/pre_compact.py",
+      "community": 46,
+      "community_name": "eval_fixture.py",
       "file_type": "code",
       "norm_label": "main()",
-      "source_file": "adapters/copilot/pre_compact.py",
-      "source_location": "L103"
-    },
-    {
-      "id": "adapters_copilot_pre_compact_read_transcript",
-      "label": "_read_transcript()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "copilot/pre_compact.py",
-      "file_type": "code",
-      "norm_label": "_read_transcript()",
-      "source_file": "adapters/copilot/pre_compact.py",
-      "source_location": "L41"
+      "source_file": "scripts/eval_fixture.py",
+      "source_location": "L112"
     },
     {
       "id": "bootstrap_install_windows_cli",
@@ -2172,54 +2449,6 @@
       "source_location": "L120"
     },
     {
-      "id": "hooks_pre_compact_git_branch",
-      "label": "_git_branch()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "hooks/pre_compact.py",
-      "file_type": "code",
-      "norm_label": "_git_branch()",
-      "source_file": "hooks/pre_compact.py",
-      "source_location": "L95"
-    },
-    {
-      "id": "hooks_pre_compact_latest_handoff_id",
-      "label": "_latest_handoff_id()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "hooks/pre_compact.py",
-      "file_type": "code",
-      "norm_label": "_latest_handoff_id()",
-      "source_file": "hooks/pre_compact.py",
-      "source_location": "L107"
-    },
-    {
-      "id": "hooks_pre_compact_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "hooks/pre_compact.py",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "hooks/pre_compact.py",
-      "source_location": "L121"
-    },
-    {
-      "id": "hooks_pre_compact_read_transcript",
-      "label": "_read_transcript()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "hooks/pre_compact.py",
-      "file_type": "code",
-      "norm_label": "_read_transcript()",
-      "source_file": "hooks/pre_compact.py",
-      "source_location": "L53"
-    },
-    {
       "id": "tests_test_mcp_live_check",
       "label": "check()",
       "_callable": true,
@@ -2266,42 +2495,6 @@
       "norm_label": "_text()",
       "source_file": "tests/test_mcp_live.py",
       "source_location": "L18"
-    },
-    {
-      "id": "adapters_opencode_save_before_compact_git_branch",
-      "label": "_git_branch()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "save_before_compact.py",
-      "file_type": "code",
-      "norm_label": "_git_branch()",
-      "source_file": "adapters/opencode/save_before_compact.py",
-      "source_location": "L25"
-    },
-    {
-      "id": "adapters_opencode_save_before_compact_latest_handoff_id",
-      "label": "_latest_handoff_id()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "save_before_compact.py",
-      "file_type": "code",
-      "norm_label": "_latest_handoff_id()",
-      "source_file": "adapters/opencode/save_before_compact.py",
-      "source_location": "L36"
-    },
-    {
-      "id": "adapters_opencode_save_before_compact_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "save_before_compact.py",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "adapters/opencode/save_before_compact.py",
-      "source_location": "L50"
     },
     {
       "id": "hooks_context_layer_checkpoint_autoslug",
@@ -2629,17 +2822,6 @@
       "source_location": "L1"
     },
     {
-      "id": "context_layer_trigger",
-      "label": "trigger.py",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "code",
-      "norm_label": "trigger.py",
-      "source_file": "context_layer/trigger.py",
-      "source_location": "L1"
-    },
-    {
       "id": "recordid",
       "label": "RecordID",
       "_origin": "ast",
@@ -2663,292 +2845,6 @@
     },
     {
       "id": "context_layer_core_rationale_103",
-      "label": "Connect to SurrealDB. Optional ns/db override for multi-tenancy.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "connect to surrealdb. optional ns/db override for multi-tenancy.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L103"
-    },
-    {
-      "id": "context_layer_core_rationale_112",
-      "label": "Verify API key if auth is enabled. Returns True if valid or auth disabled.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "verify api key if auth is enabled. returns true if valid or auth disabled.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L112"
-    },
-    {
-      "id": "context_layer_core_rationale_142",
-      "label": "Extract file paths and issue/requirement refs from handoff text. Files: path-\u2026",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "extract file paths and issue/requirement refs from handoff text. files: path-...",
-      "source_file": "context_layer/core.py",
-      "source_location": "L142"
-    },
-    {
-      "id": "context_layer_core_rationale_187",
-      "label": "Token count using tiktoken if available, else rough estimate.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "token count using tiktoken if available, else rough estimate.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L187"
-    },
-    {
-      "id": "context_layer_core_rationale_192",
-      "label": "Truncate text to roughly max_tokens, preferring to keep the end.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "truncate text to roughly max_tokens, preferring to keep the end.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L192"
-    },
-    {
-      "id": "context_layer_core_rationale_226",
-      "label": "Assemble a prioritized context package for a task within a token budget.\u2026",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "assemble a prioritized context package for a task within a token budget....",
-      "source_file": "context_layer/core.py",
-      "source_location": "L226"
-    },
-    {
-      "id": "context_layer_core_rationale_367",
-      "label": "Get the minimal current context for a task: latest handoff + immediate lineage.\u2026",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "get the minimal current context for a task: latest handoff + immediate lineage....",
-      "source_file": "context_layer/core.py",
-      "source_location": "L367"
-    },
-    {
-      "id": "context_layer_core_rationale_389",
-      "label": "Create a new handoff, optionally chained to a predecessor by id.\u2026",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "create a new handoff, optionally chained to a predecessor by id....",
-      "source_file": "context_layer/core.py",
-      "source_location": "L389"
-    },
-    {
-      "id": "context_layer_core_rationale_42",
-      "label": "Load embedder in background thread to avoid blocking event loop.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "load embedder in background thread to avoid blocking event loop.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L42"
-    },
-    {
-      "id": "context_layer_core_rationale_454",
-      "label": "Fetch the most recent handoff for a task, without side effects.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "fetch the most recent handoff for a task, without side effects.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L454"
-    },
-    {
-      "id": "context_layer_core_rationale_469",
-      "label": "Fetch the most recent handoff for a task and mark it resumed.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "fetch the most recent handoff for a task and mark it resumed.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L469"
-    },
-    {
-      "id": "context_layer_core_rationale_483",
-      "label": "Full-text (BM25) search across handoff content.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "full-text (bm25) search across handoff content.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L483"
-    },
-    {
-      "id": "context_layer_core_rationale_512",
-      "label": "Semantic (vector) search across handoff content, using the HNSW index.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "semantic (vector) search across handoff content, using the hnsw index.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L512"
-    },
-    {
-      "id": "context_layer_core_rationale_544",
-      "label": "Hybrid search: BM25 full-text + vector semantic, fused with reciprocal rank\u2026",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "hybrid search: bm25 full-text + vector semantic, fused with reciprocal rank...",
-      "source_file": "context_layer/core.py",
-      "source_location": "L544"
-    },
-    {
-      "id": "context_layer_core_rationale_590",
-      "label": "Find handoffs referencing a file path: exact match or path suffix (e.g.\u2026",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "find handoffs referencing a file path: exact match or path suffix (e.g....",
-      "source_file": "context_layer/core.py",
-      "source_location": "L590"
-    },
-    {
-      "id": "context_layer_core_rationale_607",
-      "label": "Walk the handoff chain: what this handoff continues from, and what continued\u2026",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "walk the handoff chain: what this handoff continues from, and what continued...",
-      "source_file": "context_layer/core.py",
-      "source_location": "L607"
-    },
-    {
-      "id": "context_layer_core_rationale_628",
-      "label": "Append a next step to an existing handoff without overwriting the array.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "append a next step to an existing handoff without overwriting the array.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L628"
-    },
-    {
-      "id": "context_layer_core_rationale_641",
-      "label": "Mark a handoff as closed.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "mark a handoff as closed.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L641"
-    },
-    {
-      "id": "context_layer_core_rationale_663",
-      "label": "Auto-summarize the task's context to fit within target_tokens. Creates a new\u2026",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "auto-summarize the task's context to fit within target_tokens. creates a new...",
-      "source_file": "context_layer/core.py",
-      "source_location": "L663"
-    },
-    {
-      "id": "context_layer_core_rationale_69",
-      "label": "Get embedder, loading synchronously if not ready (fallback).",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "get embedder, loading synchronously if not ready (fallback).",
-      "source_file": "context_layer/core.py",
-      "source_location": "L69"
-    },
-    {
-      "id": "context_layer_core_rationale_732",
-      "label": "Get all predecessor handoff IDs in the chain.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "get all predecessor handoff ids in the chain.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L732"
-    },
-    {
-      "id": "context_layer_core_rationale_759",
-      "label": "Report on token usage for a task's context. Useful for monitoring and debugging\u2026",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "report on token usage for a task's context. useful for monitoring and debugging...",
-      "source_file": "context_layer/core.py",
-      "source_location": "L759"
-    },
-    {
-      "id": "context_layer_core_rationale_787",
-      "label": "Generate recommendations based on token usage.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "generate recommendations based on token usage.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L787"
-    },
-    {
-      "id": "context_layer_core_rationale_79",
-      "label": "Embed text locally into a 384-dim vector.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "embed text locally into a 384-dim vector.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L79"
-    },
-    {
-      "id": "context_layer_core_rationale_84",
-      "label": "Async version that ensures embedder is loaded without blocking.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "async version that ensures embedder is loaded without blocking.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L84"
-    },
-    {
-      "id": "context_layer_core_rationale_90",
-      "label": "Parse 'handoff:abc' (or 'handoff:\u27e8...\u27e9') into a RecordID for RELATE.",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "parse 'handoff:abc' (or 'handoff:\u27e8...\u27e9') into a recordid for relate.",
-      "source_file": "context_layer/core.py",
-      "source_location": "L90"
-    },
-    {
-      "id": "context_layer_core_rationale_96",
       "label": "Apply tenant prefix to namespace for multi-tenancy isolation.",
       "_origin": "ast",
       "community": 0,
@@ -2956,7 +2852,271 @@
       "file_type": "rationale",
       "norm_label": "apply tenant prefix to namespace for multi-tenancy isolation.",
       "source_file": "context_layer/core.py",
-      "source_location": "L96"
+      "source_location": "L103"
+    },
+    {
+      "id": "context_layer_core_rationale_110",
+      "label": "Connect to SurrealDB. Optional ns/db override for multi-tenancy.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "connect to surrealdb. optional ns/db override for multi-tenancy.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L110"
+    },
+    {
+      "id": "context_layer_core_rationale_119",
+      "label": "Verify API key if auth is enabled. Returns True if valid or auth disabled.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "verify api key if auth is enabled. returns true if valid or auth disabled.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L119"
+    },
+    {
+      "id": "context_layer_core_rationale_149",
+      "label": "Extract file paths and issue/requirement refs from handoff text. Files: path-\u2026",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "extract file paths and issue/requirement refs from handoff text. files: path-...",
+      "source_file": "context_layer/core.py",
+      "source_location": "L149"
+    },
+    {
+      "id": "context_layer_core_rationale_194",
+      "label": "Token count using tiktoken if available, else rough estimate.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "token count using tiktoken if available, else rough estimate.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L194"
+    },
+    {
+      "id": "context_layer_core_rationale_199",
+      "label": "Truncate text to roughly max_tokens, preferring to keep the end.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "truncate text to roughly max_tokens, preferring to keep the end.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L199"
+    },
+    {
+      "id": "context_layer_core_rationale_233",
+      "label": "Assemble a prioritized context package for a task within a token budget.\u2026",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "assemble a prioritized context package for a task within a token budget....",
+      "source_file": "context_layer/core.py",
+      "source_location": "L233"
+    },
+    {
+      "id": "context_layer_core_rationale_374",
+      "label": "Get the minimal current context for a task: latest handoff + immediate lineage.\u2026",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "get the minimal current context for a task: latest handoff + immediate lineage....",
+      "source_file": "context_layer/core.py",
+      "source_location": "L374"
+    },
+    {
+      "id": "context_layer_core_rationale_396",
+      "label": "Create a new handoff, optionally chained to a predecessor by id.\u2026",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "create a new handoff, optionally chained to a predecessor by id....",
+      "source_file": "context_layer/core.py",
+      "source_location": "L396"
+    },
+    {
+      "id": "context_layer_core_rationale_43",
+      "label": "Load embedder in background thread to avoid blocking event loop.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "load embedder in background thread to avoid blocking event loop.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L43"
+    },
+    {
+      "id": "context_layer_core_rationale_480",
+      "label": "Fetch the most recent handoff for a task, without side effects.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "fetch the most recent handoff for a task, without side effects.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L480"
+    },
+    {
+      "id": "context_layer_core_rationale_495",
+      "label": "Fetch the most recent handoff for a task and mark it resumed.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "fetch the most recent handoff for a task and mark it resumed.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L495"
+    },
+    {
+      "id": "context_layer_core_rationale_509",
+      "label": "Full-text (BM25) search across handoff content.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "full-text (bm25) search across handoff content.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L509"
+    },
+    {
+      "id": "context_layer_core_rationale_538",
+      "label": "Semantic (vector) search across handoff content, using the HNSW index.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "semantic (vector) search across handoff content, using the hnsw index.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L538"
+    },
+    {
+      "id": "context_layer_core_rationale_570",
+      "label": "Hybrid search: BM25 full-text + vector semantic, fused with reciprocal rank\u2026",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "hybrid search: bm25 full-text + vector semantic, fused with reciprocal rank...",
+      "source_file": "context_layer/core.py",
+      "source_location": "L570"
+    },
+    {
+      "id": "context_layer_core_rationale_616",
+      "label": "Find handoffs referencing a file path: exact match or path suffix (e.g.\u2026",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "find handoffs referencing a file path: exact match or path suffix (e.g....",
+      "source_file": "context_layer/core.py",
+      "source_location": "L616"
+    },
+    {
+      "id": "context_layer_core_rationale_633",
+      "label": "Walk the handoff chain: what this handoff continues from, and what continued\u2026",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "walk the handoff chain: what this handoff continues from, and what continued...",
+      "source_file": "context_layer/core.py",
+      "source_location": "L633"
+    },
+    {
+      "id": "context_layer_core_rationale_654",
+      "label": "Append a next step to an existing handoff without overwriting the array.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "append a next step to an existing handoff without overwriting the array.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L654"
+    },
+    {
+      "id": "context_layer_core_rationale_667",
+      "label": "Mark a handoff as closed.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "mark a handoff as closed.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L667"
+    },
+    {
+      "id": "context_layer_core_rationale_689",
+      "label": "Auto-summarize the task's context to fit within target_tokens. Creates a new\u2026",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "auto-summarize the task's context to fit within target_tokens. creates a new...",
+      "source_file": "context_layer/core.py",
+      "source_location": "L689"
+    },
+    {
+      "id": "context_layer_core_rationale_759",
+      "label": "Get all predecessor handoff IDs in the chain.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "get all predecessor handoff ids in the chain.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L759"
+    },
+    {
+      "id": "context_layer_core_rationale_786",
+      "label": "Report on token usage for a task's context. Useful for monitoring and debugging\u2026",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "report on token usage for a task's context. useful for monitoring and debugging...",
+      "source_file": "context_layer/core.py",
+      "source_location": "L786"
+    },
+    {
+      "id": "context_layer_core_rationale_814",
+      "label": "Generate recommendations based on token usage.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "generate recommendations based on token usage.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L814"
+    },
+    {
+      "id": "context_layer_core_rationale_91",
+      "label": "Parse 'handoff:abc' (or 'handoff:\u27e8...\u27e9') into a RecordID for RELATE.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "parse 'handoff:abc' (or 'handoff:\u27e8...\u27e9') into a recordid for relate.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L91"
+    },
+    {
+      "id": "context_layer_core_rationale_97",
+      "label": "SHA-256 over whitespace-normalized raw_content for duplicate detection.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "core.py",
+      "file_type": "rationale",
+      "norm_label": "sha-256 over whitespace-normalized raw_content for duplicate detection.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L97"
     },
     {
       "id": "context_layer_init_rationale_1",
@@ -2967,17 +3127,6 @@
       "file_type": "rationale",
       "norm_label": "persistent, model-agnostic context storage for ai agent workflows.",
       "source_file": "context_layer/__init__.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "context_layer_trigger_rationale_1",
-      "label": "Automatic trigger: watches cumulative token usage in a conversation and fires a\u2026",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "core.py",
-      "file_type": "rationale",
-      "norm_label": "automatic trigger: watches cumulative token usage in a conversation and fires a...",
-      "source_file": "context_layer/trigger.py",
       "source_location": "L1"
     },
     {
@@ -4021,14 +4170,69 @@
       "source_location": "L1"
     },
     {
+      "id": "adapters_codex_hook",
+      "label": "hook.py",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "hook.py",
+      "source_file": "adapters/codex/hook.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "adapters_copilot_pre_compact",
+      "label": "copilot/pre_compact.py",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "copilot/pre_compact.py",
+      "source_file": "adapters/copilot/pre_compact.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "adapters_opencode_save_before_compact",
+      "label": "save_before_compact.py",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "save_before_compact.py",
+      "source_file": "adapters/opencode/save_before_compact.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "context_layer_auto_handoff",
+      "label": "auto_handoff.py",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "auto_handoff.py",
+      "source_file": "context_layer/auto_handoff.py",
+      "source_location": "L1"
+    },
+    {
       "id": "context_layer_project_identity",
       "label": "project_identity.py",
       "_origin": "ast",
       "community": 3,
-      "community_name": "project_identity.py",
+      "community_name": "auto_handoff.py",
       "file_type": "code",
       "norm_label": "project_identity.py",
       "source_file": "context_layer/project_identity.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "hooks_pre_compact",
+      "label": "hooks/pre_compact.py",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "code",
+      "norm_label": "hooks/pre_compact.py",
+      "source_file": "hooks/pre_compact.py",
       "source_location": "L1"
     },
     {
@@ -4036,18 +4240,128 @@
       "label": "new_project.py",
       "_origin": "ast",
       "community": 3,
-      "community_name": "project_identity.py",
+      "community_name": "auto_handoff.py",
       "file_type": "code",
       "norm_label": "new_project.py",
       "source_file": "scripts/new_project.py",
       "source_location": "L1"
     },
     {
+      "id": "adapters_codex_hook_rationale_1",
+      "label": "Codex lifecycle adapter for loading and saving Context Layer handoffs. Codex\u2026",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "rationale",
+      "norm_label": "codex lifecycle adapter for loading and saving context layer handoffs. codex...",
+      "source_file": "adapters/codex/hook.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "adapters_codex_hook_rationale_38",
+      "label": "Extract message text from Codex's JSONL transcript defensively. Codex documents\u2026",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "rationale",
+      "norm_label": "extract message text from codex's jsonl transcript defensively. codex documents...",
+      "source_file": "adapters/codex/hook.py",
+      "source_location": "L38"
+    },
+    {
+      "id": "adapters_copilot_pre_compact_rationale_1",
+      "label": "VS Code Copilot Chat PreCompact hook adapter. IMPORTANT CAVEAT: Copilot's hook\u2026",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "rationale",
+      "norm_label": "vs code copilot chat precompact hook adapter. important caveat: copilot's hook...",
+      "source_file": "adapters/copilot/pre_compact.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "adapters_copilot_pre_compact_rationale_34",
+      "label": "Try several possible field names, since the exact schema is unconfirmed.",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "rationale",
+      "norm_label": "try several possible field names, since the exact schema is unconfirmed.",
+      "source_file": "adapters/copilot/pre_compact.py",
+      "source_location": "L34"
+    },
+    {
+      "id": "adapters_opencode_save_before_compact_rationale_1",
+      "label": "Small helper invoked by the OpenCode TypeScript plugin (compaction-plugin.ts)\u2026",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "rationale",
+      "norm_label": "small helper invoked by the opencode typescript plugin (compaction-plugin.ts)...",
+      "source_file": "adapters/opencode/save_before_compact.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "context_layer_auto_handoff_rationale_1",
+      "label": "Auto-summarization: turns a raw conversation transcript into a structured\u2026",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "rationale",
+      "norm_label": "auto-summarization: turns a raw conversation transcript into a structured...",
+      "source_file": "context_layer/auto_handoff.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "context_layer_auto_handoff_rationale_143",
+      "label": "Extract a structured handoff from a raw transcript, then persist it through the\u2026",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "rationale",
+      "norm_label": "extract a structured handoff from a raw transcript, then persist it through the...",
+      "source_file": "context_layer/auto_handoff.py",
+      "source_location": "L143"
+    },
+    {
+      "id": "context_layer_auto_handoff_rationale_201",
+      "label": "Claude-based extraction (used only when ANTHROPIC_API_KEY is set).",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "rationale",
+      "norm_label": "claude-based extraction (used only when anthropic_api_key is set).",
+      "source_file": "context_layer/auto_handoff.py",
+      "source_location": "L201"
+    },
+    {
+      "id": "context_layer_auto_handoff_rationale_27",
+      "label": "Lazy Anthropic client so importing this module works without ANTHROPIC_API_KEY.",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "rationale",
+      "norm_label": "lazy anthropic client so importing this module works without anthropic_api_key.",
+      "source_file": "context_layer/auto_handoff.py",
+      "source_location": "L27"
+    },
+    {
+      "id": "context_layer_auto_handoff_rationale_83",
+      "label": "Heuristic extraction: decisions/steps from marker lines, summary from the first\u2026",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "rationale",
+      "norm_label": "heuristic extraction: decisions/steps from marker lines, summary from the first...",
+      "source_file": "context_layer/auto_handoff.py",
+      "source_location": "L83"
+    },
+    {
       "id": "context_layer_project_identity_rationale_1",
       "label": "Project identity: deterministic task_slug resolution shared by every adapter\u2026",
       "_origin": "ast",
       "community": 3,
-      "community_name": "project_identity.py",
+      "community_name": "auto_handoff.py",
       "file_type": "rationale",
       "norm_label": "project identity: deterministic task_slug resolution shared by every adapter...",
       "source_file": "context_layer/project_identity.py",
@@ -4058,7 +4372,7 @@
       "label": "Resolve the task_slug for a working directory. Env override wins, then the\u2026",
       "_origin": "ast",
       "community": 3,
-      "community_name": "project_identity.py",
+      "community_name": "auto_handoff.py",
       "file_type": "rationale",
       "norm_label": "resolve the task_slug for a working directory. env override wins, then the...",
       "source_file": "context_layer/project_identity.py",
@@ -4069,7 +4383,7 @@
       "label": "Create .context-layer.json at cwd with a task_slug (a provided one, or a\u2026",
       "_origin": "ast",
       "community": 3,
-      "community_name": "project_identity.py",
+      "community_name": "auto_handoff.py",
       "file_type": "rationale",
       "norm_label": "create .context-layer.json at cwd with a task_slug (a provided one, or a...",
       "source_file": "context_layer/project_identity.py",
@@ -4080,18 +4394,40 @@
       "label": "Call FIRST on any project before other tools. Creates .vscode/mcp.json (central\u2026",
       "_origin": "ast",
       "community": 3,
-      "community_name": "project_identity.py",
+      "community_name": "auto_handoff.py",
       "file_type": "rationale",
       "norm_label": "call first on any project before other tools. creates .vscode/mcp.json (central...",
       "source_file": "context_layer/server.py",
       "source_location": "L535"
     },
     {
+      "id": "hooks_pre_compact_rationale_1",
+      "label": "Claude Code PreCompact hook adapter. This is ONE adapter among several -- it's\u2026",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "rationale",
+      "norm_label": "claude code precompact hook adapter. this is one adapter among several -- it's...",
+      "source_file": "hooks/pre_compact.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "hooks_pre_compact_rationale_54",
+      "label": "Claude Code transcripts are JSONL -- one JSON object per line, each\u2026",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "auto_handoff.py",
+      "file_type": "rationale",
+      "norm_label": "claude code transcripts are jsonl -- one json object per line, each...",
+      "source_file": "hooks/pre_compact.py",
+      "source_location": "L54"
+    },
+    {
       "id": "scripts_new_project_rationale_1",
       "label": "One-command setup for context-layer MCP in any project. Usage: python\u2026",
       "_origin": "ast",
       "community": 3,
-      "community_name": "project_identity.py",
+      "community_name": "auto_handoff.py",
       "file_type": "rationale",
       "norm_label": "one-command setup for context-layer mcp in any project. usage: python...",
       "source_file": "scripts/new_project.py",
@@ -4384,6 +4720,17 @@
       "source_location": ""
     },
     {
+      "id": "exception",
+      "label": "Exception",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Handler",
+      "file_type": "code",
+      "norm_label": "exception",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
       "id": "scripts_api_server",
       "label": "api_server.py",
       "_origin": "ast",
@@ -4404,6 +4751,17 @@
       "norm_label": "rest api for context layer, so any agent or script can read and write context...",
       "source_file": "scripts/api_server.py",
       "source_location": "L2"
+    },
+    {
+      "id": "scripts_api_server_rationale_47",
+      "label": "Structured error: rendered as {\"error\": {\"code\", \"message\"}}.",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Handler",
+      "file_type": "rationale",
+      "norm_label": "structured error: rendered as {\"error\": {\"code\", \"message\"}}.",
+      "source_file": "scripts/api_server.py",
+      "source_location": "L47"
     },
     {
       "id": "scripts_evaluate_retrieval",
@@ -4581,6 +4939,28 @@
       "source_location": "L17"
     },
     {
+      "id": "context_layer_export_capsule",
+      "label": "export_capsule.py",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "handoff_cli.py",
+      "file_type": "code",
+      "norm_label": "export_capsule.py",
+      "source_file": "context_layer/export_capsule.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "context_layer_export_capsule_py_path",
+      "label": "Path",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "handoff_cli.py",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
       "id": "scripts_handoff_cli",
       "label": "handoff_cli.py",
       "_origin": "ast",
@@ -4590,6 +4970,72 @@
       "norm_label": "handoff_cli.py",
       "source_file": "scripts/handoff_cli.py",
       "source_location": "L1"
+    },
+    {
+      "id": "context_layer_core_rationale_70",
+      "label": "Get embedder, loading synchronously if not ready (fallback).",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "handoff_cli.py",
+      "file_type": "rationale",
+      "norm_label": "get embedder, loading synchronously if not ready (fallback).",
+      "source_file": "context_layer/core.py",
+      "source_location": "L70"
+    },
+    {
+      "id": "context_layer_core_rationale_80",
+      "label": "Embed text locally into a 384-dim vector.",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "handoff_cli.py",
+      "file_type": "rationale",
+      "norm_label": "embed text locally into a 384-dim vector.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L80"
+    },
+    {
+      "id": "context_layer_export_capsule_rationale_1",
+      "label": "Export a portable \"context capsule\" -- a plain markdown primer you can paste\u2026",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "handoff_cli.py",
+      "file_type": "rationale",
+      "norm_label": "export a portable \"context capsule\" -- a plain markdown primer you can paste...",
+      "source_file": "context_layer/export_capsule.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "context_layer_export_capsule_rationale_16",
+      "label": "Build the pasteable markdown primer from a handoff record.",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "handoff_cli.py",
+      "file_type": "rationale",
+      "norm_label": "build the pasteable markdown primer from a handoff record.",
+      "source_file": "context_layer/export_capsule.py",
+      "source_location": "L16"
+    },
+    {
+      "id": "context_layer_export_capsule_rationale_48",
+      "label": "Build a pasteable markdown primer from the latest handoff for a task.",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "handoff_cli.py",
+      "file_type": "rationale",
+      "norm_label": "build a pasteable markdown primer from the latest handoff for a task.",
+      "source_file": "context_layer/export_capsule.py",
+      "source_location": "L48"
+    },
+    {
+      "id": "context_layer_export_capsule_rationale_56",
+      "label": "Write the latest handoff capsule to CONTEXT.md in project_dir. Returns the\u2026",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "handoff_cli.py",
+      "file_type": "rationale",
+      "norm_label": "write the latest handoff capsule to context.md in project_dir. returns the...",
+      "source_file": "context_layer/export_capsule.py",
+      "source_location": "L56"
     },
     {
       "id": "scripts_handoff_cli_rationale_1",
@@ -4647,262 +5093,59 @@
       "source_location": "L316"
     },
     {
-      "id": "context",
-      "label": "CONTEXT.md",
+      "id": "tests_test_reliability",
+      "label": "test_reliability.py",
       "_origin": "ast",
       "community": 45,
-      "community_name": "Context primer: import-test",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "context.md",
-      "source_file": "CONTEXT.md",
+      "community_name": "test_reliability.py",
+      "file_type": "code",
+      "norm_label": "test_reliability.py",
+      "source_file": "tests/test_reliability.py",
       "source_location": "L1"
     },
     {
-      "id": "context_context_primer_import_test",
-      "label": "Context primer: import-test",
+      "id": "context_layer_core_rationale_85",
+      "label": "Async version that ensures embedder is loaded without blocking.",
       "_origin": "ast",
       "community": 45,
-      "community_name": "Context primer: import-test",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "context primer: import-test",
-      "source_file": "CONTEXT.md",
-      "source_location": "L1"
+      "community_name": "test_reliability.py",
+      "file_type": "rationale",
+      "norm_label": "async version that ensures embedder is loaded without blocking.",
+      "source_file": "context_layer/core.py",
+      "source_location": "L85"
     },
     {
-      "id": "context_decisions_already_made_do_not_relitigate_these",
-      "label": "Decisions already made (do not relitigate these)",
+      "id": "tests_test_reliability_rationale_1",
+      "label": "Focused reliability tests for Context Layer: 1. Duplicate-checkpoint guard:\u2026",
       "_origin": "ast",
       "community": 45,
-      "community_name": "Context primer: import-test",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "decisions already made (do not relitigate these)",
-      "source_file": "CONTEXT.md",
-      "source_location": "L8"
+      "community_name": "test_reliability.py",
+      "file_type": "rationale",
+      "norm_label": "focused reliability tests for context layer: 1. duplicate-checkpoint guard:...",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L1"
     },
     {
-      "id": "context_next_steps",
-      "label": "Next steps",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "Context primer: import-test",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "next steps",
-      "source_file": "CONTEXT.md",
-      "source_location": "L23"
-    },
-    {
-      "id": "context_summary",
-      "label": "Summary",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "Context primer: import-test",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "summary",
-      "source_file": "CONTEXT.md",
-      "source_location": "L5"
-    },
-    {
-      "id": "context_layer_auto_handoff",
-      "label": "auto_handoff.py",
+      "id": "scripts_eval_fixture",
+      "label": "eval_fixture.py",
       "_origin": "ast",
       "community": 46,
-      "community_name": "auto_handoff.py",
+      "community_name": "eval_fixture.py",
       "file_type": "code",
-      "norm_label": "auto_handoff.py",
-      "source_file": "context_layer/auto_handoff.py",
+      "norm_label": "eval_fixture.py",
+      "source_file": "scripts/eval_fixture.py",
       "source_location": "L1"
     },
     {
-      "id": "context_layer_auto_handoff_rationale_1",
-      "label": "Auto-summarization: turns a raw conversation transcript into a structured\u2026",
+      "id": "scripts_eval_fixture_rationale_2",
+      "label": "Create a deterministic retrieval-evaluation fixture and gold set. Creates\u2026",
       "_origin": "ast",
       "community": 46,
-      "community_name": "auto_handoff.py",
+      "community_name": "eval_fixture.py",
       "file_type": "rationale",
-      "norm_label": "auto-summarization: turns a raw conversation transcript into a structured...",
-      "source_file": "context_layer/auto_handoff.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "context_layer_auto_handoff_rationale_143",
-      "label": "Extract a structured handoff from a raw transcript, then persist it through the\u2026",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "auto_handoff.py",
-      "file_type": "rationale",
-      "norm_label": "extract a structured handoff from a raw transcript, then persist it through the...",
-      "source_file": "context_layer/auto_handoff.py",
-      "source_location": "L143"
-    },
-    {
-      "id": "context_layer_auto_handoff_rationale_201",
-      "label": "Claude-based extraction (used only when ANTHROPIC_API_KEY is set).",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "auto_handoff.py",
-      "file_type": "rationale",
-      "norm_label": "claude-based extraction (used only when anthropic_api_key is set).",
-      "source_file": "context_layer/auto_handoff.py",
-      "source_location": "L201"
-    },
-    {
-      "id": "context_layer_auto_handoff_rationale_27",
-      "label": "Lazy Anthropic client so importing this module works without ANTHROPIC_API_KEY.",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "auto_handoff.py",
-      "file_type": "rationale",
-      "norm_label": "lazy anthropic client so importing this module works without anthropic_api_key.",
-      "source_file": "context_layer/auto_handoff.py",
-      "source_location": "L27"
-    },
-    {
-      "id": "context_layer_auto_handoff_rationale_83",
-      "label": "Heuristic extraction: decisions/steps from marker lines, summary from the first\u2026",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "auto_handoff.py",
-      "file_type": "rationale",
-      "norm_label": "heuristic extraction: decisions/steps from marker lines, summary from the first...",
-      "source_file": "context_layer/auto_handoff.py",
-      "source_location": "L83"
-    },
-    {
-      "id": "adapters_codex_hook",
-      "label": "hook.py",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "hook.py",
-      "file_type": "code",
-      "norm_label": "hook.py",
-      "source_file": "adapters/codex/hook.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "adapters_codex_hook_rationale_1",
-      "label": "Codex lifecycle adapter for loading and saving Context Layer handoffs. Codex\u2026",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "hook.py",
-      "file_type": "rationale",
-      "norm_label": "codex lifecycle adapter for loading and saving context layer handoffs. codex...",
-      "source_file": "adapters/codex/hook.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "adapters_codex_hook_rationale_38",
-      "label": "Extract message text from Codex's JSONL transcript defensively. Codex documents\u2026",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "hook.py",
-      "file_type": "rationale",
-      "norm_label": "extract message text from codex's jsonl transcript defensively. codex documents...",
-      "source_file": "adapters/codex/hook.py",
-      "source_location": "L38"
-    },
-    {
-      "id": "context_layer_export_capsule",
-      "label": "export_capsule.py",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "export_capsule.py",
-      "file_type": "code",
-      "norm_label": "export_capsule.py",
-      "source_file": "context_layer/export_capsule.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "context_layer_export_capsule_py_path",
-      "label": "Path",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "export_capsule.py",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "context_layer_export_capsule_rationale_1",
-      "label": "Export a portable \"context capsule\" -- a plain markdown primer you can paste\u2026",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "export_capsule.py",
-      "file_type": "rationale",
-      "norm_label": "export a portable \"context capsule\" -- a plain markdown primer you can paste...",
-      "source_file": "context_layer/export_capsule.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "context_layer_export_capsule_rationale_16",
-      "label": "Build the pasteable markdown primer from a handoff record.",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "export_capsule.py",
-      "file_type": "rationale",
-      "norm_label": "build the pasteable markdown primer from a handoff record.",
-      "source_file": "context_layer/export_capsule.py",
-      "source_location": "L16"
-    },
-    {
-      "id": "context_layer_export_capsule_rationale_48",
-      "label": "Build a pasteable markdown primer from the latest handoff for a task.",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "export_capsule.py",
-      "file_type": "rationale",
-      "norm_label": "build a pasteable markdown primer from the latest handoff for a task.",
-      "source_file": "context_layer/export_capsule.py",
-      "source_location": "L48"
-    },
-    {
-      "id": "context_layer_export_capsule_rationale_56",
-      "label": "Write the latest handoff capsule to CONTEXT.md in project_dir. Returns the\u2026",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "export_capsule.py",
-      "file_type": "rationale",
-      "norm_label": "write the latest handoff capsule to context.md in project_dir. returns the...",
-      "source_file": "context_layer/export_capsule.py",
-      "source_location": "L56"
-    },
-    {
-      "id": "adapters_copilot_pre_compact",
-      "label": "copilot/pre_compact.py",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "copilot/pre_compact.py",
-      "file_type": "code",
-      "norm_label": "copilot/pre_compact.py",
-      "source_file": "adapters/copilot/pre_compact.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "adapters_copilot_pre_compact_rationale_1",
-      "label": "VS Code Copilot Chat PreCompact hook adapter. IMPORTANT CAVEAT: Copilot's hook\u2026",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "copilot/pre_compact.py",
-      "file_type": "rationale",
-      "norm_label": "vs code copilot chat precompact hook adapter. important caveat: copilot's hook...",
-      "source_file": "adapters/copilot/pre_compact.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "adapters_copilot_pre_compact_rationale_34",
-      "label": "Try several possible field names, since the exact schema is unconfirmed.",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "copilot/pre_compact.py",
-      "file_type": "rationale",
-      "norm_label": "try several possible field names, since the exact schema is unconfirmed.",
-      "source_file": "adapters/copilot/pre_compact.py",
-      "source_location": "L34"
+      "norm_label": "create a deterministic retrieval-evaluation fixture and gold set. creates...",
+      "source_file": "scripts/eval_fixture.py",
+      "source_location": "L2"
     },
     {
       "id": "bootstrap",
@@ -5026,39 +5269,6 @@
       "source_location": "L74"
     },
     {
-      "id": "hooks_pre_compact",
-      "label": "hooks/pre_compact.py",
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "hooks/pre_compact.py",
-      "file_type": "code",
-      "norm_label": "hooks/pre_compact.py",
-      "source_file": "hooks/pre_compact.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "hooks_pre_compact_rationale_1",
-      "label": "Claude Code PreCompact hook adapter. This is ONE adapter among several -- it's\u2026",
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "hooks/pre_compact.py",
-      "file_type": "rationale",
-      "norm_label": "claude code precompact hook adapter. this is one adapter among several -- it's...",
-      "source_file": "hooks/pre_compact.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "hooks_pre_compact_rationale_54",
-      "label": "Claude Code transcripts are JSONL -- one JSON object per line, each\u2026",
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "hooks/pre_compact.py",
-      "file_type": "rationale",
-      "norm_label": "claude code transcripts are jsonl -- one json object per line, each...",
-      "source_file": "hooks/pre_compact.py",
-      "source_location": "L54"
-    },
-    {
       "id": "tests_test_mcp_live",
       "label": "test_mcp_live.py",
       "_origin": "ast",
@@ -5078,28 +5288,6 @@
       "file_type": "rationale",
       "norm_label": "live mcp test: drive the context layer mcp server over stdio with a real mcp...",
       "source_file": "tests/test_mcp_live.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "adapters_opencode_save_before_compact",
-      "label": "save_before_compact.py",
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "save_before_compact.py",
-      "file_type": "code",
-      "norm_label": "save_before_compact.py",
-      "source_file": "adapters/opencode/save_before_compact.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "adapters_opencode_save_before_compact_rationale_1",
-      "label": "Small helper invoked by the OpenCode TypeScript plugin (compaction-plugin.ts)\u2026",
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "save_before_compact.py",
-      "file_type": "rationale",
-      "norm_label": "small helper invoked by the opencode typescript plugin (compaction-plugin.ts)...",
-      "source_file": "adapters/opencode/save_before_compact.py",
       "source_location": "L1"
     },
     {
@@ -5191,6 +5379,17 @@
       "source_location": "L1"
     },
     {
+      "id": "context_layer_trigger",
+      "label": "trigger.py",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "HandoffTrigger",
+      "file_type": "code",
+      "norm_label": "trigger.py",
+      "source_file": "context_layer/trigger.py",
+      "source_location": "L1"
+    },
+    {
       "id": "adapters_generic_loop_rationale_1",
       "label": "Generic agent-loop adapter -- for ANY framework where you have access to each\u2026",
       "_origin": "ast",
@@ -5211,6 +5410,17 @@
       "norm_label": "pass an instance of this to your agent's `hooks=` parameter.",
       "source_file": "adapters/generic_loop.py",
       "source_location": "L53"
+    },
+    {
+      "id": "context_layer_trigger_rationale_1",
+      "label": "Automatic trigger: watches cumulative token usage in a conversation and fires a\u2026",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "HandoffTrigger",
+      "file_type": "rationale",
+      "norm_label": "automatic trigger: watches cumulative token usage in a conversation and fires a...",
+      "source_file": "context_layer/trigger.py",
+      "source_location": "L1"
     },
     {
       "id": "context_layer_trigger_rationale_25",
@@ -6132,7 +6342,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L629",
+      "source_location": "L655",
       "weight": 1.0
     },
     {
@@ -6144,7 +6354,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L237",
+      "source_location": "L244",
       "weight": 1.0
     },
     {
@@ -6156,36 +6366,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L265",
+      "source_location": "L272",
       "weight": 1.0
     },
     {
       "source": "context_layer_core_assemble_context",
       "target": "context_layer_core_fmt_steps",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "context_layer/core.py",
-      "source_location": "L267",
-      "weight": 1.0
-    },
-    {
-      "source": "context_layer_core_assemble_context",
-      "target": "context_layer_core_truncate_to_tokens",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "context_layer/core.py",
-      "source_location": "L270",
-      "weight": 1.0
-    },
-    {
-      "source": "context_layer_core_assemble_context",
-      "target": "context_layer_core_estimate_tokens",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -6197,6 +6383,30 @@
     },
     {
       "source": "context_layer_core_assemble_context",
+      "target": "context_layer_core_truncate_to_tokens",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "context_layer/core.py",
+      "source_location": "L277",
+      "weight": 1.0
+    },
+    {
+      "source": "context_layer_core_assemble_context",
+      "target": "context_layer_core_estimate_tokens",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "context_layer/core.py",
+      "source_location": "L281",
+      "weight": 1.0
+    },
+    {
+      "source": "context_layer_core_assemble_context",
       "target": "context_layer_core_hybrid_search_handoffs",
       "relation": "calls",
       "_origin": "ast",
@@ -6204,7 +6414,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L314",
+      "source_location": "L321",
       "weight": 1.0
     },
     {
@@ -6216,7 +6426,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L642",
+      "source_location": "L668",
       "weight": 1.0
     },
     {
@@ -6228,7 +6438,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L107",
+      "source_location": "L114",
       "weight": 1.0
     },
     {
@@ -6240,7 +6450,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L396",
+      "source_location": "L411",
+      "weight": 1.0
+    },
+    {
+      "source": "context_layer_core_create_handoff",
+      "target": "context_layer_core_content_hash",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "context_layer/core.py",
+      "source_location": "L413",
       "weight": 1.0
     },
     {
@@ -6252,7 +6474,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L416",
+      "source_location": "L423",
       "weight": 1.0
     },
     {
@@ -6264,7 +6486,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L436",
+      "source_location": "L442",
       "weight": 1.0
     },
     {
@@ -6276,7 +6498,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L445",
+      "source_location": "L449",
       "weight": 1.0
     },
     {
@@ -6288,7 +6510,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L80",
+      "source_location": "L81",
       "weight": 1.0
     },
     {
@@ -6300,7 +6522,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L85",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -6312,7 +6534,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L86",
+      "source_location": "L87",
       "weight": 1.0
     },
     {
@@ -6324,7 +6546,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L188",
+      "source_location": "L195",
       "weight": 1.0
     },
     {
@@ -6336,7 +6558,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L593",
+      "source_location": "L619",
       "weight": 1.0
     },
     {
@@ -6348,7 +6570,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L371",
+      "source_location": "L378",
       "weight": 1.0
     },
     {
@@ -6360,7 +6582,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L608",
+      "source_location": "L634",
       "weight": 1.0
     },
     {
@@ -6372,7 +6594,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L455",
+      "source_location": "L481",
       "weight": 1.0
     },
     {
@@ -6384,7 +6606,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L738",
+      "source_location": "L765",
       "weight": 1.0
     },
     {
@@ -6396,7 +6618,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L752",
+      "source_location": "L779",
       "weight": 1.0
     },
     {
@@ -6408,7 +6630,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L763",
+      "source_location": "L790",
       "weight": 1.0
     },
     {
@@ -6420,7 +6642,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L764",
+      "source_location": "L791",
       "weight": 1.0
     },
     {
@@ -6432,7 +6654,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L782",
+      "source_location": "L809",
       "weight": 1.0
     },
     {
@@ -6444,7 +6666,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L545",
+      "source_location": "L571",
       "weight": 1.0
     },
     {
@@ -6456,7 +6678,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L547",
+      "source_location": "L573",
       "weight": 1.0
     },
     {
@@ -6468,7 +6690,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L470",
+      "source_location": "L496",
       "weight": 1.0
     },
     {
@@ -6480,7 +6702,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L473",
+      "source_location": "L499",
       "weight": 1.0
     },
     {
@@ -6492,7 +6714,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L484",
+      "source_location": "L510",
       "weight": 1.0
     },
     {
@@ -6504,7 +6726,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L513",
+      "source_location": "L539",
       "weight": 1.0
     },
     {
@@ -6516,7 +6738,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L515",
+      "source_location": "L541",
       "weight": 1.0
     },
     {
@@ -6528,7 +6750,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L674",
+      "source_location": "L700",
       "weight": 1.0
     },
     {
@@ -6540,7 +6762,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L679",
+      "source_location": "L705",
       "weight": 1.0
     },
     {
@@ -6552,7 +6774,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L695",
+      "source_location": "L721",
       "weight": 1.0
     },
     {
@@ -6564,7 +6786,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L697",
+      "source_location": "L723",
       "weight": 1.0
     },
     {
@@ -6576,7 +6798,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L700",
+      "source_location": "L726",
       "weight": 1.0
     },
     {
@@ -6588,7 +6810,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L706",
+      "source_location": "L732",
       "weight": 1.0
     },
     {
@@ -6600,7 +6822,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L714",
+      "source_location": "L740",
+      "weight": 1.0
+    },
+    {
+      "source": "context_layer_core_summarize_for_window",
+      "target": "context_layer_core_content_hash",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "context_layer/core.py",
+      "source_location": "L743",
       "weight": 1.0
     },
     {
@@ -6612,7 +6846,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L717",
+      "source_location": "L744",
       "weight": 1.0
     },
     {
@@ -6624,7 +6858,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "context_layer/core.py",
-      "source_location": "L193",
+      "source_location": "L200",
       "weight": 1.0
     },
     {
@@ -7216,6 +7450,18 @@
       "weight": 1.0
     },
     {
+      "source": "scripts_api_server_apierror_init",
+      "target": "scripts_api_server_apierror_init",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "scripts/api_server.py",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
       "source": "scripts_api_server_handler_do_get",
       "target": "scripts_api_server_handler_route",
       "relation": "calls",
@@ -7224,7 +7470,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/api_server.py",
-      "source_location": "L130",
+      "source_location": "L184",
       "weight": 1.0
     },
     {
@@ -7236,7 +7482,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/api_server.py",
-      "source_location": "L136",
+      "source_location": "L190",
       "weight": 1.0
     },
     {
@@ -7248,19 +7494,67 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/api_server.py",
+      "source_location": "L187",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler_error",
+      "target": "scripts_api_server_handler_json",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "scripts/api_server.py",
+      "source_location": "L89",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler_get",
+      "target": "scripts_api_server_handler_json",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "scripts/api_server.py",
       "source_location": "L133",
       "weight": 1.0
     },
     {
       "source": "scripts_api_server_handler_get",
-      "target": "scripts_api_server_handler_json",
+      "target": "scripts_api_server_require_slug",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/api_server.py",
-      "source_location": "L93",
+      "source_location": "L136",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler_get",
+      "target": "scripts_api_server_parse_int",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "scripts/api_server.py",
+      "source_location": "L137",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler_get",
+      "target": "scripts_api_server_apierror",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "scripts/api_server.py",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -7272,7 +7566,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/api_server.py",
-      "source_location": "L97",
+      "source_location": "L143",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler_post",
+      "target": "scripts_api_server_require_slug",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "scripts/api_server.py",
+      "source_location": "L165",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler_post",
+      "target": "scripts_api_server_apierror",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "scripts/api_server.py",
+      "source_location": "L168",
       "weight": 1.0
     },
     {
@@ -7284,7 +7602,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/api_server.py",
-      "source_location": "L114",
+      "source_location": "L169",
       "weight": 1.0
     },
     {
@@ -7296,7 +7614,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/api_server.py",
-      "source_location": "L114",
+      "source_location": "L169",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler_read_body",
+      "target": "scripts_api_server_apierror",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "scripts/api_server.py",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -7308,19 +7638,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/api_server.py",
-      "source_location": "L77",
+      "source_location": "L109",
       "weight": 1.0
     },
     {
       "source": "scripts_api_server_handler_route",
-      "target": "scripts_api_server_handler_json",
+      "target": "scripts_api_server_handler_error",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/api_server.py",
-      "source_location": "L78",
+      "source_location": "L110",
       "weight": 1.0
     },
     {
@@ -7332,7 +7662,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/api_server.py",
-      "source_location": "L84",
+      "source_location": "L122",
       "weight": 1.0
     },
     {
@@ -7344,7 +7674,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/api_server.py",
-      "source_location": "L85",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
@@ -7356,7 +7686,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/api_server.py",
-      "source_location": "L85",
+      "source_location": "L123",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_parse_int",
+      "target": "scripts_api_server_apierror",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "scripts/api_server.py",
+      "source_location": "L68",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_require_slug",
+      "target": "scripts_api_server_apierror",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "scripts/api_server.py",
+      "source_location": "L58",
       "weight": 1.0
     },
     {
@@ -7501,6 +7855,42 @@
       "context": "call",
       "source_file": "scripts/diagnostics.py",
       "source_location": "L341",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_eval_fixture_create_fixture",
+      "target": "scripts_eval_fixture_cleanup",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "scripts/eval_fixture.py",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_eval_fixture_main",
+      "target": "scripts_eval_fixture_cleanup",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "scripts/eval_fixture.py",
+      "source_location": "L119",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_eval_fixture_main",
+      "target": "scripts_eval_fixture_create_fixture",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "scripts/eval_fixture.py",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
@@ -8125,6 +8515,102 @@
       "context": "call",
       "source_file": "tests/test_new_tools.py",
       "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability_main",
+      "target": "tests_test_reliability_test_duplicate_guard",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L236",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability_main",
+      "target": "tests_test_reliability_test_lineage_safety",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L237",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability_main",
+      "target": "tests_test_reliability_test_api_validation",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L238",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability_main",
+      "target": "tests_test_reliability_wipe",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L239",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability_test_api_validation",
+      "target": "tests_test_reliability_free_port",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L165",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability_test_api_validation",
+      "target": "tests_test_reliability_request",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L175",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability_test_duplicate_guard",
+      "target": "tests_test_reliability_wipe",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability_test_duplicate_guard",
+      "target": "context_layer_core_embed_async",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L91",
       "weight": 1.0
     },
     {
@@ -8944,6 +9430,18 @@
       "weight": 1.0
     },
     {
+      "source": "tests_test_reliability",
+      "target": "context_layer_core_embed_async",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
       "source": "adapters_generic_loop",
       "target": "context_layer_trigger",
       "relation": "imports_from",
@@ -9049,6 +9547,18 @@
       "context": "import",
       "source_file": "scripts/start_db.py",
       "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability",
+      "target": "context_layer_core",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -9252,7 +9762,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "context_layer/core.py",
-      "source_location": "L102",
+      "source_location": "L109",
       "weight": 1.0
     },
     {
@@ -9264,7 +9774,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "context_layer/core.py",
-      "source_location": "L89",
+      "source_location": "L90",
       "weight": 1.0
     },
     {
@@ -9516,7 +10026,7 @@
       "confidence_score": 1.0,
       "context": "submodule_import",
       "source_file": "scripts/api_server.py",
-      "source_location": "L121",
+      "source_location": "L175",
       "weight": 1.0
     },
     {
@@ -9528,7 +10038,7 @@
       "confidence_score": 1.0,
       "context": "submodule_import",
       "source_file": "scripts/api_server.py",
-      "source_location": "L33",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -9540,7 +10050,7 @@
       "confidence_score": 1.0,
       "context": "submodule_import",
       "source_file": "scripts/api_server.py",
-      "source_location": "L33",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -9845,50 +10355,6 @@
       "weight": 1.0
     },
     {
-      "source": "context",
-      "target": "context_context_primer_import_test",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CONTEXT.md",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "context_context_primer_import_test",
-      "target": "context_next_steps",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CONTEXT.md",
-      "source_location": "L23",
-      "weight": 1.0
-    },
-    {
-      "source": "context_context_primer_import_test",
-      "target": "context_summary",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CONTEXT.md",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
-      "source": "context_context_primer_import_test",
-      "target": "context_decisions_already_made_do_not_relitigate_these",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CONTEXT.md",
-      "source_location": "L8",
-      "weight": 1.0
-    },
-    {
       "source": "context_layer_auto_handoff",
       "target": "context_layer_auto_handoff_summarize_and_store",
       "relation": "contains",
@@ -9945,7 +10411,7 @@
     },
     {
       "source": "context_layer_core",
-      "target": "context_layer_core_connect",
+      "target": "context_layer_core_tenant_ns",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -9956,13 +10422,24 @@
     },
     {
       "source": "context_layer_core",
+      "target": "context_layer_core_connect",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "context_layer/core.py",
+      "source_location": "L109",
+      "weight": 1.0
+    },
+    {
+      "source": "context_layer_core",
       "target": "context_layer_core_check_api_key",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L111",
+      "source_location": "L118",
       "weight": 1.0
     },
     {
@@ -9973,7 +10450,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L141",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -9984,7 +10461,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L182",
+      "source_location": "L189",
       "weight": 1.0
     },
     {
@@ -9995,7 +10472,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L186",
+      "source_location": "L193",
       "weight": 1.0
     },
     {
@@ -10006,7 +10483,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L191",
+      "source_location": "L198",
       "weight": 1.0
     },
     {
@@ -10017,7 +10494,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L208",
+      "source_location": "L215",
       "weight": 1.0
     },
     {
@@ -10028,7 +10505,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L215",
+      "source_location": "L222",
       "weight": 1.0
     },
     {
@@ -10039,7 +10516,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L219",
+      "source_location": "L226",
       "weight": 1.0
     },
     {
@@ -10050,7 +10527,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L366",
+      "source_location": "L373",
       "weight": 1.0
     },
     {
@@ -10061,7 +10538,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L377",
+      "source_location": "L384",
       "weight": 1.0
     },
     {
@@ -10072,7 +10549,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L41",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -10083,7 +10560,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L453",
+      "source_location": "L479",
       "weight": 1.0
     },
     {
@@ -10094,7 +10571,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L468",
+      "source_location": "L494",
       "weight": 1.0
     },
     {
@@ -10105,7 +10582,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L480",
+      "source_location": "L506",
       "weight": 1.0
     },
     {
@@ -10116,7 +10593,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L509",
+      "source_location": "L535",
       "weight": 1.0
     },
     {
@@ -10127,7 +10604,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L541",
+      "source_location": "L567",
       "weight": 1.0
     },
     {
@@ -10138,7 +10615,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L589",
+      "source_location": "L615",
       "weight": 1.0
     },
     {
@@ -10149,7 +10626,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L606",
+      "source_location": "L632",
       "weight": 1.0
     },
     {
@@ -10160,7 +10637,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L627",
+      "source_location": "L653",
       "weight": 1.0
     },
     {
@@ -10171,7 +10648,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L640",
+      "source_location": "L666",
       "weight": 1.0
     },
     {
@@ -10182,7 +10659,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L658",
+      "source_location": "L684",
       "weight": 1.0
     },
     {
@@ -10193,7 +10670,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L68",
+      "source_location": "L69",
       "weight": 1.0
     },
     {
@@ -10204,7 +10681,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L731",
+      "source_location": "L758",
       "weight": 1.0
     },
     {
@@ -10215,7 +10692,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L758",
+      "source_location": "L785",
       "weight": 1.0
     },
     {
@@ -10226,7 +10703,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L78",
+      "source_location": "L79",
       "weight": 1.0
     },
     {
@@ -10237,7 +10714,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L786",
+      "source_location": "L813",
       "weight": 1.0
     },
     {
@@ -10248,7 +10725,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L83",
+      "source_location": "L84",
       "weight": 1.0
     },
     {
@@ -10259,18 +10736,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L89",
+      "source_location": "L90",
       "weight": 1.0
     },
     {
       "source": "context_layer_core",
-      "target": "context_layer_core_tenant_ns",
+      "target": "context_layer_core_content_hash",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L95",
+      "source_location": "L96",
       "weight": 1.0
     },
     {
@@ -11348,7 +11825,40 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/api_server.py",
-      "source_location": "L142",
+      "source_location": "L196",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server",
+      "target": "scripts_api_server_apierror",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/api_server.py",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server",
+      "target": "scripts_api_server_require_slug",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/api_server.py",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server",
+      "target": "scripts_api_server_parse_int",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/api_server.py",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
@@ -11359,7 +11869,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/api_server.py",
-      "source_location": "L42",
+      "source_location": "L71",
       "weight": 1.0
     },
     {
@@ -11370,7 +11880,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/api_server.py",
-      "source_location": "L46",
+      "source_location": "L75",
       "weight": 1.0
     },
     {
@@ -11492,6 +12002,39 @@
       "confidence_score": 1.0,
       "source_file": "scripts/diagnostics.py",
       "source_location": "L79",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_eval_fixture",
+      "target": "scripts_eval_fixture_main",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/eval_fixture.py",
+      "source_location": "L112",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_eval_fixture",
+      "target": "scripts_eval_fixture_cleanup",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/eval_fixture.py",
+      "source_location": "L89",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_eval_fixture",
+      "target": "scripts_eval_fixture_create_fixture",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/eval_fixture.py",
+      "source_location": "L97",
       "weight": 1.0
     },
     {
@@ -12210,6 +12753,83 @@
       "weight": 1.0
     },
     {
+      "source": "tests_test_reliability",
+      "target": "tests_test_reliability_test_lineage_safety",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L108",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability",
+      "target": "tests_test_reliability_free_port",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L143",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability",
+      "target": "tests_test_reliability_request",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L149",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability",
+      "target": "tests_test_reliability_test_api_validation",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L164",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability",
+      "target": "tests_test_reliability_main",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L235",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability",
+      "target": "tests_test_reliability_wipe",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability",
+      "target": "tests_test_reliability_test_duplicate_guard",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_reliability.py",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
       "source": "tests_test_semantic",
       "target": "tests_test_semantic_main",
       "relation": "contains",
@@ -12243,6 +12863,17 @@
       "weight": 1.0
     },
     {
+      "source": "scripts_api_server_apierror",
+      "target": "exception",
+      "relation": "inherits",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/api_server.py",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
       "source": "scripts_api_server_handler",
       "target": "basehttprequesthandler",
       "relation": "inherits",
@@ -12250,7 +12881,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/api_server.py",
-      "source_location": "L46",
+      "source_location": "L75",
       "weight": 1.0
     },
     {
@@ -12309,91 +12940,14 @@
       "weight": 1.0
     },
     {
-      "source": "scripts_api_server_handler",
-      "target": "scripts_api_server_handler_post",
+      "source": "scripts_api_server_apierror",
+      "target": "scripts_api_server_apierror_init",
       "relation": "method",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/api_server.py",
-      "source_location": "L112",
-      "weight": 1.0
-    },
-    {
-      "source": "scripts_api_server_handler",
-      "target": "scripts_api_server_handler_do_get",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "scripts/api_server.py",
-      "source_location": "L129",
-      "weight": 1.0
-    },
-    {
-      "source": "scripts_api_server_handler",
-      "target": "scripts_api_server_handler_do_post",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "scripts/api_server.py",
-      "source_location": "L132",
-      "weight": 1.0
-    },
-    {
-      "source": "scripts_api_server_handler",
-      "target": "scripts_api_server_handler_do_options",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "scripts/api_server.py",
-      "source_location": "L135",
-      "weight": 1.0
-    },
-    {
-      "source": "scripts_api_server_handler",
-      "target": "scripts_api_server_handler_log_message",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "scripts/api_server.py",
-      "source_location": "L138",
-      "weight": 1.0
-    },
-    {
-      "source": "scripts_api_server_handler",
-      "target": "scripts_api_server_handler_json",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "scripts/api_server.py",
-      "source_location": "L47",
-      "weight": 1.0
-    },
-    {
-      "source": "scripts_api_server_handler",
-      "target": "scripts_api_server_handler_auth_ok",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "scripts/api_server.py",
-      "source_location": "L59",
-      "weight": 1.0
-    },
-    {
-      "source": "scripts_api_server_handler",
-      "target": "scripts_api_server_handler_read_body",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "scripts/api_server.py",
-      "source_location": "L67",
+      "source_location": "L49",
       "weight": 1.0
     },
     {
@@ -12404,7 +12958,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/api_server.py",
-      "source_location": "L76",
+      "source_location": "L108",
       "weight": 1.0
     },
     {
@@ -12415,7 +12969,106 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/api_server.py",
+      "source_location": "L131",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler",
+      "target": "scripts_api_server_handler_post",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/api_server.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler",
+      "target": "scripts_api_server_handler_do_get",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/api_server.py",
+      "source_location": "L183",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler",
+      "target": "scripts_api_server_handler_do_post",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/api_server.py",
+      "source_location": "L186",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler",
+      "target": "scripts_api_server_handler_do_options",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/api_server.py",
+      "source_location": "L189",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler",
+      "target": "scripts_api_server_handler_log_message",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/api_server.py",
+      "source_location": "L192",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler",
+      "target": "scripts_api_server_handler_json",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/api_server.py",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler",
+      "target": "scripts_api_server_handler_error",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/api_server.py",
+      "source_location": "L88",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler",
+      "target": "scripts_api_server_handler_auth_ok",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/api_server.py",
       "source_location": "L91",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_api_server_handler",
+      "target": "scripts_api_server_handler_read_body",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/api_server.py",
+      "source_location": "L99",
       "weight": 1.0
     },
     {
@@ -12596,7 +13249,7 @@
     },
     {
       "source": "context_layer_core_rationale_103",
-      "target": "context_layer_core_connect",
+      "target": "context_layer_core_tenant_ns",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12606,228 +13259,228 @@
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_112",
+      "source": "context_layer_core_rationale_110",
+      "target": "context_layer_core_connect",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "context_layer/core.py",
+      "source_location": "L110",
+      "weight": 1.0
+    },
+    {
+      "source": "context_layer_core_rationale_119",
       "target": "context_layer_core_check_api_key",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L112",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_142",
+      "source": "context_layer_core_rationale_149",
       "target": "context_layer_core_extract_files_refs",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L142",
+      "source_location": "L149",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_187",
+      "source": "context_layer_core_rationale_194",
       "target": "context_layer_core_estimate_tokens",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L187",
+      "source_location": "L194",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_192",
+      "source": "context_layer_core_rationale_199",
       "target": "context_layer_core_truncate_to_tokens",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L192",
+      "source_location": "L199",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_226",
+      "source": "context_layer_core_rationale_233",
       "target": "context_layer_core_assemble_context",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L226",
+      "source_location": "L233",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_367",
+      "source": "context_layer_core_rationale_374",
       "target": "context_layer_core_get_current_context",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L367",
+      "source_location": "L374",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_389",
+      "source": "context_layer_core_rationale_396",
       "target": "context_layer_core_create_handoff",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L389",
+      "source_location": "L396",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_42",
+      "source": "context_layer_core_rationale_43",
       "target": "context_layer_core_ensure_embedder_loaded",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L42",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_454",
+      "source": "context_layer_core_rationale_480",
       "target": "context_layer_core_get_latest_handoff",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L454",
+      "source_location": "L480",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_469",
+      "source": "context_layer_core_rationale_495",
       "target": "context_layer_core_resume_handoff",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L469",
+      "source_location": "L495",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_483",
+      "source": "context_layer_core_rationale_509",
       "target": "context_layer_core_search_handoffs",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L483",
+      "source_location": "L509",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_512",
+      "source": "context_layer_core_rationale_538",
       "target": "context_layer_core_semantic_search_handoffs",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L512",
+      "source_location": "L538",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_544",
+      "source": "context_layer_core_rationale_570",
       "target": "context_layer_core_hybrid_search_handoffs",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L544",
+      "source_location": "L570",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_590",
+      "source": "context_layer_core_rationale_616",
       "target": "context_layer_core_find_handoffs_by_file",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L590",
+      "source_location": "L616",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_607",
+      "source": "context_layer_core_rationale_633",
       "target": "context_layer_core_get_handoff_lineage",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L607",
+      "source_location": "L633",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_628",
+      "source": "context_layer_core_rationale_654",
       "target": "context_layer_core_append_next_step",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L628",
+      "source_location": "L654",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_641",
+      "source": "context_layer_core_rationale_667",
       "target": "context_layer_core_close_handoff",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L641",
+      "source_location": "L667",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_663",
+      "source": "context_layer_core_rationale_689",
       "target": "context_layer_core_summarize_for_window",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L663",
+      "source_location": "L689",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_69",
+      "source": "context_layer_core_rationale_70",
       "target": "context_layer_core_get_embedder",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L69",
-      "weight": 1.0
-    },
-    {
-      "source": "context_layer_core_rationale_732",
-      "target": "context_layer_core_get_lineage_ids",
-      "relation": "rationale_for",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "context_layer/core.py",
-      "source_location": "L732",
+      "source_location": "L70",
       "weight": 1.0
     },
     {
       "source": "context_layer_core_rationale_759",
-      "target": "context_layer_core_get_token_budget_report",
+      "target": "context_layer_core_get_lineage_ids",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12837,58 +13490,69 @@
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_787",
-      "target": "context_layer_core_budget_recommendations",
+      "source": "context_layer_core_rationale_786",
+      "target": "context_layer_core_get_token_budget_report",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L787",
+      "source_location": "L786",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_79",
+      "source": "context_layer_core_rationale_80",
       "target": "context_layer_core_embed",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L79",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_84",
+      "source": "context_layer_core_rationale_814",
+      "target": "context_layer_core_budget_recommendations",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "context_layer/core.py",
+      "source_location": "L814",
+      "weight": 1.0
+    },
+    {
+      "source": "context_layer_core_rationale_85",
       "target": "context_layer_core_embed_async",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L84",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_90",
+      "source": "context_layer_core_rationale_91",
       "target": "context_layer_core_to_record_id",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L90",
+      "source_location": "L91",
       "weight": 1.0
     },
     {
-      "source": "context_layer_core_rationale_96",
-      "target": "context_layer_core_tenant_ns",
+      "source": "context_layer_core_rationale_97",
+      "target": "context_layer_core_content_hash",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "context_layer/core.py",
-      "source_location": "L96",
+      "source_location": "L97",
       "weight": 1.0
     },
     {
@@ -13387,6 +14051,17 @@
       "weight": 1.0
     },
     {
+      "source": "scripts_api_server_rationale_47",
+      "target": "scripts_api_server_apierror",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/api_server.py",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
       "source": "scripts_backfill_refs_rationale_2",
       "target": "scripts_backfill_refs",
       "relation": "rationale_for",
@@ -13417,6 +14092,17 @@
       "confidence_score": 1.0,
       "source_file": "scripts/diagnostics.py",
       "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_eval_fixture_rationale_2",
+      "target": "scripts_eval_fixture",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/eval_fixture.py",
+      "source_location": "L2",
       "weight": 1.0
     },
     {
@@ -13735,6 +14421,17 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_new_tools.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_reliability_rationale_1",
+      "target": "tests_test_reliability",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_reliability.py",
       "source_location": "L1",
       "weight": 1.0
     },
@@ -14306,5 +15003,5 @@
       "source_file": "README.md"
     }
   ],
-  "built_at_commit": "37ccc0f6ac3f0a8914458f5ae34dd21b799f2f29"
+  "built_at_commit": "6d458f311a21d1aeba30a53d2481943e98b5dd83"
 }

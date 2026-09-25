@@ -95,7 +95,11 @@ def main() -> None:
         assert status == 200 and SLUG in capsule["capsule"], capsule
 
         # Search finds it (raw_content is what hybrid search ranks).
-        status, results = _request(port, "GET", "/search?q=REST%20bridge&mode=hybrid&limit=5")
+        # Scoped to this run's slug: repeated runs accumulate identical
+        # records, and an unscoped top-5 search would be dominated by them.
+        status, results = _request(
+            port, "GET",
+            f"/search?q=REST%20bridge&mode=hybrid&limit=5&task_slug={SLUG}")
         assert status == 200 and any(
             r.get("task_slug") == SLUG for r in results
         ), results

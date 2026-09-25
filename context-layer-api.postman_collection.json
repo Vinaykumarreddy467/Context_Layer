@@ -1,0 +1,231 @@
+{
+  "info": {
+    "name": "Context Layer API",
+    "description": "Proof that the Context Layer REST bridge works: health, capsule, search, token-budgeted context, handoff creation, transcript summarization, and CONTEXT.md sync. Import, then run requests top to bottom — each has a green-check test script. Fill the api_key variable from .env (CONTEXT_LAYER_API_KEY) before running; this file contains no secrets.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{api_key}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "1. Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": ["{{base_url}}"],
+          "path": ["health"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('server is up', function () {",
+              "  pm.response.to.have.status(200);",
+              "  pm.expect(pm.response.json().status).to.eql('ok');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Capsule (portable markdown primer)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/capsule/context-layer-project",
+          "host": ["{{base_url}}"],
+          "path": ["capsule", "context-layer-project"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('capsule returns the primer', function () {",
+              "  pm.response.to.have.status(200);",
+              "  pm.expect(pm.response.json().capsule).to.include('Context primer');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Search (hybrid)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/search?q=retrieval&mode=hybrid&limit=3",
+          "host": ["{{base_url}}"],
+          "path": ["search"],
+          "query": [
+            { "key": "q", "value": "retrieval" },
+            { "key": "mode", "value": "hybrid" },
+            { "key": "limit", "value": "3" }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('search returns results', function () {",
+              "  pm.response.to.have.status(200);",
+              "  pm.expect(pm.response.json().length).to.be.above(0);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Context (token-budgeted, for agents)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/context/context-layer-project?max_tokens=2000",
+          "host": ["{{base_url}}"],
+          "path": ["context", "context-layer-project"],
+          "query": [{ "key": "max_tokens", "value": "2000" }]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('context has sections', function () {",
+              "  pm.response.to.have.status(200);",
+              "  pm.expect(pm.response.json().sections).to.be.an('array');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Create handoff (project slug)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"task_slug\": \"context_layer\",\n  \"git_branch\": \"main\",\n  \"decisions\": [\n    {\n      \"text\": \"REST API verified from Postman\",\n      \"rationale\": \"Proof of the any-agent bridge\"\n    }\n  ],\n  \"next_steps\": [\n    \"Check search finds this handoff\"\n  ],\n  \"raw_content\": \"Handoff created from Postman to prove the Context Layer REST API works.\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/handoffs",
+          "host": ["{{base_url}}"],
+          "path": ["handoffs"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('handoff created', function () {",
+              "  pm.response.to.have.status(201);",
+              "  pm.expect(pm.response.json().id).to.exist;",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Summarize transcript",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"transcript\": \"We fixed the git_branch bug end to end and pushed. The live MCP test passes 12/12. Next: update the Postman collection to cover the summarize endpoint.\",\n  \"task_slug\": \"postman-proof\",\n  \"git_branch\": \"main\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/summarize",
+          "host": ["{{base_url}}"],
+          "path": ["summarize"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('handoff created from transcript', function () {",
+              "  pm.response.to.have.status(201);",
+              "  pm.expect(pm.response.json().id).to.exist;",
+              "  pm.expect(pm.response.json().status).to.eql('open');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "7. Sync CONTEXT.md",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"project_dir\": \"{{project_dir}}\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/sync",
+          "host": ["{{base_url}}"],
+          "path": ["sync"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('CONTEXT.md synced', function () {",
+              "  pm.response.to.have.status(200);",
+              "  pm.expect(pm.response.json().synced).to.include('CONTEXT.md');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "http://127.0.0.1:8123" },
+    { "key": "api_key", "value": "" },
+    { "key": "project_dir", "value": "C:\\Users\\Vinaykumar.R\\Downloads\\context_layer\\context_layer" }
+  ]
+}
