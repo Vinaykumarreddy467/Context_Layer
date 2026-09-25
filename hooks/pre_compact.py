@@ -46,7 +46,7 @@ from pathlib import Path
 # Make the project root importable regardless of cwd this hook runs from
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from context_layer import auto_handoff, project_identity  # noqa: E402
+from context_layer import auto_handoff, export_capsule as capsule, project_identity  # noqa: E402
 import context_layer as cl  # noqa: E402
 
 
@@ -148,6 +148,7 @@ async def main():
 
     print(f"context-layer: saved handoff {handoff.get('id')} "
           f"before {trigger} compaction (task={task_slug})")
+    await capsule.sync_capsule(task_slug, cwd)
 
 
 if __name__ == "__main__":

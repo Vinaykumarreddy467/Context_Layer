@@ -8,14 +8,12 @@ can reach inside another vendor's chat UI.
 """
 
 import context_layer as cl
+from pathlib import Path
+from typing import Optional
 
 
-async def export_capsule(task_slug: str) -> str:
-    """Build a pasteable markdown primer from the latest handoff for a task."""
-    latest = await cl.resume_handoff(task_slug)
-    if not latest:
-        return f"No handoff found for task '{task_slug}'."
-
+def _capsule_text(latest: dict) -> str:
+    """Build the pasteable markdown primer from a handoff record."""
     # Prefer the structured summary. Older records without it use the shared
     # separator when available, with raw content as the final fallback.
     summary = latest.get("summary")
@@ -24,7 +22,8 @@ async def export_capsule(task_slug: str) -> str:
         summary = raw_content.split(cl.HANDOFF_CONTENT_SEPARATOR, 1)[0]
 
     lines = [
-        f"# Context primer: {task_slug}",
+        f"# Context primer: {latest.get('task_slug')}",
+        f"capsule_version: {latest.get('version', 1)}",
         "",
         "You are resuming work from a previous AI session on this task. "
         "Here is the context so far -- do not ask the user to re-explain it.",
@@ -43,3 +42,26 @@ async def export_capsule(task_slug: str) -> str:
         lines.append(f"- {step}")
 
     return "\n".join(lines)
+
+
+async def export_capsule(task_slug: str) -> str:
+    """Build a pasteable markdown primer from the latest handoff for a task."""
+    latest = await cl.get_latest_handoff(task_slug)
+    if not latest:
+        return f"No handoff found for task '{task_slug}'."
+    return _capsule_text(latest)
+
+
+async def sync_capsule(task_slug: str, project_dir) -> Optional[Path]:
+    """Write the latest handoff capsule to CONTEXT.md in project_dir.
+
+    Returns the written path, or None when no handoff exists yet. Any agent
+    that reads project files (all coding agents) picks the context up with
+    zero integration work.
+    """
+    latest = await cl.get_latest_handoff(task_slug)
+    if not latest:
+        return None
+    target = Path(project_dir) / "CONTEXT.md"
+    target.write_text(_capsule_text(latest) + "\n", encoding="utf-8")
+    return target

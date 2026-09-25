@@ -11,6 +11,7 @@
 - Context assembly and portable Markdown capsules for bounded context windows.
 - Handoff lineage and 17 MCP tools, plus a project context resource.
 - Optional client lifecycle adapters for automatic checkpointing and context loading.
+- Command-line utilities (`scripts/handoff_cli.py`) for export/import, consolidation, backup, correction, and lifecycle checks.
 
 Context Layer stores and retrieves context explicitly provided to it. It does not synchronize complete private conversation histories across platforms. Automatic capture depends on a supported client adapter; otherwise, an agent must call the MCP tools.
 
@@ -48,6 +49,7 @@ See [Getting started](docs/getting-started.md) for platform-specific setup, veri
 - [MCP reference](docs/mcp-reference.md) — tools and resource with use cases.
 - [Operations and security](docs/operations.md) — database, migrations, diagnostics, data handling, and troubleshooting.
 - [Development](docs/development.md) — repository workflow and integration test precautions.
+- [Retrieval evaluation](docs/development.md#retrieval-evaluation) — compare search modes against labeled handoffs.
 - [Repository map](FOLDER_STRUCTURE.md) — source tree and entry points.
 - [Migration workflow](sql/migrations/README.md) — how to evolve the SurrealDB schema.
 - [MCP-only agent guidance](adapters/PROACTIVE_INSTRUCTIONS.md) — instructions for clients without lifecycle hooks.

@@ -42,6 +42,8 @@ The Context Layer server exposes 17 MCP tools and the resource template `context
 
 Tool argument schemas are exposed by the server through MCP `tools/list`; use the connected client's tool inspector for the authoritative schema for the installed version.
 
+Text and semantic search results include each handoff's `id` so callers can trace results and retrieval evaluation can compare them with labeled expected IDs.
+
 ## Client adapters
 
 | Client/pattern | Integration | Behavior and caveat |
@@ -54,4 +56,3 @@ Tool argument schemas are exposed by the server through MCP `tools/list`; use th
 | MCP-only client | `adapters/PROACTIVE_INSTRUCTIONS.md` | Agent-initiated calls guided by project instructions; no automatic lifecycle hook. |
 
 Host hook formats are subject to change. Adapters should fail without interrupting host work; review and trust generated local hooks before enabling them.
-

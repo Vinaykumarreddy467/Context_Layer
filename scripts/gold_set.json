@@ -1,0 +1,35 @@
+{
+  "description": "Reviewed retrieval gold set for context-layer-project (3 handoffs, 2026-09-25). Queries are real project questions; relevant_ids are the handoffs a good retriever should surface.",
+  "cases": [
+    {
+      "query": "How is task_slug resolved for a project?",
+      "task_slug": "context-layer-project",
+      "relevant_ids": ["handoff:o825d7tp1yecyl04odm5", "handoff:mkz2c8uw1hegvnkqbw69"]
+    },
+    {
+      "query": "Which test scripts pass against the live SurrealDB instance?",
+      "task_slug": "context-layer-project",
+      "relevant_ids": ["handoff:mkz2c8uw1hegvnkqbw69"]
+    },
+    {
+      "query": "Connect the context-layer MCP server to OpenCode",
+      "task_slug": "context-layer-project",
+      "relevant_ids": ["handoff:o825d7tp1yecyl04odm5", "handoff:mkz2c8uw1hegvnkqbw69"]
+    },
+    {
+      "query": "Curate a retrieval evaluation dataset and record a baseline",
+      "task_slug": "context-layer-project",
+      "relevant_ids": ["handoff:aoduiie6ciy4m591on8s"]
+    },
+    {
+      "query": "Add an open-source LICENSE before wider distribution",
+      "task_slug": "context-layer-project",
+      "relevant_ids": ["handoff:aoduiie6ciy4m591on8s"]
+    },
+    {
+      "query": "Create the .context-layer.json identity file",
+      "task_slug": "context-layer-project",
+      "relevant_ids": ["handoff:mkz2c8uw1hegvnkqbw69"]
+    }
+  ]
+}

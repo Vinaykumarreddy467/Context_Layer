@@ -22,6 +22,9 @@ Files under `tests/` are executable integration scripts. They are not a conventi
 python tests/test_mcp_e2e.py
 python tests/test_mcp_semantic.py
 python tests/test_migrations.py
+python tests/test_handoff.py
+python tests/test_adapter_query.py
+python tests/test_api_and_sync.py
 ```
 
 Do not aim integration runs at a database whose contents must be preserved.
@@ -36,3 +39,34 @@ Do not aim integration runs at a database whose contents must be preserved.
 
 See [Migration workflow](../sql/migrations/README.md) before changing the schema.
 
+## Retrieval evaluation
+
+`scripts/evaluate_retrieval.py` compares search results with a hand-labeled JSON dataset. Each case needs a query, project `task_slug`, and one or more relevant handoff IDs. Start a small dataset like this, replacing the example IDs with real IDs from your handoff records:
+
+```json
+{
+  "cases": [
+    {
+      "query": "Why did we choose SurrealDB?",
+      "task_slug": "context-layer",
+      "relevant_ids": ["handoff:REPLACE_WITH_ID"]
+    }
+  ]
+}
+```
+
+The repository ships a labeled set at `scripts/gold_set.json` (six queries against real handoffs) with a recorded baseline: hybrid `-k 5` gives hit rate 1.000, mean recall 1.000, MRR 0.639. Re-run it after retrieval changes to compare:
+
+```text
+python scripts/evaluate_retrieval.py scripts/gold_set.json --search hybrid -k 5
+```
+
+Run each search mode against the same labeled set to compare rankings:
+
+```text
+python scripts/evaluate_retrieval.py retrieval-eval.json --search hybrid -k 5
+python scripts/evaluate_retrieval.py retrieval-eval.json --search text -k 5 --json
+python scripts/evaluate_retrieval.py retrieval-eval.json --search semantic -k 5 --min-mrr 0.6
+```
+
+The evaluator only reads/searches the configured database; it does not create handoffs. `hit_rate@k` is the fraction of queries with any expected handoff in the results; `mean_recall@k` is the average fraction of expected handoffs found; `mean_precision@k` is the average fraction of returned slots that are relevant; `MRR@k` rewards putting a relevant result near the top. These scores reflect the quality of the labeled examples, so review expected IDs carefully and keep the dataset representative of real resume questions.

@@ -25,7 +25,9 @@ context_layer.core
 
 ## Handoff data
 
-A handoff is a durable checkpoint associated with a project slug. The current schema includes timestamps, branch, status, decisions, next steps, raw content, summary, platform session metadata, token count, compaction flag, extracted files/references, and embedding. A `continues_from` relation can connect successive handoffs. Versioned SurrealQL migrations are under `sql/migrations/`.
+A handoff is a durable checkpoint associated with a project slug. The current schema includes timestamps, branch, status, decisions, next steps, raw content, summary, platform session metadata, token count, compaction flag, schema version, extracted files/references, and embedding. A `continues_from` relation can connect successive handoffs. Versioned SurrealQL migrations are under `sql/migrations/`; the `version` field is set by migration `0002` and defaults to 1.
+
+`create_handoff` guards against duplicate checkpoints: a record with identical raw content (or the same platform session id) created within 60 seconds is skipped and the existing record is returned, so double-firing lifecycle events (for example PreCompact plus SessionEnd) do not create duplicate history. Capsule export includes the handoff's `version` as `capsule_version`.
 
 The database stores user/agent-provided handoff text. Do not include credentials or unrelated sensitive conversation content. The embedding model runs locally after it has been obtained, but optional Claude extraction sends its transcript input to Anthropic when configured and used.
 

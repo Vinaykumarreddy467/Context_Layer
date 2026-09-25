@@ -16,7 +16,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 import context_layer as cl  # noqa: E402
-from context_layer import auto_handoff, project_identity  # noqa: E402
+from context_layer import auto_handoff, export_capsule as capsule, project_identity  # noqa: E402
 
 
 def _git_branch(cwd: str) -> str:
@@ -132,6 +132,7 @@ async def _save_handoff(payload: dict, cwd: str, task_slug: str) -> None:
     )
     if handoff.get("error"):
         raise RuntimeError(handoff["error"])
+    await capsule.sync_capsule(task_slug, cwd)
 
 
 async def main() -> None:

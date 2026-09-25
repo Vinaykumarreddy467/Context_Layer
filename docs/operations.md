@@ -30,6 +30,19 @@ The command exits successfully only when all readiness checks pass. It launches 
 
 Numbered files in `sql/migrations/` are applied during normal MCP server startup and recorded in `schema_version`. Check status with `python scripts/run_migrations.py --status`; that standalone runner requires a reachable database. Follow [the migration workflow](../sql/migrations/README.md) when changing schema. Test migration changes using a disposable database before applying them to important data.
 
+## Data handling CLI
+
+`scripts/handoff_cli.py` provides database-level data tools (run from the repository root; requires a reachable database):
+
+- `export <task_slug> [--output <file>]` — dump all handoffs for one task as JSON (portable backup).
+- `import <file> [--task-slug <slug>]` — restore handoffs from an export file.
+- `backup [--dir <dir>]` — export every task's handoffs to `<dir>/<date>/<task_slug>.json` (default `backups/`); the scheduled-backup primitive.
+- `forget <task_slug> --yes` — delete all handoffs for a task (correction/forget; refuses without `--yes`).
+- `check` — per-client lifecycle check: database reachable, embedder loads, all four adapter files present.
+- `consolidate <task_slug> [--git-branch <branch>]` — merge all handoffs for a task into a canonical current-state handoff and sync `CONTEXT.md`.
+
+These operate on handoff records, not on the SurrealDB store itself; for full database backup follow SurrealDB's supported backup procedure (see [Startup and database](#startup-and-database)).
+
 ## Security and privacy
 
 - Keep real credentials in the ignored `.env`; never commit it or copy secrets into client configuration.
@@ -37,7 +50,7 @@ Numbered files in `sql/migrations/` are applied during normal MCP server startup
 - Handoffs retain raw content as well as structured summaries. Save only work-relevant content and exclude secrets.
 - Optional Claude extraction sends transcript text to Anthropic when that extraction path is invoked with `ANTHROPIC_API_KEY` configured.
 - Namespace tenant prefixes are not access control. Do not expose this setup as a shared service without an explicit authentication/authorization and network security design.
-- Define backup, restore, retention, and upgrade procedures before relying on the database for important project history.
+- Define retention and upgrade procedures before relying on the database for important project history. The CLI data tools below cover backup and restore primitives.
 
 The configured `CONTEXT_LAYER_API_KEY` should not be treated as a complete authorization guarantee without validating where and how server operations enforce it. The current project's deployment posture is local-first, not hardened multi-tenant hosting.
 

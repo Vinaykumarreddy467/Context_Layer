@@ -47,15 +47,21 @@ async def _ensure_embedder_loaded():
         await _embedder_ready.wait()
         return
     _embedder_loading = True
+    _embedder_ready.clear()
     try:
-        import asyncio
         from fastembed import TextEmbedding
         # Run in thread pool to avoid blocking
         loop = asyncio.get_event_loop()
         _embedder = await loop.run_in_executor(
             None, lambda: TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
         )
+    except Exception:
+        # Reset loading flag so future calls can retry
+        _embedder_loading = False
+        raise
     finally:
+        # Always wake waiters: on success they see _embedder set; on
+        # failure they fall through to _get_embedder() which raises.
         _embedder_ready.set()
 
 
@@ -117,8 +123,11 @@ _FILE_EXT = (
     r"cfg|lock|mod|sum|xml|proto|graphql|surql|env"
 )
 # A path must not be embedded in another word or URL path segment.
+# Second alternative: Windows absolute paths (C:\...\file.py) — the
+# lookbehind in the first branch would reject them (segment preceded by \).
 _FILE_RE = re.compile(
-    r"(?<![\w/\\])(?:[\w./\\-]+\.(?:" + _FILE_EXT + r"))(?::\d+(?:-\d+)?)?",
+    r"(?<![\w/\\])(?:[\w./\\-]+\.(?:" + _FILE_EXT + r"))(?::\d+(?:-\d+)?)?"
+    r"|(?<![A-Za-z])[A-Za-z]:[\\/][\w./\\-]*\.(?:" + _FILE_EXT + r")(?::\d+(?:-\d+)?)?",
     re.I,
 )
 # Match issue refs but not inside URLs - negative lookbehind for / or :
@@ -386,6 +395,24 @@ async def create_handoff(
     """
     db = await _connect()
     try:
+        # Duplicate-checkpoint guard: hooks (PreCompact + SessionEnd) can
+        # fire twice with identical content. Skip creating a duplicate if
+        # an identical handoff (same raw_content, or same platform session)
+        # was stored within the last 60 seconds.
+        dup_where = "raw_content = $raw"
+        dup_params = {"slug": task_slug, "raw": raw_content}
+        if platform_session_id:
+            dup_where += " OR platform_session_id = $sid"
+            dup_params["sid"] = platform_session_id
+        dup = await db.query(
+            "SELECT * FROM handoff WHERE task_slug = $slug AND timestamp > time::now() - 60s "
+            f"AND ({dup_where}) ORDER BY timestamp DESC LIMIT 1;",
+            dup_params,
+        )
+        rows = dup[0] if dup else []
+        if rows:
+            return rows[0]
+
         files, refs = extract_files_refs(
             raw_content, summary,
             " ".join(d.get("text", "") for d in decisions),
@@ -397,6 +424,7 @@ async def create_handoff(
                 "task_slug": task_slug,
                 "git_branch": git_branch,
                 "status": "open",
+                "version": 1,
                 "decisions": decisions,
                 "next_steps": next_steps,
                 "raw_content": raw_content,
@@ -422,8 +450,8 @@ async def create_handoff(
         await db.close()
 
 
-async def resume_handoff(task_slug: str) -> Optional[dict]:
-    """Fetch the most recent handoff for a task and mark it resumed."""
+async def get_latest_handoff(task_slug: str) -> Optional[dict]:
+    """Fetch the most recent handoff for a task, without side effects."""
     db = await _connect()
     try:
         result = await db.query(
@@ -432,10 +460,18 @@ async def resume_handoff(task_slug: str) -> Optional[dict]:
             {"slug": task_slug},
         )
         rows = result[0] if result else []
-        if not rows:
-            return None
+        return rows[0] if rows else None
+    finally:
+        await db.close()
 
-        latest = rows[0]
+
+async def resume_handoff(task_slug: str) -> Optional[dict]:
+    """Fetch the most recent handoff for a task and mark it resumed."""
+    latest = await get_latest_handoff(task_slug)
+    if not latest:
+        return None
+    db = await _connect()
+    try:
         return await db.update(latest["id"]).merge({"status": "resumed"})
     finally:
         await db.close()
@@ -449,7 +485,7 @@ async def search_handoffs(
     try:
         if task_slug:
             sql = (
-                "SELECT task_slug, raw_content, files, refs, timestamp, "
+                "SELECT id, task_slug, raw_content, files, refs, timestamp, "
                 "search::score(1) AS relevance FROM handoff "
                 "WHERE task_slug = $slug AND raw_content @1@ $q "
                 "ORDER BY relevance DESC LIMIT $limit;"
@@ -457,7 +493,7 @@ async def search_handoffs(
             params = {"slug": task_slug, "q": query, "limit": limit}
         else:
             sql = (
-                "SELECT task_slug, raw_content, files, refs, timestamp, "
+                "SELECT id, task_slug, raw_content, files, refs, timestamp, "
                 "search::score(1) AS relevance FROM handoff "
                 "WHERE raw_content @1@ $q "
                 "ORDER BY relevance DESC LIMIT $limit;"
@@ -481,7 +517,7 @@ async def semantic_search_handoffs(
         k = max(1, min(int(limit), 100))
         if task_slug:
             sql = (
-                "SELECT task_slug, raw_content, files, refs, timestamp, "
+                "SELECT id, task_slug, raw_content, files, refs, timestamp, "
                 "(1 - vector::distance::knn()) AS relevance FROM handoff "
                 f"WHERE task_slug = $slug AND embedding <|{k}, 40|> $vector "
                 "ORDER BY relevance DESC;"
@@ -489,7 +525,7 @@ async def semantic_search_handoffs(
             params = {"slug": task_slug, "vector": vector}
         else:
             sql = (
-                "SELECT task_slug, raw_content, files, refs, timestamp, "
+                "SELECT id, task_slug, raw_content, files, refs, timestamp, "
                 "(1 - vector::distance::knn()) AS relevance FROM handoff "
                 f"WHERE embedding <|{k}, 40|> $vector "
                 "ORDER BY relevance DESC;"
@@ -605,7 +641,14 @@ async def close_handoff(handoff_id: str) -> dict:
     """Mark a handoff as closed."""
     db = await _connect()
     try:
-        return await db.update(handoff_id).merge({"status": "closed"})
+        result = await db.query(
+            "UPDATE type::record($id) MERGE $data RETURN AFTER;",
+            {"id": handoff_id, "data": {"status": "closed"}},
+        )
+        rows = result[0] if result else []
+        if not rows:
+            raise ValueError(f"Handoff not found: {handoff_id}")
+        return rows[0]
     finally:
         await db.close()
 

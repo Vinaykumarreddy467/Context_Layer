@@ -26,8 +26,11 @@ context_layer/
 │   ├── start_db.py
 │   ├── run_migrations.py
 │   ├── diagnostics.py                 # Database, schema, embedding, and MCP readiness checks
+│   ├── evaluate_retrieval.py           # Read-only search evaluation against labeled queries
+│   ├── gold_set.json                   # Labeled retrieval-evaluation dataset (baseline queries)
 │   ├── run_mcp.py
 │   ├── run_mcp.ps1
+│   ├── api_server.py                 # REST API for any agent/script (stdlib, no deps)
 │   ├── handoff_cli.py
 │   ├── new_project.py
 │   └── backfill_refs.py
@@ -65,6 +68,14 @@ Run commands from the project root unless noted otherwise.
 | `python scripts/diagnostics.py` | Check database, migrations, local embedding model, and MCP stdio readiness. |
 | `python scripts/handoff_cli.py summarize ...` | Summarize a transcript and store a handoff. |
 | `python scripts/handoff_cli.py resume <task_slug>` | Fetch and mark the latest handoff as resumed. |
+| `python scripts/handoff_cli.py sync [--cwd <dir>]` | Write the latest handoff as `CONTEXT.md` in the project dir. |
+| `python scripts/handoff_cli.py export <task_slug> [--output <file>]` | Dump all handoffs for a task as JSON (portable backup). |
+| `python scripts/handoff_cli.py import <file> [--task-slug <slug>]` | Restore handoffs from an export file. |
+| `python scripts/handoff_cli.py consolidate <task_slug> [--git-branch <branch>]` | Merge all handoffs for a task into a canonical current-state handoff (dedup decisions, supersede old, sync CONTEXT.md). Uses Claude if `ANTHROPIC_API_KEY` set, else local heuristic. |
+| `python scripts/handoff_cli.py check` | Per-client lifecycle check: DB reachable, embedder loads, all 4 adapter files present. |
+| `python scripts/handoff_cli.py forget <task_slug> --yes` | Delete all handoffs for a task (correction/forget; requires `--yes`). |
+| `python scripts/handoff_cli.py backup [--dir <dir>]` | Export every task's handoffs to `<dir>/<date>/<task_slug>.json` (scheduled-backup primitive). |
+| `python scripts/api_server.py [--host 127.0.0.1] [--port 8123]` | Serve the REST API (`/health`, `/context/{slug}`, `/capsule/{slug}`, `/search`, `POST /handoffs`, `/summarize`, `/sync`). Requires `CONTEXT_LAYER_API_KEY` to be set for auth. |
 
 ## Generated and local data
 
