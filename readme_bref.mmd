@@ -1,0 +1,328 @@
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#1a1a2e', 'secondaryColor': '#16213e', 'tertiaryColor': '#0f3460', 'background': '#ffffff', 'mainBkg': '#e8e8e8', 'secondBkg': '#d4d4d4', 'tertiaryBkg': '#c0c0c0', 'primaryTextColor': '#1a1a2e', 'secondaryTextColor': '#16213e', 'tertiaryTextColor': '#0f3460', 'lineColor': '#333333', 'fontSize': '14px'}}}%%
+graph TB
+    %% ============================================================
+    %% CONTEXT LAYER MCP PROJECT - COMPLETE ARCHITECTURE
+    %% ============================================================
+    
+    subgraph USER["👤 USER / AGENT"]
+        direction TB
+        HUMAN["Human Developer"]
+        AGENT["AI Agent (Claude, Cursor, Copilot, Codex, OpenCode)"]
+    end
+
+    subgraph MCP_CLIENTS["🔌 MCP CLIENTS (stdio)"]
+        direction TB
+        VSCODE["VS Code\n(.vscode/mcp.json)"]
+        CURSOR["Cursor\n(.cursor/mcp.json)"]
+        CLAUDE_CODE["Claude Code\n(.claude/settings.json)"]
+        CLAUDE_DESKTOP["Claude Desktop\n(~/.config/claude-desktop/)"]
+        COPILOT["GitHub Copilot\n(copilot-hooks.json)"]
+        CODEX["Codex\n(.codex/hooks.json)"]
+        OPENCODE["OpenCode / OpenWork\n(opencode.json + .opencode/plugins/)"]
+        GENERIC["Generic Loop\n(adapters/generic_loop.py)"]
+    end
+
+    subgraph MCP_SERVER["🖥️ CONTEXT LAYER MCP SERVER (context_layer/server.py)"]
+        direction TB
+        
+        subgraph STARTUP["🚀 STARTUP SEQUENCE"]
+            CHECK_DB["_db_reachable()"]
+            START_SURREAL["_ensure_surreal()\n→ spawn surreal start --http"]
+            APPLY_SCHEMA["_apply_schema()\n→ sql/migrations/*.surql"]
+            LOAD_EMBEDDER["_ensure_embedder_loaded()\n→ BAAI/bge-small-en-v1.5"]
+        end
+        
+        subgraph TOOLS["🛠️ MCP TOOLS (17 tools)"]
+            direction TB
+            
+            subgraph HANDOFF_MGMT["📝 Handoff Management"]
+                T_CREATE["create_handoff\n(task_slug, decisions, next_steps,\nraw_content, git_branch, continues_from_id)"]
+                T_RESUME["resume_handoff\n(task_slug) → latest handoff"]
+                T_AUTO["auto_summarize_handoff\n(transcript, task_slug, git_branch)"]
+                T_APPEND["append_next_step\n(handoff_id, step)"]
+                T_CLOSE["close_handoff\n(handoff_id)"]
+            end
+            
+            subgraph SEARCH["🔍 Search & Retrieval"]
+                T_SEARCH["search_handoffs\n(query, task_slug?, limit=5)\n→ BM25 full-text"]
+                T_SEMANTIC["semantic_search_handoffs\n(query, task_slug?, limit=5)\n→ Vector (local embeddings)"]
+                T_HYBRID["hybrid_search_handoffs\n(query, task_slug?, limit=5)\n→ BM25 + Vector (RRF) ⭐ DEFAULT"]
+                T_BY_FILE["find_handoffs_by_file\n(path, limit=10)"]
+            end
+            
+            subgraph CONTEXT_ASSEMBLY["📦 Context Assembly"]
+                T_WINDOW["context_for_window\n(task_slug, max_tokens=8000,\nsemantic_query?) → sections + tokens"]
+                T_SUMMARIZE["summarize_for_window\n(task_slug, target_tokens=4000)\n→ compress if needed"]
+                T_BUDGET["token_budget_report\n(task_slug) → recommendations"]
+                T_CAPSULE["get_context_capsule\n(task_slug) → portable markdown"]
+            end
+            
+            subgraph LINEAGE["🔗 Lineage & Graph"]
+                T_LINEAGE["get_handoff_lineage\n(handoff_id) → {history, successors}"]
+            end
+            
+            subgraph PROJECT["🏗️ Project Setup"]
+                T_ENSURE["ensure_project_ready\n(project_path, task_slug?) → {ready, slug, created[]}"]
+            end
+            
+            subgraph SKILLS["🎓 Skills"]
+                T_LIST_SKILLS["list_skills → [{name, description}]"]
+                T_GET_SKILL["get_skill(name) → {name, content}"]
+            end
+        end
+        
+        subgraph RESOURCES["📄 MCP RESOURCES"]
+            R_CURRENT["context://current/{task_slug}\n→ auto-assembled markdown"]
+        end
+    end
+
+    subgraph PYTHON_CORE["🐍 PYTHON CORE (context_layer/)"]
+        direction TB
+        
+        subgraph CORE_MODULES["Core Modules"]
+            CL_CORE["core.py\n• create_handoff (content_hash dedup, tx lineage)\n• search_handoffs (BM25)\n• semantic_search_handoffs (HNSW)\n• hybrid_search_handoffs (RRF)\n• assemble_context / summarize_for_window\n• get_handoff_lineage / find_handoffs_by_file\n• _connect() / _ensure_embedder_loaded()"]
+            CL_AUTO["auto_handoff.py\n• summarize_and_store(transcript)\n• extract_decisions_next_steps()\n• local rules + optional Claude API"]
+            CL_EXPORT["export_capsule.py\n• export_capsule(task_slug) → markdown"]
+            CL_PROJECT["project_identity.py\n• resolve_task_slug(cwd)\n  1. CONTEXT_LAYER_TASK_SLUG env\n  2. .context-layer.json (walk up)\n  3. ERROR (no basename fallback)\n• init_project_identity(cwd, slug?)"]
+            CL_TRIGGER["trigger.py\n• HandoffTrigger(token_budget)\n• should_trigger(tokens, prev_handoff)"]
+        end
+        
+        subgraph ADAPTERS["Adapters (Platform Integrations)"]
+            AD_CODEX["adapters/codex/hook.py\n• SessionStart/PreCompact/SessionEnd\n• calls handoff_cli.py summarize/resume"]
+            AD_OPENCODE["adapters/opencode/\n• save_before_compact.py (reactive)\n• context-layer-plugin.ts (proactive)\n  - session.idle → checkpoint.js\n  - experimental.session.compacting → save_before_compact.py"]
+            AD_COPILOT["adapters/copilot/pre_compact.py\n• userPromptSubmitted → checkpoint.js"]
+            AD_GENERIC["adapters/generic_loop.py\n• framework integration examples"]
+        end
+        
+        subgraph HOOKS_JS["Node.js Hooks (hooks/)"]
+            HK_HANDOFF["context-layer-handoff.js\n• --resume <slug> | --resume-auto\n• --summarize <slug> <branch>\n• fetch /sql via HTTP + Basic Auth\n• SURREAL_HTTP_URL, NS, DB, USER, PASS\n• CONTEXT_LAYER_PYTHON for summarize"]
+            HK_CHECKPOINT["context-layer-checkpoint.js\n• --transcript-file | env | stdin\n• token estimate → threshold check\n• latestHandoff() → shouldTrigger()\n• shells out to handoff_cli.py summarize\n• loads .env for DB config"]
+        end
+    end
+
+    subgraph SETUP["⚙️ SETUP & CONFIG GENERATION"]
+        SETUP_MCP["setup_mcp.py\n• Generates ALL platform configs:\n  - .mcp/config.json (source of truth)\n  - .vscode/mcp.json\n  - .cursor/mcp.json\n  - opencode.json (merged)\n  - .claude/settings.json\n  - ~/.config/claude-desktop/claude_desktop_config.json\n  - copilot-hooks.json (absolute paths)\n  - .codex/hooks.json (idempotent)\n  - hooks/context-layer-*.js (deployed)\n  - .opencode/plugins/context-layer.ts\n    (CONTEXT_LAYER_DIR, CHECKPOINT_JS, CONTEXT_LAYER_PYTHON)\n• ensure_identity() → .context-layer.json + .mcp/config.json sync\n• write_codex_hooks() → normalized command comparison\n• write_copilot_hooks() → absolute paths (no ${PLUGIN_ROOT})\n• deploy_hooks_and_plugin() → forward-slash paths via as_posix()"]
+        BOOTSTRAP["bootstrap.py\n• venv + pip install -e .\n• Windows CLI shim (context-layer.cmd)\n• setup_mcp.py\n• diagnostics.py"]
+        DIAG["scripts/diagnostics.py\n• DB connectivity + auth\n• Migration status\n• Embedding model readiness\n• MCP stdio handshake"]
+    end
+
+    subgraph DATABASE["🗄️ SURREALDB (ws://127.0.0.1:8010 / HTTP :8010)"]
+        direction TB
+        
+        subgraph SCHEMA["Schema (sql/migrations/)"]
+            MIG_001["0001_initial_schema.surql\n• DEFINE TABLE handoff\n• DEFINE INDEX (text, vector HNSW)\n• DEFINE TABLE schema_version"]
+            MIG_002["0002_handoff_version.surql\n• ADD version field (default 1)"]
+            MIG_003["0003_optional_git_branch.surql\n• git_branch TYPE option<string>"]
+            MIG_004["0004_add_handoff_content_hash.surql\n• content_hash TYPE option<string>\n• INDEX task_content_hash_idx (task_slug, content_hash)"]
+        end
+        
+        subgraph TABLES["Tables"]
+            T_HANDOFF["handoff\n• id, task_slug, timestamp\n• git_branch, status, decisions[], next_steps[]\n• raw_content, summary, token_count\n• content_hash (SHA-256 normalized)\n• embedding[384], version, compacted\n• platform_session_id, files[], refs[]"]
+            T_SCHEMA_VER["schema_version\n• version, applied_at, description"]
+            T_REL["continues_from (edge)\n• handoff → continues_from → handoff"]
+        end
+        
+        subgraph FEATURES["Key Features"]
+            F_DEDUP["Content-hash dedup\n• SHA-256(normalized raw_content)\n• 60s window per task_slug\n• platform_session_id = metadata only"]
+            F_TX["Transactional Lineage\n• Python pre-check: predecessor exists\n• SurrealDB TX: CREATE + RELATE\n• No orphan handoffs on failure"]
+            F_EMBED["Local Embeddings\n• BAAI/bge-small-en-v1.5 (384-dim)\n• HNSW vector index\n• Runs offline, no API key"]
+        end
+    end
+
+    subgraph CLI["📋 CLI TOOLS (scripts/)"]
+        direction TB
+        CLI_HANDOFF["handoff_cli.py\n• summarize <slug> <branch> [--transcript-file]\n• resume <slug>\n• sync [--cwd] → CONTEXT.md\n• export <slug> [--output]\n• import <file> [--task-slug]\n• consolidate <slug> [--git-branch]\n• check | forget <slug> --yes | backup [--dir]"]
+        CLI_API["api_server.py (REST :8123)\n• /health, /context/{slug}, /capsule/{slug}\n• /search?q=...&mode=hybrid|text|semantic&limit=5\n• POST /handoffs (validation + stable errors)\n• /summarize, /sync\n• Auth: CONTEXT_LAYER_API_KEY"]
+        CLI_EVAL["evaluate_retrieval.py\n• eval_fixture.py → output/eval/gold_set.json\n• Baseline: hybrid@5 hit=1.0, recall=1.0, MRR=0.917"]
+        CLI_MIG["run_migrations.py\n• --status | applies pending"]
+        CLI_DB["start_db.py\n• Ensures SurrealDB running"]
+    end
+
+    subgraph TESTS["✅ TESTS (tests/)"]
+        direction TB
+        T_MCP_E2E["test_mcp_e2e.py (19 steps)"]
+        T_MCP_LIVE["test_mcp_live.py (12 checks)"]
+        T_MCP_SEM["test_mcp_semantic.py"]
+        T_MIG["test_migrations.py"]
+        T_NEW["test_new_tools.py (7 steps)"]
+        T_REL["test_reliability.py (dedup, lineage, API)"]
+        T_HANDOFF["test_handoff.py"]
+        T_ADAPTER["test_adapter_query.py"]
+        T_API["test_api_and_sync.py"]
+        T_SEM["test_semantic.py"]
+        T_SKILLS["test_skills.py"]
+        T_CTX["test_context_assembly_regression.py"]
+    end
+
+    subgraph DOCS["📚 DOCUMENTATION"]
+        direction TB
+        D_README["README.md"]
+        D_ARCH["docs/architecture.md"]
+        D_DEV["docs/development.md\n• Retrieval eval: eval_fixture.py + evaluate_retrieval.py"]
+        D_OPS["docs/operations.md"]
+        D_MCP["docs/mcp-reference.md"]
+        D_CFG["docs/configuration.md"]
+        D_GS["docs/getting-started.md"]
+        D_FOLDER["FOLDER_STRUCTURE.md"]
+    end
+
+    %% ============================================================
+    %% CONNECTIONS
+    %% ============================================================
+    
+    %% User → MCP Clients
+    HUMAN --> AGENT
+    AGENT --> MCP_CLIENTS
+    
+    %% MCP Clients → MCP Server (stdio)
+    MCP_CLIENTS -->|stdio| MCP_SERVER
+    
+    %% MCP Server → Python Core
+    MCP_SERVER --> PYTHON_CORE
+    
+    %% Python Core → Database
+    PYTHON_CORE -->|SurrealDB SDK| DATABASE
+    
+    %% Setup → Generated Configs
+    SETUP -->|generates| MCP_CLIENTS
+    SETUP -->|deploys| HOOKS_JS
+    SETUP -->|deploys| AD_OPENCODE
+    
+    %% CLI → Python Core
+    CLI --> PYTHON_CORE
+    
+    %% Hooks → Python Core
+    HOOKS_JS -->|shell out| CLI_HANDOFF
+    HOOKS_JS -->|HTTP /sql| DATABASE
+    HOOKS_JS -->|loads .env| DATABASE
+    
+    %% Adapters → Hooks/CLI
+    AD_CODEX --> CLI_HANDOFF
+    AD_OPENCODE --> HK_CHECKPOINT
+    AD_OPENCODE --> CLI_HANDOFF
+    AD_COPILOT --> HK_CHECKPOINT
+    
+    %% Tests → All
+    TESTS --> PYTHON_CORE
+    TESTS --> MCP_SERVER
+    TESTS --> CLI
+    TESTS --> DATABASE
+    
+    %% Docs reference
+    DOCS -.->|documents| PYTHON_CORE
+    DOCS -.->|documents| SETUP
+    DOCS -.->|documents| DATABASE
+    DOCS -.->|documents| CLI
+
+    %% ============================================================
+    %% STYLING
+    %% ============================================================
+    
+    classDef user fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
+    classDef mcpClient fill:#e3f2fd,stroke:#1565c0,stroke-width:2px;
+    classDef mcpServer fill:#fff3e0,stroke:#ef6c00,stroke-width:2px;
+    classDef pythonCore fill:#fce4ec,stroke:#c2185b,stroke-width:2px;
+    classDef database fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px;
+    classDef setup fill:#e0f2f1,stroke:#00695c,stroke-width:2px;
+    classDef cli fill:#fff8e1,stroke:#f57f17,stroke-width:2px;
+    classDef tests fill:#fafafa,stroke:#616161,stroke-width:1px,stroke-dasharray: 5 5;
+    classDef docs fill:#f5f5f5,stroke:#757575,stroke-width:1px,stroke-dasharray: 5 5;
+    
+    class USER user;
+    class MCP_CLIENTS mcpClient;
+    class MCP_SERVER mcpServer;
+    class PYTHON_CORE pythonCore;
+    class DATABASE database;
+    class SETUP setup;
+    class CLI cli;
+    class TESTS tests;
+    class DOCS docs;
+```
+
+---
+## QUICK REFERENCE: WHEN TO USE WHAT
+
+### 🎯 **For AI Agents (MCP Tools)**
+
+| Scenario | Tool | Why |
+|----------|------|-----|
+| **Session start** | `ensure_project_ready()` → `resume_handoff()` → `context_for_window()` | Load project identity, prior context, assemble relevant context within token budget |
+| **Find past decision** | `hybrid_search_handoffs(query)` | Best default: catches exact terms + paraphrases |
+| **Find by file** | `find_handoffs_by_file("auth.py")` | Which handoffs touched this file |
+| **Session end / milestone** | `create_handoff(decisions, next_steps, raw_content)` | Structured checkpoint with lineage |
+| **Raw transcript only** | `auto_summarize_handoff(transcript)` | Auto-extract decisions/next_steps/summary |
+| **Context too large** | `summarize_for_window(target_tokens)` | Auto-compress, creates compressed handoff |
+| **Trace evolution** | `get_handoff_lineage(id)` | Full chain: predecessors → successors |
+| **Portable export** | `get_context_capsule(slug)` | Markdown for non-MCP chats (ChatGPT, Gemini) |
+
+### 🛠️ **For Developers (CLI)**
+
+| Task | Command |
+|------|---------|
+| **First-time setup** | `python bootstrap.py` |
+| **Project init** | `python setup_mcp.py` (or `--no-db` for configs only) |
+| **Start MCP server** | `python start_mcp.py` |
+| **Check readiness** | `python scripts/diagnostics.py` |
+| **Manual handoff** | `python scripts/handoff_cli.py summarize <slug> <branch>` |
+| **Resume context** | `python scripts/handoff_cli.py resume <slug>` |
+| **Sync CONTEXT.md** | `python scripts/handoff_cli.py sync [--cwd]` |
+| **Export/Import** | `handoff_cli.py export/import` |
+| **Run tests** | `venv\Scripts\python.exe tests\test_*.py` |
+| **Eval retrieval** | `python scripts/eval_fixture.py && python scripts/evaluate_retrieval.py output/eval/gold_set.json --search hybrid -k 5` |
+
+### 🔧 **For Platform Integration**
+
+| Platform | Config File | Hook Type |
+|----------|-------------|-----------|
+| VS Code / Cursor | `.vscode/mcp.json` / `.cursor/mcp.json` | MCP stdio |
+| Claude Code | `.claude/settings.json` | MCP stdio |
+| Claude Desktop | `~/.config/claude-desktop/claude_desktop_config.json` | MCP stdio |
+| GitHub Copilot | `copilot-hooks.json` | `sessionStart` + `userPromptSubmitted` → Node hooks |
+| Codex | `.codex/hooks.json` | `SessionStart` / `PreCompact` / `SessionEnd` → Python hook |
+| OpenCode / OpenWork | `opencode.json` + `.opencode/plugins/context-layer.ts` | `session.idle` + `experimental.session.compacting` |
+| Generic | `adapters/generic_loop.py` | Custom event loop |
+
+### 🗄️ **Database Schema Highlights**
+
+| Feature | Implementation |
+|---------|----------------|
+| **Dedup** | `content_hash` (SHA-256 normalized) + 60s window per `task_slug` |
+| **Lineage** | `continues_from` edge + transactional CREATE+RELATE |
+| **Search** | BM25 (text) + HNSW (vector) + RRF (hybrid) |
+| **Embeddings** | BAAI/bge-small-en-v1.5 (384-dim), local, offline |
+| **Migrations** | Versioned `.surql` files in `sql/migrations/` |
+
+### 🔑 **Key Environment Variables**
+
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `CONTEXT_LAYER_TASK_SLUG` | Override task_slug | — |
+| `SURREAL_URL` | SurrealDB endpoint | `ws://127.0.0.1:8010` |
+| `SURREAL_NS` / `SURREAL_DB` | Namespace / Database | `dev` / `context_layer` |
+| `SURREAL_USER` / `SURREAL_PASS` | Auth | `root` / `root` |
+| `CONTEXT_LAYER_PYTHON` | Venv python path | Auto-detected |
+| `CONTEXT_LAYER_API_KEY` | REST API auth | Required for api_server |
+| `ANTHROPIC_API_KEY` | Optional Claude extraction | — |
+| `SKILLS_DIRS` | Skill pack directories | — |
+
+### 📁 **Generated Files (gitignored)**
+
+```
+.opencode/              # OpenCode plugin (generated)
+copilot-hooks.json      # Copilot hooks (generated)
+.vscode/mcp.json        # VS Code MCP config
+.cursor/mcp.json        # Cursor MCP config
+.claude/settings.json   # Claude Code config
+.codex/hooks.json       # Codex hooks
+.context-layer.json     # Project identity (COMMIT THIS)
+.mcp/config.json        # Central config (COMMIT THIS)
+hooks/context-layer-*.js # Deployed Node hooks
+data/handoffs.db/       # SurrealDB RocksDB data
+venv/                   # Python virtual environment
+output/                 # Eval artifacts
+CONTEXT.md              # Synced context (per project)
+```
+
+---
+*Generated for context_layer MCP project — comprehensive architecture reference*
