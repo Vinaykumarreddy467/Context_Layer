@@ -1,17 +1,17 @@
 # Graph Report - context_layer  (2026-09-25)
 
 ## Corpus Check
-- 61 files · ~46,029 words
+- 62 files · ~46,522 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 5 file(s) not represented in the graph (top: .surql 3, .example 1, (none) 1)
+- Unclassified: 6 file(s) not represented in the graph (top: .surql 4, .example 1, (none) 1)
 
 ## Summary
-- 479 nodes · 738 edges · 46 communities (28 shown, 18 thin omitted)
+- 485 nodes · 746 edges · 53 communities (35 shown, 18 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 13 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8e8152d3`
+- Built from commit: `37ccc0f6`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -19,7 +19,7 @@
 - core.py
 - server.py
 - diagnostics.py
-- auto_handoff.py
+- project_identity.py
 - Handler
 - setup_mcp.py
 - context-layer-checkpoint.js
@@ -60,6 +60,13 @@
 - Development
 - handoff_cli.py
 - Context primer: import-test
+- auto_handoff.py
+- hook.py
+- export_capsule.py
+- copilot/pre_compact.py
+- hooks/pre_compact.py
+- test_mcp_live.py
+- save_before_compact.py
 
 ## God Nodes (most connected - your core abstractions)
 1. `_connect()` - 19 edges
@@ -74,16 +81,16 @@
 10. `main()` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `_save_handoff()` --calls--> `summarize_and_store()`  [EXTRACTED]
+  adapters/codex/hook.py → context_layer/auto_handoff.py
 - `_save_handoff()` --calls--> `sync_capsule()`  [EXTRACTED]
   adapters/codex/hook.py → context_layer/export_capsule.py
+- `main()` --calls--> `resolve_task_slug()`  [EXTRACTED]
+  adapters/codex/hook.py → context_layer/project_identity.py
+- `main()` --calls--> `summarize_and_store()`  [EXTRACTED]
+  adapters/copilot/pre_compact.py → context_layer/auto_handoff.py
 - `main()` --calls--> `sync_capsule()`  [EXTRACTED]
   adapters/copilot/pre_compact.py → context_layer/export_capsule.py
-- `ContextLayerHooks` --uses--> `HandoffTrigger`  [INFERRED]
-  adapters/generic_loop.py → context_layer/trigger.py
-- `main()` --calls--> `sync_capsule()`  [EXTRACTED]
-  adapters/opencode/save_before_compact.py → context_layer/export_capsule.py
-- `_summarize()` --calls--> `summarize_and_store()`  [EXTRACTED]
-  scripts/handoff_cli.py → context_layer/auto_handoff.py
 
 ## Import Cycles
 - None detected.
@@ -91,11 +98,11 @@
 ## Hyperedges (group relationships)
 - **Handoff context persistence and retrieval flow** — readme_project_handoffs, readme_surrealdb_storage, readme_mcp_interface, readme_context_assembly [EXTRACTED 1.00]
 
-## Communities (46 total, 18 thin omitted)
+## Communities (53 total, 18 thin omitted)
 
 ### Community 0 - "core.py"
 Cohesion: 0.06
-Nodes (58): AsyncSurreal, append_next_step(), assemble_context(), _budget_recommendations(), check_api_key(), close_handoff(), _connect(), _count_tokens() (+50 more)
+Nodes (62): AsyncSurreal, append_next_step(), assemble_context(), _budget_recommendations(), check_api_key(), close_handoff(), _connect(), _count_tokens() (+54 more)
 
 ### Community 1 - "server.py"
 Cohesion: 0.05
@@ -105,9 +112,9 @@ Nodes (57): append_next_step(), _apply_schema(), auto_summarize_handoff(), close
 Cohesion: 0.12
 Nodes (22): load_local_env(), Path, Load local environment settings without overriding the parent process., Read simple KEY=VALUE lines from the project .env file, if present., Namespace, Process, _check_database_and_migrations(), _check_embedding() (+14 more)
 
-### Community 3 - "auto_handoff.py"
-Cohesion: 0.07
-Nodes (45): _git_branch(), _latest_handoff_id(), main(), Codex lifecycle adapter for loading and saving Context Layer handoffs. Codex…, Extract message text from Codex's JSONL transcript defensively. Codex documents…, _read_transcript(), _save_handoff(), _session_start() (+37 more)
+### Community 3 - "project_identity.py"
+Cohesion: 0.27
+Nodes (10): init_project_identity(), main(), Project identity: deterministic task_slug resolution shared by every adapter…, Resolve the task_slug for a working directory. Env override wins, then the…, Create .context-layer.json at cwd with a task_slug (a provided one, or a…, resolve_task_slug(), ensure_project_ready(), Call FIRST on any project before other tools. Creates .vscode/mcp.json (central… (+2 more)
 
 ### Community 4 - "Handler"
 Cohesion: 0.23
@@ -198,32 +205,58 @@ Cohesion: 0.40
 Nodes (5): Code changes, Development, Install for development, Retrieval evaluation, Tests and data safety
 
 ### Community 44 - "handoff_cli.py"
-Cohesion: 0.11
-Nodes (28): _embed(), _get_embedder(), Get embedder, loading synchronously if not ready (fallback)., Embed text locally into a 384-dim vector., _capsule_text(), export_capsule(), Path, Export a portable "context capsule" -- a plain markdown primer you can paste… (+20 more)
+Cohesion: 0.19
+Nodes (16): _backup(), _check(), _consolidate(), _consolidate_local(), _export(), _forget(), _import(), main() (+8 more)
 
 ### Community 45 - "Context primer: import-test"
 Cohesion: 0.40
 Nodes (4): Context primer: import-test, Decisions already made (do not relitigate these), Next steps, Summary
 
+### Community 46 - "auto_handoff.py"
+Cohesion: 0.25
+Nodes (10): _clean(), _extract_local(), _extract_with_claude(), _get_client(), Auto-summarization: turns a raw conversation transcript into a structured…, Extract a structured handoff from a raw transcript, then persist it through the…, Claude-based extraction (used only when ANTHROPIC_API_KEY is set)., Lazy Anthropic client so importing this module works without ANTHROPIC_API_KEY. (+2 more)
+
+### Community 47 - "hook.py"
+Cohesion: 0.36
+Nodes (8): _git_branch(), _latest_handoff_id(), main(), Codex lifecycle adapter for loading and saving Context Layer handoffs. Codex…, Extract message text from Codex's JSONL transcript defensively. Codex documents…, _read_transcript(), _save_handoff(), _session_start()
+
+### Community 48 - "export_capsule.py"
+Cohesion: 0.28
+Nodes (8): _capsule_text(), export_capsule(), Path, Export a portable "context capsule" -- a plain markdown primer you can paste…, Build the pasteable markdown primer from a handoff record., Build a pasteable markdown primer from the latest handoff for a task., Write the latest handoff capsule to CONTEXT.md in project_dir. Returns the…, sync_capsule()
+
+### Community 49 - "copilot/pre_compact.py"
+Cohesion: 0.39
+Nodes (7): _get(), _git_branch(), _latest_handoff_id(), main(), VS Code Copilot Chat PreCompact hook adapter. IMPORTANT CAVEAT: Copilot's hook…, Try several possible field names, since the exact schema is unconfirmed., _read_transcript()
+
+### Community 50 - "hooks/pre_compact.py"
+Cohesion: 0.43
+Nodes (6): _git_branch(), _latest_handoff_id(), main(), Claude Code PreCompact hook adapter. This is ONE adapter among several -- it's…, Claude Code transcripts are JSONL -- one JSON object per line, each…, _read_transcript()
+
+### Community 51 - "test_mcp_live.py"
+Cohesion: 0.53
+Nodes (5): check(), _json(), main(), Live MCP test: drive the Context Layer MCP server over stdio with a real MCP…, _text()
+
+### Community 52 - "save_before_compact.py"
+Cohesion: 0.60
+Nodes (4): _git_branch(), _latest_handoff_id(), main(), Small helper invoked by the OpenCode TypeScript plugin (compaction-plugin.ts)…
+
 ## Knowledge Gaps
 - **65 isolated node(s):** `C:\Users\Vinaykumar.R\Downloads\context_layer\context_layer\venv\Scripts\python.exe`, `{ execFileSync }`, `fs`, `TOKENS`, `MIN_INTERVAL` (+60 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 223 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 224 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `init_project_identity()` connect `auto_handoff.py` to `setup_mcp.py`?**
-  _High betweenness centrality (0.033) - this node is a cross-community bridge._
-- **Why does `load_local_env()` connect `diagnostics.py` to `core.py`?**
+- **Why does `init_project_identity()` connect `project_identity.py` to `setup_mcp.py`?**
   _High betweenness centrality (0.032) - this node is a cross-community bridge._
+- **Why does `load_local_env()` connect `diagnostics.py` to `core.py`?**
+  _High betweenness centrality (0.031) - this node is a cross-community bridge._
 - **What connects `C:\Users\Vinaykumar.R\Downloads\context_layer\context_layer\venv\Scripts\python.exe`, `{ execFileSync }`, `fs` to the rest of the system?**
   _65 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `core.py` be split into smaller, more focused modules?**
-  _Cohesion score 0.06448087431693988 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06057692307692308 - nodes in this community are weakly interconnected._
 - **Should `server.py` be split into smaller, more focused modules?**
   _Cohesion score 0.053410893707033315 - nodes in this community are weakly interconnected._
 - **Should `diagnostics.py` be split into smaller, more focused modules?**
   _Cohesion score 0.11965811965811966 - nodes in this community are weakly interconnected._
-- **Should `auto_handoff.py` be split into smaller, more focused modules?**
-  _Cohesion score 0.06561085972850679 - nodes in this community are weakly interconnected._

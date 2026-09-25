@@ -2,7 +2,7 @@
   "0": "core.py",
   "1": "server.py",
   "2": "diagnostics.py",
-  "3": "auto_handoff.py",
+  "3": "project_identity.py",
   "4": "Handler",
   "5": "setup_mcp.py",
   "6": "context-layer-checkpoint.js",
@@ -44,5 +44,12 @@
   "42": "Configuration",
   "43": "Development",
   "44": "handoff_cli.py",
-  "45": "Context primer: import-test"
+  "45": "Context primer: import-test",
+  "46": "auto_handoff.py",
+  "47": "hook.py",
+  "48": "export_capsule.py",
+  "49": "copilot/pre_compact.py",
+  "50": "hooks/pre_compact.py",
+  "51": "test_mcp_live.py",
+  "52": "save_before_compact.py"
 }

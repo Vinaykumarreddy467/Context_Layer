@@ -114,9 +114,9 @@
     "semantic_hash": "c45ceb6f2350dd4ef234effd1ec88fba"
   },
   "context_layer/core.py": {
-    "mtime": 1790317916.6985593,
-    "seen": 1790318142.8113842,
-    "ast_hash": "e0d248a11aba9f7fb777501f054bcda6",
+    "mtime": 1790319521.335214,
+    "seen": 1790319692.5916438,
+    "ast_hash": "6c935e9f36a4dfe58183b42cc682fedb",
     "semantic_hash": ""
   },
   "context_layer/env.py": {
@@ -138,10 +138,10 @@
     "semantic_hash": "d0846b8baa209cfd879eea7bac69ed89"
   },
   "context_layer/server.py": {
-    "mtime": 1790229551.9846451,
-    "seen": 1790235031.3895857,
-    "ast_hash": "13aab2f82e6af27faf0a23935af20a34",
-    "semantic_hash": "13aab2f82e6af27faf0a23935af20a34"
+    "mtime": 1790319338.1559365,
+    "seen": 1790319692.591657,
+    "ast_hash": "bc8ea2f551b79e3f008fcf96aa73604b",
+    "semantic_hash": ""
   },
   "context_layer/trigger.py": {
     "mtime": 1790165437.8664496,
@@ -483,6 +483,12 @@
     "mtime": 1790316077.7377388,
     "seen": 1790318142.8114862,
     "ast_hash": "c03335231755cb5317efdca1b8929546",
+    "semantic_hash": ""
+  },
+  "tests/test_mcp_live.py": {
+    "mtime": 1790319583.7098196,
+    "seen": 1790319692.5917354,
+    "ast_hash": "10de64e1d253e32fdb860c383c871eee",
     "semantic_hash": ""
   }
 }

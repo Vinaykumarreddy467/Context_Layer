@@ -260,7 +260,7 @@ async def assemble_context(
         if latest.get("refs"):
             extra += "## Refs\n" + "\n".join(f"- {r}" for r in latest["refs"]) + "\n"
         latest_content = f"""# Latest Handoff ({latest['id']})
-## Task: {latest['task_slug']} | Branch: {latest['git_branch']} | Status: {latest['status']}
+## Task: {latest['task_slug']} | Branch: {latest.get('git_branch') or 'unknown'} | Status: {latest['status']}
 ## Decisions
 {_fmt_decisions(latest.get('decisions', []))}
 ## Next Steps
@@ -328,8 +328,8 @@ async def assemble_context(
                 })
                 remaining -= sections[-1]["tokens"]
         
-        # Section 4: Same-branch handoffs (if budget allows)
-        if remaining > 500:
+        # Section 4: Same-branch handoffs (if budget allows and branch known)
+        if remaining > 500 and latest.get("git_branch"):
             branch_budget = min(int(max_tokens * 0.1), remaining - 500)
             branch_result = await db.query(
                 "SELECT * FROM handoff WHERE git_branch = $branch AND task_slug != $slug "
@@ -706,7 +706,7 @@ async def summarize_for_window(
         files, refs = extract_files_refs(compressed)
         created = await db.create("handoff", {
             "task_slug": task_slug,
-            "git_branch": latest["git_branch"],
+            "git_branch": latest.get("git_branch"),
             "status": "open",
             "decisions": latest.get("decisions", []),
             "next_steps": latest.get("next_steps", []),

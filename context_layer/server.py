@@ -249,10 +249,10 @@ def _safe(v):
 @mcp.tool()
 async def create_handoff(
     task_slug: str,
-    git_branch: str,
     decisions: list[dict],
     next_steps: list[str],
     raw_content: str,
+    git_branch: Optional[str] = None,
     token_count: int = 0,
     continues_from_id: Optional[str] = None,
     *,
